@@ -18,7 +18,7 @@ function loop(timeStamp) {
     // Clear the screen
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     
-    game.update(deltaTime);
+    game.update(deltaTime, timeStamp);
     game.draw(ctx);
 
     requestAnimationFrame(loop);
