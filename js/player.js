@@ -5,12 +5,14 @@ class Player {
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
 
-        this.width = 100
-        this.height = 60;
+        this.image = document.getElementById("riley");
+
+        this.width = 200;
+        this.height = 86;
 
         this.position = {
 
-            x: 40,
+            x: this.gameWidth / 2 - this.width / 2,
             y: this.gameHeight / 2 - this.height / 2
 
         }
@@ -19,7 +21,7 @@ class Player {
 
     draw(ctx) {
 
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
 
     }
 

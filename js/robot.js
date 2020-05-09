@@ -84,13 +84,25 @@ class Robot {
 
         // Concatenate to make equation
         this.equation = `${numberOne} ${operation} ${numberTwo} =`;
-        console.log(this.equation);        
+        this.equationAnswer = eval(this.equation.replace("=", "")).toString();
+        console.log(this.equation, this.equationAnswer);
+
+    }
+
+    drawRobot(ctx) {
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    }
+
+    drawEquation(ctx) {
+
+        ctx.fillText(this.equation, this.position.x, this.position.y);
 
     }
 
     draw(ctx) {
 
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        this.drawRobot(ctx);
+        this.drawEquation(ctx);
 
     }
 
