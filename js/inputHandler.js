@@ -1,12 +1,17 @@
 class InputHandler {
 
     constructor(game) {
-
-        this.robots = game.robots;
-
-        this.digit = 0
-        this.equationAnswer = "";
         
+        // Player property
+        this.player = game.player;
+
+        // Equation property
+        this.equation = game.equation;
+
+        // Properties to prevent holding key
+        this.isHold = false;
+        this.lastKey = "";
+
         document.addEventListener("keydown", this.onKeyDown.bind(this));
         document.addEventListener("keyup", this.onKeyUp.bind(this));
 
@@ -15,24 +20,20 @@ class InputHandler {
     // Key down
     onKeyDown(e) {
 
-        // Check if its a number
-        if (isFinite(e.key)) {
+        // Check if its a number and key is not holded
+        if (isFinite(e.key) && e.code != "Space" && (!this.isHold || e.key != this.lastKey)) {
 
-            for (let i = 0; i < this.robots.length; i++) {
+            // Prevent holding down key
+            this.isHold = true;
+            this.lastKey = e.key;
 
-                // Check if the first number of an answer of an equation is the same as the input
-                if (this.robots[i].equationAnswer.charAt(this.digit)) {
+            // Only add typing when the player is not moving
+            if (this.player.speed == 0) {
 
-                    this.equationAnswer += e.key;
-                    this.robots[i].isSelected = true;
-                    console.log(this.equationAnswer);
-                    this.digit++;
-                    break;
-
-                }
+                this.equation.addTyping(e.key);
 
             }
-        
+
         }
         
     }
@@ -40,7 +41,8 @@ class InputHandler {
     // Key up
     onKeyUp(e) {
         
-
+        // Stop holding when key up
+        this.isHold = false;
 
     }
 

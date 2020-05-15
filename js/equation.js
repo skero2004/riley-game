@@ -1,25 +1,27 @@
-class Robot {
+class Equation {
 
     constructor(game) {
 
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
 
-        this.width = 70;
-        this.height = 70;
+        this.player = game.player;
 
-        // Speed is from -20 to -10
-        this.speed = -(10 + Math.round(Math.random() * 10));
+        this.digit = 0;
+        this.typing = "";
+
+        this.textColor = "white";
 
         this.position = {
 
-            x: this.gameWidth,
-            y: Math.round(Math.random() * (this.gameHeight - this.height))
+            x: this.gameWidth / 2,
+            y: 560
 
         }
 
     }
 
+    // Create an equation with its answer
     makeEquation() {
 
         // Operation chooser
@@ -29,7 +31,7 @@ class Robot {
             operation = "+";
         } else if (rand == 2) {
             operation = "-";
-        } else if (this.rand == 3) {
+        } else if (rand == 3) {
             operation = "x";
         } else {
             operation = "/";
@@ -83,32 +85,80 @@ class Robot {
         }
 
         // Concatenate to make equation
-        this.equation = `${numberOne} ${operation} ${numberTwo} =`;
-        this.equationAnswer = eval(this.equation.replace("=", "")).toString();
-        console.log(this.equation, this.equationAnswer);
-
+        this.equation = `${numberOne} ${operation} ${numberTwo} = `;
+        this.answer = eval(this.equation.replace("x", "*").replace("=", "")).toString();
+        
     }
 
-    drawRobot(ctx) {
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-    }
+    // What the player is typing
+    addTyping(number) {
 
-    drawEquation(ctx) {
+        // If it is the correct number, add digit and add to typing
+        if (number == this.answer.charAt(this.digit)) {
 
-        ctx.fillText(this.equation, this.position.x, this.position.y);
+            this.typing += number;
+            this.digit++;
+
+            // Check if it satisfies the equation. If it does, then reset and make a new one
+            if (this.typing == this.answer) {
+
+                // Change text color to green
+                this.textColor = "lime";
+
+                // Move player position
+                this.player.moveRight();
+
+                // Add delay
+                setTimeout(() => {
+
+                    this.digit = 0;
+                    this.typing = "";
+                    this.textColor = "white";
+                    this.makeEquation();
+
+                }, 300);
+
+            }
+
+        } else {
+ 
+            this.player.moveLeft();
+
+            if (this.textColor == "white") {
+
+                // Fade from red to white
+                let redness = 0;
+                let interval = setInterval(() => {
+
+                    this.textColor = `rgba(255, ${redness}, ${redness})`;
+                    redness += 10; // increase redness
+                    if (redness > 255) {
+
+                        this.textColor = "white";
+                        clearInterval(interval);
+                    
+                    }
+
+                }, 15);
+
+            }
+
+        }
 
     }
 
     draw(ctx) {
 
-        this.drawRobot(ctx);
-        this.drawEquation(ctx);
+        ctx.font = "30px Arial";
+        ctx.fillStyle = this.textColor;
+        ctx.textAlign = "center";
+        ctx.fillText(this.equation + this.typing, this.position.x, this.position.y);
 
     }
 
-    update(deltaTime) {
-        
-        this.position.x += this.speed / deltaTime;
+    update() {
+
+
 
     }
 

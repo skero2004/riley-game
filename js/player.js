@@ -5,15 +5,70 @@ class Player {
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
 
+        this.opponents = game.opponents;
+
         this.image = document.getElementById("riley");
 
         this.width = 200;
         this.height = 86;
 
+        this.maxSpeed = 10;
+        this.speed = 0;
+
+        this.moveTime = 1000;
+
         this.position = {
 
-            x: this.gameWidth / 2 - this.width / 2,
-            y: this.gameHeight / 2 - this.height / 2
+            x: 150,
+            y: 225
+
+        }
+
+    }
+
+    moveLeft() {
+
+        if (this.position.x > 46) {
+
+            this.speed = -this.maxSpeed;
+            setTimeout(() => { 
+            
+                this.speed = 0;
+                this.position.x = Math.round(this.position.x);
+
+            }, this.moveTime);
+
+        } else {
+
+            this.opponents.forEach(opponent => {
+
+                opponent.moveRight();
+
+            });
+
+        }
+
+    }
+
+    moveRight() {
+
+        if (this.position.x < 610 - this.width) {
+
+            this.speed = this.maxSpeed;
+            setTimeout(() => { 
+            
+                this.speed = 0;
+                this.position.x = Math.round(this.position.x);
+            
+            }, this.moveTime);
+
+        } else {
+
+            this.opponents.forEach(opponent => {
+
+                opponent.moveLeft();
+
+            });
 
         }
 
@@ -27,7 +82,7 @@ class Player {
 
     update(deltaTime) {
 
-
+        this.position.x += this.speed / deltaTime
 
     }
 

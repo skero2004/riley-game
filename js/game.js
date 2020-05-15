@@ -6,20 +6,38 @@ class Game {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
 
-        // Set variables for the robot creation loop
-        this.lastCreateRobotTime = 0;
-        this.nextCreateRobotTime = 500 + Math.round(Math.random() * 2000);
-        this.robots = [];
-
-        // Set initial level
-        this.level = 1;
-
     }
 
     start() {
 
-        // Objects
+        // Create opponents
+        this.opponents = [
+            
+            new Opponent(this, 25),
+            new Opponent(this, 125),
+            new Opponent(this, 325),
+            new Opponent(this, 425)
+        
+        ];
+
+        // Set opponent images
+
+        // Shuffle array
+        for (let i = this.opponents.length - 1; i > 0; i--) {
+
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.opponents[i], this.opponents[j]] = [this.opponents[j], this.opponents[i]];
+        
+        }
+
+        this.opponents[0].setImage("sammy");
+
+        // Create player
         this.player = new Player(this);
+
+        // Create equation
+        this.equation = new Equation(this);
+        this.equation.makeEquation();
 
         // Input handler
         this.inputs = new InputHandler(this);
@@ -28,47 +46,38 @@ class Game {
 
     update(deltaTime, timeStamp) {
 
-        // Update player position
+        // Update player
         this.player.update(deltaTime);
+
+        // Update opponents
+        this.opponents.forEach(opponent => {
+            
+            opponent.update(deltaTime, timeStamp);
+
+        });
+
+        // Update equation
+        this.equation.update();
 
         // Update inputs
         this.inputs.update(this);
-        
-        // Create new robot every 0.5 ~ 2.5 seconds
-        if (timeStamp - this.lastCreateRobotTime > this.nextCreateRobotTime) {
-
-            this.lastCreateRobotTime = timeStamp;
-            this.nextCreateRobotTime = 500 + Math.round(Math.random() * 2000) 
-
-            // Create robot
-            this.robots.push(new Robot(this))
-            this.robots[this.robots.length - 1].makeEquation();
-
-        }
-
-        this.robots.forEach(robot => {
-            
-            robot.update(deltaTime);
-
-            if (robot.position.x < -robot.width) {
-
-                this.robots.splice(this.robots.indexOf(robot), 1);
-
-            } 
-
-        });
 
     }
 
     draw(ctx) {
 
+        // Draw player
         this.player.draw(ctx);
+    
+        // Draw opponent
+        this.opponents.forEach(opponent => {
 
-        this.robots.forEach(robot => {
-            
-            robot.draw(ctx);
+            opponent.draw(ctx);
 
         });
+
+        // Draw equation
+        this.equation.draw(ctx);
 
     }
 
