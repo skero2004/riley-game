@@ -5,7 +5,10 @@ const ctx = gameScene.getContext("2d");
 const GAME_WIDTH = gameScene.width;
 const GAME_HEIGHT = gameScene.height;
 
-const game = new Game(GAME_WIDTH, GAME_HEIGHT);
+const background = new Background(GAME_WIDTH, GAME_HEIGHT);
+background.start();
+
+const game = new Game(GAME_WIDTH, GAME_HEIGHT, background);
 game.start();
 
 // Main loop
@@ -18,6 +21,11 @@ function loop(timeStamp) {
     // Clear the screen
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     
+    // Draw background
+    background.update(deltaTime, timeStamp);
+    background.draw(ctx);
+
+    // Draw game
     game.update(deltaTime, timeStamp);
     game.draw(ctx);
 

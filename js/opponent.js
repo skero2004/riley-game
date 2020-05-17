@@ -10,12 +10,9 @@ class Opponent {
 
         this.moveTime = 1000;
 
-        this.width = 200;
-        this.height = 80;
-
         this.position = {
 
-            x: 150,
+            x: 300,
             y: y
 
         }
@@ -29,12 +26,8 @@ class Opponent {
           
         this.image = document.getElementById(image);
 
-        if (image = "sammy") {
-
-            this.width = 200;
-            this.height = 51;
-
-        }
+        this.width = this.image.width;
+        this.height = this.image.height;
 
     }
 
@@ -54,7 +47,8 @@ class Opponent {
 
         this.speed = this.maxSpeed;
         setTimeout(() => { 
-        
+
+            // Reset speed
             this.speed = 0 
             this.position.x = Math.round(this.position.x);
 
@@ -63,12 +57,16 @@ class Opponent {
     }
 
     draw(ctx) {
-        if(this.image != null) {
-            ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
-        } else {
-            ctx.fillStyle = "white";
-            ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-        }
+
+        // Translate so center the image
+        ctx.translate(this.position.x, this.position.y);
+
+        // Draw image
+        ctx.drawImage(this.image, -this.width / 2, -this.height / 2);
+
+        // Reset transform
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+    
     }
 
     update(deltaTime, timeStamp) {
@@ -76,9 +74,9 @@ class Opponent {
         // Move opponent forward or backward randomly
         if (timeStamp > this.lastMoved + this.nextMoveTime) {
 
-            // 80% move right, 20% move left
+            // 90% move right
             let rand = Math.random() * 10;
-            if (rand < 8) {
+            if (rand < 9) {
 
                 this.moveRight();
 

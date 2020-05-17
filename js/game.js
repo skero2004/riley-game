@@ -1,6 +1,9 @@
 class Game {
 
-    constructor(gameWidth, gameHeight) {
+    constructor(gameWidth, gameHeight, background) {
+
+        // Get background
+        this.background = background;
 
         // Set width and height
         this.gameWidth = gameWidth;
@@ -10,19 +13,19 @@ class Game {
 
     start() {
 
+        this.gameDuration = 60000;
+
         // Create opponents
         this.opponents = [
             
-            new Opponent(this, 25),
-            new Opponent(this, 125),
-            new Opponent(this, 325),
-            new Opponent(this, 425)
+            new Opponent(this, 75),
+            new Opponent(this, 175),
+            new Opponent(this, 375),
+            new Opponent(this, 475)
         
         ];
 
-        // Set opponent images
-
-        // Shuffle array
+        // Shuffle opponents array
         for (let i = this.opponents.length - 1; i > 0; i--) {
 
             const j = Math.floor(Math.random() * (i + 1));
@@ -30,7 +33,11 @@ class Game {
         
         }
 
-        this.opponents[0].setImage("sammy");
+        // Set the images (random since it's shuffled)
+        this.opponents[0].setImage("andy");
+        this.opponents[1].setImage("mannie");
+        this.opponents[2].setImage("sammy");
+        this.opponents[3].setImage("winnie");
 
         // Create player
         this.player = new Player(this);

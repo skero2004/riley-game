@@ -15,7 +15,7 @@ class Equation {
         this.position = {
 
             x: this.gameWidth / 2,
-            y: 560
+            y: 570
 
         }
 
@@ -99,7 +99,7 @@ class Equation {
             this.typing += number;
             this.digit++;
 
-            // Check if it satisfies the equation. If it does, then reset and make a new one
+            // Check if the answer is correct. If yes, then reset and make a new equation
             if (this.typing == this.answer) {
 
                 // Change text color to green
@@ -111,6 +111,7 @@ class Equation {
                 // Add delay
                 setTimeout(() => {
 
+                    // Reset equation
                     this.digit = 0;
                     this.typing = "";
                     this.textColor = "white";

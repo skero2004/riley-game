@@ -2,6 +2,8 @@ class Player {
 
     constructor(game) {
 
+        this.background = game.background;
+
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
 
@@ -9,8 +11,8 @@ class Player {
 
         this.image = document.getElementById("riley");
 
-        this.width = 200;
-        this.height = 86;
+        this.width = this.image.width;
+        this.height = this.image.height;
 
         this.maxSpeed = 10;
         this.speed = 0;
@@ -19,8 +21,8 @@ class Player {
 
         this.position = {
 
-            x: 150,
-            y: 225
+            x: 300,
+            y: 275
 
         }
 
@@ -28,11 +30,14 @@ class Player {
 
     moveLeft() {
 
-        if (this.position.x > 46) {
+        // Slow background
+        this.background.setSlow();
+
+        if (this.position.x > 130) {
 
             this.speed = -this.maxSpeed;
             setTimeout(() => { 
-            
+
                 this.speed = 0;
                 this.position.x = Math.round(this.position.x);
 
@@ -48,11 +53,21 @@ class Player {
 
         }
 
+        setTimeout(() => {
+
+            // Normal background
+            this.background.setNormal();
+
+        }, this.moveTime);
+
     }
 
     moveRight() {
 
-        if (this.position.x < 610 - this.width) {
+        // Quicken background
+        this.background.setFast();
+
+        if (this.position.x < 610) {
 
             this.speed = this.maxSpeed;
             setTimeout(() => { 
@@ -72,11 +87,25 @@ class Player {
 
         }
 
+        setTimeout(() => {
+
+            // Normal background
+            this.background.setNormal();
+
+        }, this.moveTime);
+
     }
 
     draw(ctx) {
 
-        ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
+        // Translate so center the image
+        ctx.translate(this.position.x, this.position.y);
+
+        // Draw image
+        ctx.drawImage(this.image, -this.width / 2, -this.height / 2);
+
+        // Reset transform
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
 
     }
 
