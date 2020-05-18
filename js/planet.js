@@ -5,7 +5,7 @@ class Planet {
         this.gameWidth = background.gameWidth;
         this.gameHeight = background.gameHeight;
         
-        this.maxSpeed = -40;
+        this.maxSpeed = -50;
         this.normalSpeed = -30;
         this.minSpeed = -20;
 
@@ -47,8 +47,8 @@ class Planet {
 
         this.position = {
 
-            x: Math.random() * (this.gameWidth - this.width / 2),
-            y: Math.random() * (this.gameHeight - this.height / 2)
+            x: this.width / 2 + Math.random() * (this.gameWidth - this.width),
+            y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
 
@@ -59,7 +59,7 @@ class Planet {
         this.position = {
 
             x: this.gameWidth + this.width / 2,
-            y: Math.random() * (this.gameHeight - this.height / 2)
+            y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
 

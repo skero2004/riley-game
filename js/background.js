@@ -11,7 +11,7 @@ class Background {
 
         this.stars = [];
         this.lastCreateStar = 0;
-        this.nextStarTime = Math.random() * 200;
+        this.nextStarTime = Math.random() * 150;
 
         this.speedTypes = {
 
@@ -27,8 +27,8 @@ class Background {
     start() {
 
         // Create planets at the beginning
-        let rand = Math.floor(Math.random() * 3)
-        for (let i = 0; i < rand; i++) {
+        let rand1 = Math.floor(Math.random() * 2);
+        for (let i = 0; i < rand1; i++) {
 
             this.planets.push(new Planet(this));
 
@@ -37,6 +37,19 @@ class Background {
 
             planet.setRandomImage();
             planet.setFirstPosition();
+
+        });
+
+        // Create stars at the beginning
+        let rand2 = 20 + Math.floor(Math.random() * 20);
+        for (let i = 0; i < rand2; i++) {
+
+            this.stars.push(new Star(this));
+
+        }
+        this.stars.forEach(star => {
+
+            star.setFirstPosition();
 
         });
 
@@ -80,7 +93,7 @@ class Background {
             this.stars.push(new Star(this));
 
             this.lastCreateStar = timeStamp;
-            this.nextStarTime = Math.random() * 200;
+            this.nextStarTime = Math.random() * 150;
 
         }
 
@@ -94,7 +107,7 @@ class Background {
         // Update stars
         this.stars.forEach(star => {
 
-            star.update(deltaTime);
+            star.update(deltaTime, this.speed);
 
         });
 
