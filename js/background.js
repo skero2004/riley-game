@@ -9,6 +9,10 @@ class Background {
         this.lastCreatePlanet = 0;
         this.nextPlanetTime = 5000 + Math.random() * 10000;
 
+        this.stars = [];
+        this.lastCreateStar = 0;
+        this.nextStarTime = Math.random() * 200;
+
         this.speedTypes = {
 
             SLOW: "slow",
@@ -70,10 +74,27 @@ class Background {
 
         }
 
+        // Create new star at random interval
+        if (timeStamp > this.lastCreateStar + this.nextStarTime) {
+
+            this.stars.push(new Star(this));
+
+            this.lastCreateStar = timeStamp;
+            this.nextStarTime = Math.random() * 200;
+
+        }
+
         // Update planets
         this.planets.forEach(planet => {
 
             planet.update(deltaTime, this.speed);
+
+        });
+
+        // Update stars
+        this.stars.forEach(star => {
+
+            star.update(deltaTime);
 
         });
 
@@ -88,10 +109,29 @@ class Background {
 
         });
 
+        // Delete star when it reaches end
+        this.stars.forEach(star => {
+
+            if (star.position.x + star.width / 2 < 0) {
+
+                this.stars.splice(this.stars.indexOf(star), 1);
+
+            }
+
+        });
+
     }
 
     draw(ctx) {
         
+        // Draw stars
+        this.stars.forEach(star => {
+
+            star.draw(ctx);
+
+        });
+
+        // Draw planets
         this.planets.forEach(planet => {
 
             planet.draw(ctx);
