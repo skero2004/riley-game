@@ -1,3 +1,5 @@
+var speedThreshold = 256;
+
 // gameScene and context variables
 const gameScene = document.getElementById("gameScene");
 const ctx = gameScene.getContext("2d");
@@ -17,7 +19,7 @@ function loop(timeStamp) {
 
     let deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;
-    console.log(deltaTime);
+
     // Clear the screen
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     

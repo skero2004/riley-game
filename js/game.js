@@ -13,8 +13,6 @@ class Game {
 
     start() {
 
-        this.gameDuration = 60000;
-
         // Create opponents
         this.opponents = [
             

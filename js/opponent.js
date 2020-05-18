@@ -92,7 +92,7 @@ class Opponent {
 
         }
 
-        this.position.x += this.speed * deltaTime / 256;
+        this.position.x += this.speed * deltaTime / speedThreshold;
 
     }
 

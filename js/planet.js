@@ -75,7 +75,7 @@ class Planet {
         else 
             speed = this.minSpeed;
 
-        this.position.x += speed * deltaTime / 256;
+        this.position.x += speed * deltaTime / speedThreshold;
 
     }
 

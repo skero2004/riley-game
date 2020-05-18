@@ -111,7 +111,7 @@ class Player {
 
     update(deltaTime) {
 
-        this.position.x += this.speed * deltaTime / 256
+        this.position.x += this.speed * deltaTime / speedThreshold;
 
     }
 
