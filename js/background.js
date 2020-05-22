@@ -100,14 +100,14 @@ class Background {
         // Update planets
         this.planets.forEach(planet => {
 
-            planet.update(deltaTime, this.speed);
+            planet.update(deltaTime);
 
         });
 
         // Update stars
         this.stars.forEach(star => {
 
-            star.update(deltaTime, this.speed);
+            star.update(deltaTime);
 
         });
 

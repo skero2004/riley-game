@@ -2,6 +2,8 @@ class Star {
 
     constructor(background) {
 
+        this.background = background;
+
         this.gameWidth = background.gameWidth;
         this.gameHeight = background.gameHeight;
 
@@ -50,12 +52,12 @@ class Star {
 
     }
 
-    update(deltaTime, speedType) {
+    update(deltaTime) {
 
         let speed;
-        if (speedType == this.speedTypes.FAST)
+        if (this.background.speed == this.speedTypes.FAST)
             speed = this.maxSpeed;
-        else if (speedType == this.speedTypes.NORMAL)
+        else if (this.background.speed == this.speedTypes.NORMAL)
             speed = this.normalSpeed;
         else 
             speed = this.minSpeed;

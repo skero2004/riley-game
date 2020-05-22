@@ -44,6 +44,12 @@ class Game {
         this.equation = new Equation(this);
         this.equation.makeEquation();
 
+        // Create timer
+        this.timer = new Timer();
+
+        // Create goal line
+        this.goalLine = new GoalLine(this);
+
         // Input handler
         this.inputs = new InputHandler(this);
         
@@ -64,12 +70,21 @@ class Game {
         // Update equation
         this.equation.update();
 
+        // Update timer
+        this.timer.update(timeStamp);
+
+        // Update goal line
+        this.goalLine.update(deltaTime);
+
         // Update inputs
         this.inputs.update(this);
 
     }
 
     draw(ctx) {
+
+        // Draw goal line
+        this.goalLine.draw(ctx);
 
         // Draw player
         this.player.draw(ctx);
@@ -83,6 +98,9 @@ class Game {
 
         // Draw equation
         this.equation.draw(ctx);
+
+        // Draw timer
+        this.timer.draw(ctx);
 
     }
 
