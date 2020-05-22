@@ -10,29 +10,42 @@
 
     <body>
 
-        <div style="text-align: center;">
-            <canvas id="gameScene" width="800" height="600"></canvas>
+        <!-- Canvases -->
+        <div id="canvases_outer">
+
+            <div id="canvases_inner">
+
+                <canvas id="background" width="800" height="600"></canvas>
+                <canvas id="gameScene" width="800" height="600"></canvas>
+                <canvas id="workshop" width="800" height="600"></canvas>
+            
+            </div>
+
         </div>
         
         <!-- Images -->
 
-        <!-- Characters -->
-        <img id="andy" src="assets/images/characters/Andy.png">
-        <img id="mannie" src="assets/images/characters/Mannie.png">
-        <img id="riley" src="assets/images/characters/Riley.png">
-        <img id="sammy" src="assets/images/characters/Sammy.png">
-        <img id="winnie" src="assets/images/characters/Winnie.png">
+        <div style="display: none;">
+        
+            <!-- Characters -->
+            <img id="andy" src="assets/images/characters/Andy.png">
+            <img id="mannie" src="assets/images/characters/Mannie.png">
+            <img id="riley" src="assets/images/characters/Riley.png">
+            <img id="sammy" src="assets/images/characters/Sammy.png">
+            <img id="winnie" src="assets/images/characters/Winnie.png">
 
-        <!-- Background -->
-        <img id="chrysalis" src="assets/images/background/Chrysalis.png">
-        <img id="diginet" src="assets/images/background/Diginet.png">
-        <img id="frostburg" src="assets/images/background/Frostburg.png">
-        <img id="mizar" src="assets/images/background/Mizar.png">
-        <img id="primus" src="assets/images/background/Primus.png">
-        <img id="star" src="assets/images/background/Star.png">
+            <!-- Background -->
+            <img id="chrysalis" src="assets/images/background/Chrysalis.png">
+            <img id="diginet" src="assets/images/background/Diginet.png">
+            <img id="frostburg" src="assets/images/background/Frostburg.png">
+            <img id="mizar" src="assets/images/background/Mizar.png">
+            <img id="primus" src="assets/images/background/Primus.png">
+            <img id="star" src="assets/images/background/Star.png">
 
-        <!-- Miscellaneous -->
-        <img id="goalLine" src="assets/images/miscellaneous/GoalLine.png">
+            <!-- Miscellaneous -->
+            <img id="goalLine" src="assets/images/miscellaneous/GoalLine.png">
+
+        </div>
 
         <!-- Javascript code -->
         <script src="js/goalLine.js"></script>

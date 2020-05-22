@@ -83,6 +83,9 @@ class Game {
 
     draw(ctx) {
 
+        // Clear the screen
+        ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+
         // Draw goal line
         this.goalLine.draw(ctx);
 

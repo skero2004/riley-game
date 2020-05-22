@@ -1,13 +1,34 @@
-#gameScene {
+#canvases_outer {
 
-    border: 1px solid black;
-    background-color: black;
-
+    text-align: center;
+    position: relative;
 
 }
 
-img {
+#canvases_inner {
 
-    display: none;
+    position: relative;
+
+}
+
+#background {
+
+    background-color: black;
+    position: absolute;
+    z-index: 0;
+
+}
+
+#gameScene {
+
+    position: absolute;
+    z-index: 1;
+
+}
+
+#workshop {
+
+    position: relative;
+    z-index: 1;
 
 }

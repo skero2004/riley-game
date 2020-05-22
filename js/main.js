@@ -1,8 +1,17 @@
+// Controls the speed of the game
 var speedThreshold = 256;
 
-// gameScene and context variables
+// Background and its context
+const backgroundScene = document.getElementById("background");
+const backgroundCtx = backgroundScene.getContext("2d");
+
+// Game and its context
 const gameScene = document.getElementById("gameScene");
-const ctx = gameScene.getContext("2d");
+const gameCtx = gameScene.getContext("2d");
+
+// Workshop and its context
+const workshopScene = document.getElementById("workshop");
+const workshopCtx = workshop.getContext("2d");
 
 const GAME_WIDTH = gameScene.width;
 const GAME_HEIGHT = gameScene.height;
@@ -19,17 +28,17 @@ function loop(timeStamp) {
 
     let deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;
-
-    // Clear the screen
-    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     
     // Draw background
     background.update(deltaTime, timeStamp);
-    background.draw(ctx);
+    background.draw(backgroundCtx);
 
     // Draw game
     game.update(deltaTime, timeStamp);
-    game.draw(ctx);
+    game.draw(gameCtx);
+
+    // Draw workshop
+
 
     requestAnimationFrame(loop);
 

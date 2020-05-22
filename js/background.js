@@ -137,6 +137,9 @@ class Background {
 
     draw(ctx) {
         
+        // Clear the screen
+        ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+
         // Draw stars
         this.stars.forEach(star => {
 
