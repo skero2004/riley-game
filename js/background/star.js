@@ -1,6 +1,6 @@
 class Star {
 
-    constructor(background) {
+    init(background, loadType) {
 
         this.background = background;
 
@@ -13,13 +13,6 @@ class Star {
         this.width = this.image.width * this.scale;
         this.height = this.image.height * this.scale;
 
-        this.position = {
-
-            x: this.gameWidth + this.width / 2,
-            y: Math.random() * this.gameHeight
-
-        }
-
         this.speedTypes = background.speedTypes;
 
         this.maxSpeed = -120;
@@ -27,6 +20,11 @@ class Star {
         this.minSpeed = -60;
 
         this.rotateAngle = Math.random() * Math.PI / 2;
+
+        if (loadType == background.loadTypes.FIRST)
+            this.setFirstPosition();
+        else
+            this.setPosition();
 
     }
 

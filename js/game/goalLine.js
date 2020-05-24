@@ -1,6 +1,6 @@
 class GoalLine {
 
-    constructor(game) {
+    init(game) {
 
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;

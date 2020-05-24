@@ -1,7 +1,7 @@
 class InputHandler {
 
-    constructor(game) {
-        
+    init(game) {
+
         // Player property
         this.player = game.player;
 

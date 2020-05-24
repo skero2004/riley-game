@@ -1,27 +1,51 @@
 class Game {
 
-    constructor(gameWidth, gameHeight, background) {
+    constructor(gameWidth, gameHeight) {
 
-        // Get background
-        this.background = background;
-
-        // Set width and height
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
 
     }
 
-    start() {
+    start(background) {
+
+        // Get background
+        this.background = background;
+
+        // Create goal line
+        this.goalLine = new GoalLine();
 
         // Create opponents
         this.opponents = [
             
-            new Opponent(this, 75),
-            new Opponent(this, 175),
-            new Opponent(this, 375),
-            new Opponent(this, 475)
+            new Opponent(),
+            new Opponent(),
+            new Opponent(),
+            new Opponent()
         
         ];
+
+        // Create player
+        this.player = new Player();
+
+        // Create equation
+        this.equation = new Equation();
+        this.equation.makeEquation();
+
+        // Create timer
+        this.timer = new Timer();
+
+        // Create input handler
+        this.inputs = new InputHandler();
+
+        // Initialize goalLine
+        this.goalLine.init(this);
+
+        // Initialize opponents
+        this.opponents[0].init(this, 75, "andy");
+        this.opponents[1].init(this, 175, "mannie");
+        this.opponents[2].init(this, 375, "sammy");
+        this.opponents[3].init(this, 475, "winnie");
 
         // Shuffle opponents array
         for (let i = this.opponents.length - 1; i > 0; i--) {
@@ -31,27 +55,17 @@ class Game {
         
         }
 
-        // Set the images (random since it's shuffled)
-        this.opponents[0].setImage("andy");
-        this.opponents[1].setImage("mannie");
-        this.opponents[2].setImage("sammy");
-        this.opponents[3].setImage("winnie");
+        // Initilize player
+        this.player.init(this);
 
-        // Create player
-        this.player = new Player(this);
+        // Initialize equation
+        this.equation.init(this);
 
-        // Create equation
-        this.equation = new Equation(this);
-        this.equation.makeEquation();
+        // Initialize timer
+        this.timer.init();
 
-        // Create timer
-        this.timer = new Timer();
-
-        // Create goal line
-        this.goalLine = new GoalLine(this);
-
-        // Input handler
-        this.inputs = new InputHandler(this);
+        // Initialize input handler
+        this.inputs.init(this);
         
     }
 
@@ -82,9 +96,6 @@ class Game {
     }
 
     draw(ctx) {
-
-        // Clear the screen
-        ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
 
         // Draw goal line
         this.goalLine.draw(ctx);

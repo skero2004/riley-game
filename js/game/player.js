@@ -1,11 +1,10 @@
 class Player {
 
-    constructor(game) {
+    init(game) {
 
         this.background = game.background;
 
-        this.gameWidth = game.gameWidth;
-        this.gameHeight = game.gameHeight;
+        this.goalLine = game.goalLine;
 
         this.opponents = game.opponents;
 
@@ -25,6 +24,8 @@ class Player {
             y: 275
 
         }
+
+        this.isGoalLineCrossed = false;
 
     }
 
@@ -110,6 +111,10 @@ class Player {
     }
 
     update(deltaTime) {
+
+        // Setting isGoalLineCrossed
+        if (this.position.x > this.goalLine.position.x)
+            this.isGoalLineCrossed = true;
 
         this.position.x += this.speed * deltaTime / speedThreshold;
 

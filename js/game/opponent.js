@@ -1,9 +1,13 @@
 class Opponent {
 
-    constructor(game, y) {
+    init(game, y, image) {
 
-        this.gameWidth = game.gameWidth;
-        this.gameHeight = game.gameHeight;
+        this.image = document.getElementById(image);
+
+        this.width = this.image.width;
+        this.height = this.image.height;
+
+        this.goalLine = game.goalLine;
 
         this.maxSpeed = 10;
         this.speed = 0;
@@ -20,14 +24,7 @@ class Opponent {
         this.lastMoved = 0;
         this.nextMoveTime = 2000 + Math.random() * 8000;
 
-    }
-
-    setImage(image) {
-          
-        this.image = document.getElementById(image);
-
-        this.width = this.image.width;
-        this.height = this.image.height;
+        this.isGoalLineCrossed = false;
 
     }
 
@@ -71,8 +68,12 @@ class Opponent {
 
     update(deltaTime, timeStamp) {
         
+        // Setting isGoalLineCrossed
+        if (this.position.x > this.goalLine.position.x)
+            this.isGoalLineCrossed = true;
+
         // Move opponent forward or backward randomly
-        if (timeStamp > this.lastMoved + this.nextMoveTime) {
+        if (timeStamp > this.lastMoved + this.nextMoveTime && !this.isGoalLineCrossed) {
 
             // 90% move right
             let rand = Math.random() * 10;

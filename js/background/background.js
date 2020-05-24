@@ -6,12 +6,7 @@ class Background {
         this.gameHeight = gameHeight;
 
         this.planets = [];
-        this.lastCreatePlanet = 0;
-        this.nextPlanetTime = 5000 + Math.random() * 10000;
-
         this.stars = [];
-        this.lastCreateStar = 0;
-        this.nextStarTime = Math.random() * 150;
 
         this.speedTypes = {
 
@@ -20,39 +15,59 @@ class Background {
             FAST: "fast"
 
         }
-        this.speed = this.speedTypes.NORMAL;
+
+        this.loadTypes = {
+
+            FIRST: "first",
+            RUNNING: "running"
+
+        }
 
     }
     
     start() {
 
+        // Create next planet time
+        this.lastCreatePlanet = 0;
+        this.nextPlanetTime = 5000 + Math.random() * 10000;
+
+        // Create next star time
+        this.lastCreateStar = 0;
+        this.nextStarTime = Math.random() * 150;
+
+        // Set speed to NORMAL
+        this.speed = this.speedTypes.NORMAL;
+
         // Create planets at the beginning
         let rand1 = Math.floor(Math.random() * 2);
         for (let i = 0; i < rand1; i++) {
-
-            this.planets.push(new Planet(this));
-
+        
+            this.planets.push(new Planet());
+        
         }
-        this.planets.forEach(planet => {
-
-            planet.setRandomImage();
-            planet.setFirstPosition();
-
-        });
 
         // Create stars at the beginning
         let rand2 = 20 + Math.floor(Math.random() * 20);
         for (let i = 0; i < rand2; i++) {
-
-            this.stars.push(new Star(this));
-
+        
+            this.stars.push(new Star());            
+        
         }
-        this.stars.forEach(star => {
 
-            star.setFirstPosition();
-
+        // Initialize planets
+        this.planets.forEach(planet => {
+        
+            planet.init(this, this.loadTypes.FIRST);
+        
         });
 
+        // Initialize stars
+        this.stars.forEach(star => {
+
+            star.init(this, this.loadTypes.FIRST);
+        
+        });
+    
     }
 
     setSlow() {
@@ -78,9 +93,8 @@ class Background {
         // Create new planet at random interval
         if (timeStamp > this.lastCreatePlanet + this.nextPlanetTime) {
 
-            this.planets.push(new Planet(this));
-            this.planets[this.planets.length - 1].setRandomImage();
-            this.planets[this.planets.length - 1].setPosition();
+            this.planets.push(new Planet());
+            this.planets[this.planets.length - 1].init(this, this.loadTypes.RUNNING);
 
             this.lastCreatePlanet = timeStamp;
             this.nextPlanetTime = 5000 + Math.random() * 10000;
@@ -90,8 +104,9 @@ class Background {
         // Create new star at random interval
         if (timeStamp > this.lastCreateStar + this.nextStarTime) {
 
-            this.stars.push(new Star(this));
-
+            this.stars.push(new Star());
+            this.stars[this.stars.length - 1].init(this, this.loadTypes.RUNNING);
+            
             this.lastCreateStar = timeStamp;
             this.nextStarTime = Math.random() * 150;
 
@@ -136,9 +151,6 @@ class Background {
     }
 
     draw(ctx) {
-        
-        // Clear the screen
-        ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
 
         // Draw stars
         this.stars.forEach(star => {

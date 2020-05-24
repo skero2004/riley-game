@@ -1,6 +1,6 @@
 class Planet {
 
-    constructor(background) {
+    init(background, loadType) {
 
         this.background = background;
 
@@ -12,6 +12,13 @@ class Planet {
         this.minSpeed = -20;
 
         this.speedTypes = background.speedTypes;
+
+        this.setRandomImage();
+
+        if (loadType == background.loadTypes.FIRST)
+            this.setFirstPosition();
+        else 
+            this.setPosition();
 
     }
 

@@ -1,6 +1,6 @@
 class Timer {
 
-    constructor() {
+    init() {
 
         this.position = {
 

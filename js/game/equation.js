@@ -1,6 +1,6 @@
 class Equation {
 
-    constructor(game) {
+    init(game) {
 
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
