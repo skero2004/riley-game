@@ -25,18 +25,7 @@ class Background {
 
     }
     
-    start() {
-
-        // Create next planet time
-        this.lastCreatePlanet = 0;
-        this.nextPlanetTime = 5000 + Math.random() * 10000;
-
-        // Create next star time
-        this.lastCreateStar = 0;
-        this.nextStarTime = Math.random() * 150;
-
-        // Set speed to NORMAL
-        this.speed = this.speedTypes.NORMAL;
+    createObjects() {
 
         // Create planets at the beginning
         let rand1 = Math.floor(Math.random() * 2);
@@ -50,9 +39,27 @@ class Background {
         let rand2 = 20 + Math.floor(Math.random() * 20);
         for (let i = 0; i < rand2; i++) {
         
-            this.stars.push(new Star());            
+            this.stars.push(new Star());
         
         }
+
+    }
+
+    start(game) {
+
+        // Get player
+        this.player = game.player;
+
+        // Create next planet time
+        this.lastCreatePlanet = 0;
+        this.nextPlanetTime = 5000 + Math.random() * 10000;
+
+        // Create next star time
+        this.lastCreateStar = 0;
+        this.nextStarTime = Math.random() * 150;
+
+        // Set speed to NORMAL
+        this.speed = this.speedTypes.NORMAL;
 
         // Initialize planets
         this.planets.forEach(planet => {
@@ -91,7 +98,7 @@ class Background {
     update(deltaTime, timeStamp) {
 
         // Create new planet at random interval
-        if (timeStamp > this.lastCreatePlanet + this.nextPlanetTime) {
+        if (timeStamp > this.lastCreatePlanet + this.nextPlanetTime && !this.player.isGoalLineCrossed) {
 
             this.planets.push(new Planet());
             this.planets[this.planets.length - 1].init(this, this.loadTypes.RUNNING);
@@ -102,7 +109,7 @@ class Background {
         }
 
         // Create new star at random interval
-        if (timeStamp > this.lastCreateStar + this.nextStarTime) {
+        if (timeStamp > this.lastCreateStar + this.nextStarTime && !this.player.isGoalLineCrossed) {
 
             this.stars.push(new Star());
             this.stars[this.stars.length - 1].init(this, this.loadTypes.RUNNING);

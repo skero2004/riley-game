@@ -11,7 +11,12 @@ const GAME_HEIGHT = gameScene.height;
 const background = new Background(GAME_WIDTH, GAME_HEIGHT);
 const game = new Game(GAME_WIDTH, GAME_HEIGHT, background);
 
-background.start();
+// Create game content
+background.createObjects();
+game.createObjects();
+
+// Initialize game content
+background.start(game);
 game.start(background);
 
 // Main loop

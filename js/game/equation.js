@@ -19,6 +19,8 @@ class Equation {
 
         }
 
+        this.makeEquation();
+
     }
 
     // Create an equation with its answer
@@ -96,54 +98,62 @@ class Equation {
         // If it is the correct number, add digit and add to typing
         if (number == this.answer.charAt(this.digit)) {
 
-            this.typing += number;
-            this.digit++;
+            if (!this.player.isGoalLineCrossed) {
 
-            // Check if the answer is correct. If yes, then reset and make a new equation
-            if (this.typing == this.answer) {
+                this.typing += number;
+                this.digit++;
 
-                // Change text color to green
-                this.textColor = "lime";
+                // Check if the answer is correct. If yes, then reset and make a new equation
+                if (this.typing == this.answer) {
 
-                // Move player position
-                this.player.moveRight();
+                    // Change text color to green
+                    this.textColor = "lime";
 
-                // Add delay
-                setTimeout(() => {
+                    // Move player position
+                    this.player.moveRight();
 
-                    // Reset equation
-                    this.digit = 0;
-                    this.typing = "";
-                    this.textColor = "white";
-                    this.makeEquation();
+                    // Add delay
+                    setTimeout(() => {
 
-                }, 300);
+                        // Reset equation
+                        this.digit = 0;
+                        this.typing = "";
+                        this.textColor = "white";
+                        this.makeEquation();
+
+                    }, 300);
+
+                }
 
             }
 
         } else {
  
-            this.player.moveLeft();
+            if (!this.player.isGoalLineCrossed) {
 
-            if (this.textColor == "white") {
+                this.player.moveLeft();
 
-                // Fade from red to white
-                let redness = 0;
-                let interval = setInterval(() => {
+                if (this.textColor == "white") {
 
-                    this.textColor = `rgba(255, ${redness}, ${redness})`;
-                    redness += 10; // increase redness
-                    if (redness > 255) {
+                    // Fade from red to white
+                    let redness = 0;
+                    let interval = setInterval(() => {
 
-                        this.textColor = "white";
-                        clearInterval(interval);
-                    
-                    }
+                        this.textColor = `rgba(255, ${redness}, ${redness})`;
+                        redness += 10; // increase redness
+                        if (redness > 255) {
 
-                }, 15);
+                            this.textColor = "white";
+                            clearInterval(interval);
+                        
+                        }
+
+                    }, 15);
+
+                }
 
             }
-
+        
         }
 
     }

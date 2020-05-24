@@ -7,10 +7,7 @@ class Game {
 
     }
 
-    start(background) {
-
-        // Get background
-        this.background = background;
+    createObjects() {
 
         // Create goal line
         this.goalLine = new GoalLine();
@@ -30,13 +27,19 @@ class Game {
 
         // Create equation
         this.equation = new Equation();
-        this.equation.makeEquation();
 
         // Create timer
         this.timer = new Timer();
 
         // Create input handler
         this.inputs = new InputHandler();
+
+    }
+
+    start(background) {
+
+        // Get background
+        this.background = background;
 
         // Initialize goalLine
         this.goalLine.init(this);

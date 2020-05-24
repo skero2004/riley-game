@@ -4,6 +4,8 @@ class Star {
 
         this.background = background;
 
+        this.player = background.player;
+
         this.gameWidth = background.gameWidth;
         this.gameHeight = background.gameHeight;
 
@@ -18,6 +20,7 @@ class Star {
         this.maxSpeed = -120;
         this.normalSpeed = -80;
         this.minSpeed = -60;
+        this.speed = this.normalSpeed;
 
         this.rotateAngle = Math.random() * Math.PI / 2;
 
@@ -32,7 +35,7 @@ class Star {
 
         this.position = {
 
-            x: this.width / 2 + Math.random() * (this.gameWidth - this.width),
+            x: Math.random() * (this.gameWidth + 150),
             y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
@@ -43,24 +46,40 @@ class Star {
 
         this.position = {
 
-            x: this.gameWidth + this.width / 2,
+            x: this.gameWidth + 150,
             y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
 
     }
 
+    stop() {
+
+        if (this.speed < 0)
+            this.speed += 1;
+        else
+            this.speed = 0;
+
+    }
+
     update(deltaTime) {
 
-        let speed;
-        if (this.background.speed == this.speedTypes.FAST)
-            speed = this.maxSpeed;
-        else if (this.background.speed == this.speedTypes.NORMAL)
-            speed = this.normalSpeed;
-        else 
-            speed = this.minSpeed;
+        if (!this.player.isGoalLineCrossed) {
 
-        this.position.x += speed * deltaTime / speedThreshold;
+            if (this.background.speed == this.speedTypes.FAST)
+                this.speed = this.maxSpeed;
+            else if (this.background.speed == this.speedTypes.NORMAL)
+                this.speed = this.normalSpeed;
+            else 
+                this.speed = this.minSpeed;
+
+        } else {
+            
+            this.stop();
+
+        }
+
+        this.position.x += this.speed * deltaTime / speedThreshold;
 
     }
 
