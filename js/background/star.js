@@ -17,10 +17,16 @@ class Star {
 
         this.speedTypes = background.speedTypes;
 
+        // Set speed
         this.maxSpeed = -120;
         this.normalSpeed = -80;
         this.minSpeed = -60;
-        this.speed = this.normalSpeed;
+        if (this.background.speed == this.speedTypes.FAST)
+            this.speed = this.maxSpeed;
+        else if (this.background.speed == this.speedTypes.NORMAL)
+            this.speed = this.normalSpeed;
+        else 
+            this.speed = this.minSpeed;
 
         this.rotateAngle = Math.random() * Math.PI / 2;
 
@@ -35,7 +41,7 @@ class Star {
 
         this.position = {
 
-            x: Math.random() * (this.gameWidth + 150),
+            x: Math.random() * this.gameWidth * 2,
             y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
@@ -46,19 +52,10 @@ class Star {
 
         this.position = {
 
-            x: this.gameWidth + 150,
+            x: this.gameWidth * 2,
             y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
-
-    }
-
-    stop() {
-
-        if (this.speed < 0)
-            this.speed += 1;
-        else
-            this.speed = 0;
 
     }
 
@@ -73,13 +70,13 @@ class Star {
             else 
                 this.speed = this.minSpeed;
 
-        } else {
-            
-            this.stop();
-
         }
 
-        this.position.x += this.speed * deltaTime / speedThreshold;
+        // If the dampening is not complete, continue to dampen. Else, stop
+        if (this.speed + this.background.dampener < 0)
+            this.position.x += (this.speed + this.background.dampener) * deltaTime / speedThreshold;
+        else
+            this.position.x += 0;
 
     }
 

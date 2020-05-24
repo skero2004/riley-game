@@ -9,10 +9,18 @@ class Planet {
         this.gameWidth = background.gameWidth;
         this.gameHeight = background.gameHeight;
         
+        this.speedTypes = background.speedTypes;
+
+        // Set speed
         this.maxSpeed = -50;
         this.normalSpeed = -30;
         this.minSpeed = -20;
-        this.speed = this.normalSpeed;
+        if (this.background.speed == this.speedTypes.FAST)
+            this.speed = this.maxSpeed;
+        else if (this.background.speed == this.speedTypes.NORMAL)
+            this.speed = this.normalSpeed;
+        else 
+            this.speed = this.minSpeed;
 
         this.speedTypes = background.speedTypes;
 
@@ -59,7 +67,7 @@ class Planet {
 
         this.position = {
 
-            x: Math.random() * (this.gameWidth + 150),
+            x: Math.random() * this.gameWidth * 2,
             y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
@@ -70,20 +78,10 @@ class Planet {
 
         this.position = {
 
-            x: this.gameWidth + 150,
+            x: this.gameWidth * 2,
             y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
-
-    }
-
-    stop() {
-
-        if (this.speed < 0)
-            this.speed += 1;
-        else
-            this.speed = 0;
-        console.log(this.speed);
 
     }
 
@@ -98,13 +96,13 @@ class Planet {
             else 
                 this.speed = this.minSpeed;
 
-        } else {
-
-            this.stop();
-
         }
 
-        this.position.x += this.speed * deltaTime / speedThreshold;
+        // If the dampening is not complete, continue to dampen. Else, stop
+        if (this.speed + this.background.dampener * 0.5 < 0)
+            this.position.x += (this.speed + this.background.dampener * 0.5) * deltaTime / speedThreshold;
+        else
+            this.position.x += 0;
 
     }
 

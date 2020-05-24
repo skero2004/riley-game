@@ -60,6 +60,7 @@ class Background {
 
         // Set speed to NORMAL
         this.speed = this.speedTypes.NORMAL;
+        this.dampener = 0;
 
         // Initialize planets
         this.planets.forEach(planet => {
@@ -96,6 +97,12 @@ class Background {
     }
 
     update(deltaTime, timeStamp) {
+
+        // If goaled then dampen speed
+        if (this.player.isGoalLineCrossed)
+            this.dampener += 1;
+        else
+            this.dampener = 0;
 
         // Create new planet at random interval
         if (timeStamp > this.lastCreatePlanet + this.nextPlanetTime && !this.player.isGoalLineCrossed) {
