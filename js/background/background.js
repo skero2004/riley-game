@@ -23,10 +23,6 @@ class Background {
 
         }
 
-    }
-    
-    createObjects() {
-
         // Create planets at the beginning
         let rand1 = Math.floor(Math.random() * 2);
         for (let i = 0; i < rand1; i++) {
@@ -45,10 +41,7 @@ class Background {
 
     }
 
-    start(game) {
-
-        // Get player
-        this.player = game.player;
+    init(game) {
 
         // Create next planet time
         this.lastCreatePlanet = 0;
@@ -98,14 +91,8 @@ class Background {
 
     update(deltaTime, timeStamp) {
 
-        // If goaled then dampen speed
-        if (this.player.isGoalLineCrossed)
-            this.dampener += 1;
-        else
-            this.dampener = 0;
-
         // Create new planet at random interval
-        if (timeStamp > this.lastCreatePlanet + this.nextPlanetTime && !this.player.isGoalLineCrossed) {
+        if (timeStamp > this.lastCreatePlanet + this.nextPlanetTime) {
 
             this.planets.push(new Planet());
             this.planets[this.planets.length - 1].init(this, this.loadTypes.RUNNING);
@@ -116,7 +103,7 @@ class Background {
         }
 
         // Create new star at random interval
-        if (timeStamp > this.lastCreateStar + this.nextStarTime && !this.player.isGoalLineCrossed) {
+        if (timeStamp > this.lastCreateStar + this.nextStarTime) {
 
             this.stars.push(new Star());
             this.stars[this.stars.length - 1].init(this, this.loadTypes.RUNNING);

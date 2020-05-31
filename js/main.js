@@ -9,15 +9,11 @@ const GAME_WIDTH = gameScene.width;
 const GAME_HEIGHT = gameScene.height;
 
 const background = new Background(GAME_WIDTH, GAME_HEIGHT);
-const game = new Game(GAME_WIDTH, GAME_HEIGHT, background);
-
-// Create game content
-background.createObjects();
-game.createObjects();
+const game = new Game(GAME_WIDTH, GAME_HEIGHT);
 
 // Initialize game content
-background.start(game);
-game.start(background);
+background.init(game);
+game.init(background);
 
 // Main loop
 let lastTime = 0;

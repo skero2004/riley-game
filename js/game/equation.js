@@ -2,15 +2,23 @@ class Equation {
 
     init(game) {
 
-        this.gameWidth = game.gameWidth;
-        this.gameHeight = game.gameHeight;
+        this.game = game;
 
         this.player = game.player;
+
+        this.gameWidth = game.gameWidth;
+        this.gameHeight = game.gameHeight;
 
         this.digit = 0;
         this.typing = "";
 
         this.textColor = "white";
+
+        this.numEquationsSolved = 0;
+
+        this.numTotalKeyStrokes = 0;
+        this.correctKeyStrokes = 0;
+        this.accuracy = 1; // 100%
 
         this.position = {
 
@@ -95,10 +103,15 @@ class Equation {
     // What the player is typing
     addTyping(number) {
 
-        // If it is the correct number, add digit and add to typing
-        if (number == this.answer.charAt(this.digit)) {
+        if (this.game.isGame) {
 
-            if (!this.player.isGoalLineCrossed) {
+            // Increment total number of keystrokes
+            this.numTotalKeyStrokes++;
+
+            // If it is the correct number, add digit and add to typing
+            if (number == this.answer.charAt(this.digit)) {
+
+                this.correctKeyStrokes++;
 
                 this.typing += number;
                 this.digit++;
@@ -111,6 +124,9 @@ class Equation {
 
                     // Move player position
                     this.player.moveRight();
+
+                    // Increment number of equations solved
+                    this.numEquationsSolved++;
 
                     // Add delay
                     setTimeout(() => {
@@ -125,11 +141,7 @@ class Equation {
 
                 }
 
-            }
-
-        } else {
- 
-            if (!this.player.isGoalLineCrossed) {
+            } else { // If it not the correct number, move player to the left and red pulse
 
                 this.player.moveLeft();
 
@@ -151,9 +163,9 @@ class Equation {
                     }, 15);
 
                 }
-
-            }
         
+            }
+
         }
 
     }
@@ -169,7 +181,9 @@ class Equation {
 
     update() {
 
-
+        this.accuracy = this.correctKeyStrokes / this.numTotalKeyStrokes;
+        if (isNaN(this.accuracy)) this.accuracy = 1;
+        this.accuracy = Math.round((this.accuracy + Number.EPSILON) * 100) / 100;
 
     }
 

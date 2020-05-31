@@ -4,8 +4,6 @@ class Player {
 
         this.background = game.background;
 
-        this.goalLine = game.goalLine;
-
         this.opponents = game.opponents;
 
         this.image = document.getElementById("riley");
@@ -25,7 +23,7 @@ class Player {
 
         }
 
-        this.isGoalLineCrossed = false;
+        this.place = 1;
 
     }
 
@@ -110,12 +108,31 @@ class Player {
 
     }
 
+    setPlace() {
+        
+        // Calculate the place of the player
+
+        // Add opponents' x positions
+        let opponentXPositions = [];
+        this.opponents.forEach(opponent => {
+
+            opponentXPositions.push(opponent.position.x);
+
+        });
+
+        // Sort them in descending order
+        opponentXPositions.sort((a, b) => b - a);
+
+        // Compare each one to the player position to check player place
+        let i = 1;
+        while (opponentXPositions[i - 1] > this.position.x) i++;
+        this.place = i;
+
+    }
+
     update(deltaTime) {
 
-        // Setting isGoalLineCrossed
-        if (this.position.x > this.goalLine.position.x)
-            this.isGoalLineCrossed = true;
-
+        this.setPlace();
         this.position.x += this.speed * deltaTime / speedThreshold;
 
     }

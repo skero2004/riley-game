@@ -10,6 +10,8 @@
 
     <body>
 
+        <p style="font: 0 SpaceAge;">This downloads the font SpaceAge</p>
+
         <div id="wrapper">
 
             <canvas id="gameScene" width="800" height="600"></canvas>
@@ -17,15 +19,17 @@
         </div>
         
         <!-- Images -->
-
         <div style="display: none;">
-        
+
             <!-- Characters -->
-            <img id="andy" src="assets/images/characters/Andy.png">
-            <img id="mannie" src="assets/images/characters/Mannie.png">
+
             <img id="riley" src="assets/images/characters/Riley.png">
-            <img id="sammy" src="assets/images/characters/Sammy.png">
-            <img id="winnie" src="assets/images/characters/Winnie.png">
+
+            <img class="opponent" src="assets/images/characters/Andy.png">
+            <img class="opponent" src="assets/images/characters/Mannie.png">
+            <img class="opponent" src="assets/images/characters/Sammy.png">
+            <img class="opponent" src="assets/images/characters/Winnie.png">
+            <img class="opponent" src="assets/images/characters/SpaceCat.png">
 
             <!-- Background -->
             <img id="chrysalis" src="assets/images/background/Chrysalis.png">
@@ -37,10 +41,15 @@
 
             <!-- Miscellaneous -->
             <img id="goalLine" src="assets/images/miscellaneous/GoalLine.png">
+            <img id="scoreBoard" src="assets/images/miscellaneous/Scoreboard.png">
 
         </div>
 
         <!-- Javascript code -->
+        <script src="js/game/item.js"></script>
+        <script src="js/game/results.js"></script>
+        <script src="js/mainMenu/menu.js"></script>
+        <script src="js/mainMenu/settings.js"></script>
         <script src="js/game/goalLine.js"></script>
         <script src="js/background/star.js"></script>
         <script src="js/background/planet.js"></script>

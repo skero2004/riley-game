@@ -47,7 +47,7 @@ class InputHandler {
     }
 
     // Key hold
-    update(game) {
+    update() {
 
         
 

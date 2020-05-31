@@ -1,3 +1,14 @@
+@font-face {
+
+    font-family: "SpaceAge";
+    src: url(fonts/spaceage.eot);
+    src:
+    url(fonts/spaceage.woff) format("woff"),
+    url(fonts/spaceage.otf) format("opentype"),
+    url(fonts/spaceage.svg#SpaceAge) format("svg");
+
+}
+
 #wrapper {
 
     text-align: center;

@@ -4,8 +4,6 @@ class Planet {
 
         this.background = background;
 
-        this.player = background.player;
-
         this.gameWidth = background.gameWidth;
         this.gameHeight = background.gameHeight;
         
@@ -15,15 +13,7 @@ class Planet {
         this.maxSpeed = -50;
         this.normalSpeed = -30;
         this.minSpeed = -20;
-        if (this.background.speed == this.speedTypes.FAST)
-            this.speed = this.maxSpeed;
-        else if (this.background.speed == this.speedTypes.NORMAL)
-            this.speed = this.normalSpeed;
-        else 
-            this.speed = this.minSpeed;
-
-        this.speedTypes = background.speedTypes;
-
+    
         this.setRandomImage();
 
         if (loadType == background.loadTypes.FIRST)
@@ -67,7 +57,7 @@ class Planet {
 
         this.position = {
 
-            x: Math.random() * this.gameWidth * 2,
+            x: Math.random() * (this.gameWidth - this.width / 2),
             y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
@@ -78,7 +68,7 @@ class Planet {
 
         this.position = {
 
-            x: this.gameWidth * 2,
+            x: this.gameWidth + this.width / 2,
             y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
@@ -87,22 +77,14 @@ class Planet {
 
     update(deltaTime) {
 
-        if (!this.player.isGoalLineCrossed) {
+        if (this.background.speed == this.speedTypes.FAST)
+            this.speed = this.maxSpeed;
+        else if (this.background.speed == this.speedTypes.NORMAL)
+            this.speed = this.normalSpeed;
+        else 
+            this.speed = this.minSpeed;
 
-            if (this.background.speed == this.speedTypes.FAST)
-                this.speed = this.maxSpeed;
-            else if (this.background.speed == this.speedTypes.NORMAL)
-                this.speed = this.normalSpeed;
-            else 
-                this.speed = this.minSpeed;
-
-        }
-
-        // If the dampening is not complete, continue to dampen. Else, stop
-        if (this.speed + this.background.dampener * 0.5 < 0)
-            this.position.x += (this.speed + this.background.dampener * 0.5) * deltaTime / speedThreshold;
-        else
-            this.position.x += 0;
+        this.position.x += this.speed * deltaTime / speedThreshold;
 
     }
 

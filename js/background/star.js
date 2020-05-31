@@ -4,8 +4,6 @@ class Star {
 
         this.background = background;
 
-        this.player = background.player;
-
         this.gameWidth = background.gameWidth;
         this.gameHeight = background.gameHeight;
 
@@ -41,7 +39,7 @@ class Star {
 
         this.position = {
 
-            x: Math.random() * this.gameWidth * 2,
+            x: Math.random() * (this.gameWidth - this.width / 2),
             y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
@@ -52,7 +50,7 @@ class Star {
 
         this.position = {
 
-            x: this.gameWidth * 2,
+            x: this.gameWidth + this.width / 2,
             y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
 
         }
@@ -61,22 +59,14 @@ class Star {
 
     update(deltaTime) {
 
-        if (!this.player.isGoalLineCrossed) {
+        if (this.background.speed == this.speedTypes.FAST)
+            this.speed = this.maxSpeed;
+        else if (this.background.speed == this.speedTypes.NORMAL)
+            this.speed = this.normalSpeed;
+        else 
+            this.speed = this.minSpeed;
 
-            if (this.background.speed == this.speedTypes.FAST)
-                this.speed = this.maxSpeed;
-            else if (this.background.speed == this.speedTypes.NORMAL)
-                this.speed = this.normalSpeed;
-            else 
-                this.speed = this.minSpeed;
-
-        }
-
-        // If the dampening is not complete, continue to dampen. Else, stop
-        if (this.speed + this.background.dampener < 0)
-            this.position.x += (this.speed + this.background.dampener) * deltaTime / speedThreshold;
-        else
-            this.position.x += 0;
+        this.position.x += this.speed * deltaTime / speedThreshold;
 
     }
 

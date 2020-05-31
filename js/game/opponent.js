@@ -2,7 +2,7 @@ class Opponent {
 
     init(game, y, image) {
 
-        this.image = document.getElementById(image);
+        this.image = image;
 
         this.width = this.image.width;
         this.height = this.image.height;
