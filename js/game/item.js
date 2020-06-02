@@ -4,8 +4,8 @@ class Item {
 
         this.position = {
 
-            x: 150,
-            y: 455
+            x: -200,
+            y: 160
 
         }
 
@@ -76,12 +76,6 @@ class Item {
 
         // Draw the image
         ctx.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
-
-        // Reset transform
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-
-        // Reset alpha
-        ctx.globalAlpha = 1;
 
     }
 

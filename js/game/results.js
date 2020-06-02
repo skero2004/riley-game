@@ -52,6 +52,9 @@ class Results {
         this.itemCheck = 0;
         this.isGettingItem = false;
 
+        // Reset results showed
+        this.isResultsShowed = false;
+
     }
 
     chooseRandomItem() {
@@ -82,8 +85,13 @@ class Results {
             i++;
 
             // If statements to check if the player should receive an item
-            if (this.player.place > 3 && i == this.numElements - 1) clearInterval(interval); 
-            if (i == this.numElements) clearInterval(interval);
+            if ((!this.isGettingItem && i == this.numElements - 1) ||
+                (this.isGettingItem && i == this.numElements)) {
+                
+                this.isResultsShowed = true;
+                clearInterval(interval); 
+            
+            }
 
         }, 500);
 
@@ -133,7 +141,10 @@ class Results {
         if (!isNaN(this.equation.accuracy)) {
             
             if (pastAccuracies[0] == null) pastAccuracies[0] = this.equation.accuracy;
-            else if (pastAccuracies.length == 30) pastAccuracies.shift().push(this.equation.accuracy);
+            else if (pastAccuracies.length == 30) {
+                pastAccuracies.shift()
+                pastAccuracies.push(this.equation.accuracy);
+            }
             else pastAccuracies.push(this.equation.accuracy);
         
         }
@@ -173,9 +184,9 @@ class Results {
         // When the game just finished
         if (this.game.justFinish) {
 
+            this.getItem();
             this.appear();
             this.storeResults();
-            this.getItem();
 
         }
 
@@ -222,8 +233,8 @@ class Results {
 
             // Draw "item earned: _"
             ctx.font = "25px SpaceAge"; 
-            ctx.fillText("Item Earned:", -100 + this.item.image.width / 2, 150);
-            ctx.fillText(this.item.name, -100 + this.item.image.width / 2, 170);
+            ctx.fillText("Item Earned:", this.item.position.x + this.item.image.width / 2 + 150, this.item.position.y - 10);
+            ctx.fillText(this.item.name, this.item.position.x + this.item.image.width / 2 + 150, this.item.position.y + 10);
         
         }
         if (this.itemCheck == 1) this.item.appear();
@@ -236,14 +247,14 @@ class Results {
         if (this.isElementsShowing[7] && this.isGettingItem)
             ctx.fillText("Press any key to continue", 0, 230);
 
+        // Draw item
+        this.item.draw(ctx);
+
         // Reset transform
         ctx.setTransform(1, 0, 0, 1, 0, 0);
 
         // Reset alpha
         ctx.globalAlpha = 1;
-
-        // Draw item
-        this.item.draw(ctx);
 
     }
 

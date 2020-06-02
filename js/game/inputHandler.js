@@ -2,11 +2,17 @@ class InputHandler {
 
     init(game) {
 
+        // Get game
+        this.game = game;
+
         // Player property
         this.player = game.player;
 
         // Equation property
         this.equation = game.equation;
+
+        // Results property
+        this.results = game.results;
 
         // Properties to prevent holding key
         this.isHold = false;
@@ -20,8 +26,9 @@ class InputHandler {
     // Key down
     onKeyDown(e) {
 
-        // Check if its a number and key is not holded
-        if (isFinite(e.key) && e.code != "Space" && (!this.isHold || e.key != this.lastKey)) {
+        // Check if its a number and key is not holded and game has started
+        if (isFinite(e.key) && e.code != "Space" && (!this.isHold || e.key != this.lastKey)
+            && this.game.isGame) {
 
             // Prevent holding down key
             this.isHold = true;
@@ -33,6 +40,13 @@ class InputHandler {
                 this.equation.addTyping(e.key);
 
             }
+
+        }
+
+        // Check if all results in the results screen showed
+        if (this.results.isResultsShowed) {
+
+            this.results.isResultsShowed = false;
 
         }
         
@@ -49,7 +63,7 @@ class InputHandler {
     // Key hold
     update() {
 
-        
+
 
     }
 
