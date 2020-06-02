@@ -26,20 +26,9 @@ class Planet {
     setRandomImage() {
 
         // Randomly choose image
-        let rand = Math.ceil(Math.random() * 5);
-        let image;
-        if (rand == 1)
-            image = "chrysalis";
-        else if (rand == 2)
-            image = "diginet";
-        else if (rand == 3)
-            image = "frostburg";
-        else if (rand == 4)
-            image = "mizar";
-        else
-            image = "primus";
-
-        this.image = document.getElementById(image);
+        let images = document.getElementsByClassName("planet");
+        let rand = Math.floor(Math.random() * images.length);
+        this.image = images[rand];
 
         // Scale down the image by some percent
         this.scale = 0.5 + Math.random() * 0.5;

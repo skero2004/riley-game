@@ -182,7 +182,6 @@ class Equation {
     update() {
 
         this.accuracy = this.correctKeyStrokes / this.numTotalKeyStrokes;
-        if (isNaN(this.accuracy)) this.accuracy = 1;
         this.accuracy = Math.round((this.accuracy + Number.EPSILON) * 100) / 100;
 
     }
