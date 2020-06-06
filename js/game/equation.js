@@ -27,6 +27,8 @@ class Equation {
 
         }
 
+        this.alpha = 1;
+
         this.makeEquation();
 
     }
@@ -170,16 +172,82 @@ class Equation {
 
     }
 
+    disappear() {
+
+        const secondsToDisappear = 2;
+        const framesInInterval = fps * secondsToDisappear;
+        let interval = setInterval(() => {
+
+            // Increase alpha by a little
+            this.alpha -= 1 / framesInInterval;
+            if (this.position.y < this.gameHeight / 2 - this.distFromCenter) {
+
+                this.position.y = this.gameHeight / 2 - this.distFromCenter;
+                this.alpha = 0;
+                clearInterval(interval);
+            
+            }
+
+        }, 1 / fps);
+
+    }
+
+    appear() {
+
+        // Necessary calculations
+        const fps = 60;
+        const secondsToAppear = 1;
+        const framesInInterval = fps * secondsToAppear;
+        let interval = setInterval(() => {
+
+            // Increase alpha by a little
+            this.alpha += 1 / framesInInterval;
+            if (this.alpha > 1) {
+
+                this.alpha = 1;
+                clearInterval(interval);
+            
+            }
+
+        }, 1 / fps);
+
+    }
+
+    disappear() {
+
+        // Necessary calculations
+        const fps = 60;
+        const secondsToDisappear = 1;
+        const framesInInterval = fps * secondsToDisappear;
+        let interval = setInterval(() => {
+
+            // Increase alpha by a little
+            this.alpha -= 1 / framesInInterval;
+            if (this.alpha < 0) {
+
+                this.alpha = 0;
+                clearInterval(interval);
+            
+            }
+
+        }, 1 / fps);
+
+    }
+
     draw(ctx) {
 
+        ctx.globalAlpha = this.alpha;
         ctx.font = "30px Arial";
         ctx.fillStyle = this.textColor;
         ctx.textAlign = "center";
         ctx.fillText(this.equation + this.typing, this.position.x, this.position.y);
+        ctx.globalAlpha = 1;
 
     }
 
     update() {
+
+        if (this.game.justFinish) this.disappear();
 
         this.accuracy = this.correctKeyStrokes / this.numTotalKeyStrokes;
         this.accuracy = Math.round((this.accuracy + Number.EPSILON) * 100) / 100;

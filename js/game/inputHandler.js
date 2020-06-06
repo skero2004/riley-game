@@ -11,6 +11,9 @@ class InputHandler {
         // Equation property
         this.equation = game.equation;
 
+        // Opponents
+        this.opponents = game.opponents;
+
         // Results property
         this.results = game.results;
 
@@ -46,7 +49,21 @@ class InputHandler {
         // Check if all results in the results screen showed
         if (this.results.isResultsShowed) {
 
+            // Set results showed to false
             this.results.isResultsShowed = false;
+
+            // Make results disappear
+            this.results.disappear();
+
+            // Reset player x position
+            this.player.reset();
+
+            // Make opponents disappear
+            this.opponents.forEach(opponent => {
+
+                opponent.disappear();
+
+            });
 
         }
         

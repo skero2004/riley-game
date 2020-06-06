@@ -179,6 +179,34 @@ class Results {
 
     }
 
+    disappear() {
+
+        // If the item is there, then make it disappear
+        if (this.isGettingItem) this.item.disappear();
+
+        // Necessary calculations
+        const fps = 60;
+        const secondsToDisappear = 2;
+        const framesInInterval = fps * secondsToDisappear;
+        let interval = setInterval(() => {
+
+            // Move results up by a little
+            this.position.y -= this.distFromCenter / framesInInterval;
+
+            // Increase alpha by a little
+            this.alpha -= 1 / framesInInterval;
+            if (this.position.y < this.gameHeight / 2 - this.distFromCenter) {
+
+                this.position.y = this.gameHeight / 2 - this.distFromCenter;
+                this.alpha = 0;
+                clearInterval(interval);
+            
+            }
+
+        }, 1 / fps);
+
+    }
+
     update() {
 
         // When the game just finished

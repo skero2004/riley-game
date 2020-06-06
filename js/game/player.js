@@ -2,6 +2,10 @@ class Player {
 
     init(game) {
 
+        this.game = game;
+
+        this.gameWidth = game.gameWidth;
+
         this.background = game.background;
 
         this.opponents = game.opponents;
@@ -16,14 +20,20 @@ class Player {
 
         this.moveTime = 1000;
 
+        this.initialXPos = 300;
         this.position = {
 
-            x: 300,
+            x: this.initialXPos,
             y: 275
 
         }
 
         this.place = 1;
+
+        this.isReset = false;
+        this.didPassRightEdge = false;
+        this.initialResetSpeed = 150;
+        this.resetSpeed = 150;
 
     }
 
@@ -95,6 +105,12 @@ class Player {
 
     }
 
+    reset() {
+
+        this.isReset = true;
+
+    }
+
     draw(ctx) {
 
         // Translate so center the image
@@ -132,8 +148,48 @@ class Player {
 
     update(deltaTime) {
 
-        this.setPlace();
+        // Calculate place
+        if (this.game.isGame) this.setPlace();
+
+        // Move robot
         this.position.x += this.speed * deltaTime / speedThreshold;
+
+        // Reset position if isReset is true
+        if (this.isReset) {
+
+            if (!this.didPassRightEdge) {
+
+                // Static speed if going to right edge
+                this.speed = this.resetSpeed;
+
+            } else {
+
+                // If going to initial position, dampen speed
+                const dampenRate = 1 - ((this.initialResetSpeed * deltaTime / speedThreshold) / (this.initialXPos + this.width / 2));
+
+                this.resetSpeed *= dampenRate;
+                this.speed = this.resetSpeed + 1;
+
+            }
+
+            // Go to left ege if on right edge
+            if (this.position.x - this.width / 2 > this.gameWidth) {
+
+                this.position.x = -this.width / 2;
+                this.didPassRightEdge = true;
+
+            }
+
+            if (this.position.x > this.initialXPos && this.didPassRightEdge) {
+
+                this.speed = 0;
+                this.didPassRightEdge = false;
+                this.position.x = this.initialXPos;
+                this.isReset = false;
+
+            }
+
+        }
 
     }
 

@@ -83,7 +83,7 @@ class Game {
         this.equation.init(this);
 
         // Initialize timer
-        this.timer.init();
+        this.timer.init(this);
 
         // Initialize input handler
         this.inputs.init(this);

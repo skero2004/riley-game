@@ -57,6 +57,27 @@ class Item {
 
     }
 
+    disappear() {
+
+        // Necessary calculations
+        const fps = 60;
+        const secondsToDisappear = 2;
+        const framesInInterval = fps * secondsToDisappear;
+        let interval = setInterval(() => {
+
+            // Increase alpha by a little
+            this.alpha -= 1 / framesInInterval;
+            if (this.alpha < 0) {
+
+                this.alpha = 0;
+                clearInterval(interval);
+            
+            }
+
+        }, 1 / fps);
+
+    }
+
     storeItem() {
 
 

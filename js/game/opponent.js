@@ -1,6 +1,8 @@
 class Opponent {
 
     init(game, y, image) {
+ 
+        this.gameWidth = game.gameWidth;
 
         this.image = image;
 
@@ -26,6 +28,10 @@ class Opponent {
 
         this.isGoalLineCrossed = false;
 
+        this.isDisappearing = false;
+        this.initialAppearSpeed = 150;
+        this.appearSpeed = this.initialAppearSpeed;
+
     }
 
     moveLeft() {
@@ -50,6 +56,12 @@ class Opponent {
             this.position.x = Math.round(this.position.x);
 
         }, this.moveTime);
+
+    }
+
+    disappear() {
+
+        this.isDisappearing = true;
 
     }
 
@@ -90,6 +102,19 @@ class Opponent {
             // Set next time
             this.lastMoved = timeStamp;
             this.nextMoveTime = 2000 + Math.random() * 8000;
+
+        }
+
+        if (this.isDisappearing) {
+
+            this.speed = this.initialAppearSpeed;
+            
+            if (this.position.x - this.width / 2 > this.gameWidth) {
+
+                this.isDisappearing = false;
+                this.speed = 0;
+
+            }
 
         }
 
