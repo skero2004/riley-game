@@ -9,14 +9,22 @@
 
 }
 
-#wrapper {
+#canvases {
 
-    text-align: center;
+    position: relative;
 
 }
 
-#gameScene {
+#background {
 
     background-color: black;
+
+}
+
+#canvases > canvas {
+
+    left: 50%;
+    margin-left: -400px;
+    position: absolute;
 
 }

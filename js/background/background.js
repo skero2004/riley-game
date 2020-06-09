@@ -153,6 +153,9 @@ class Background {
 
     draw(ctx) {
 
+        // Clear canvas
+        ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+
         // Draw stars
         this.stars.forEach(star => {
 

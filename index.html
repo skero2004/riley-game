@@ -10,11 +10,16 @@
 
     <body>
 
+        <!-- Font installation -->
         <p style="font: 0 SpaceAge;">This downloads the font SpaceAge</p>
 
-        <div id="wrapper">
+        <!-- Canvases -->
+        <div id="canvases">
 
-            <canvas id="gameScene" width="800" height="600"></canvas>
+            <canvas id="background" width="800" height="600"></canvas>
+            <canvas id="game" width="800" height="600"></canvas>
+            <canvas id="menu" width="800" height="600"></canvas>
+            <canvas id="workshop" width="800" height="600"></canvas>
         
         </div>
         
@@ -51,20 +56,26 @@
         </div>
 
         <!-- Javascript code -->
-        <script src="js/game/item.js"></script>
-        <script src="js/game/results.js"></script>
-        <script src="js/mainMenu/menu.js"></script>
+        <script src="js/mainMenu/enterWorkshop.js"></script>
+        <script src="js/mainMenu/startGame.js"></script>
         <script src="js/mainMenu/settings.js"></script>
-        <script src="js/game/goalLine.js"></script>
+        <script src="js/mainMenu/title.js"></script>
+        <script src="js/mainMenu/menu.js"></script>
+
         <script src="js/background/star.js"></script>
         <script src="js/background/planet.js"></script>
+        <script src="js/background//background.js"></script>
+
+        <script src="js/game/item.js"></script>
+        <script src="js/game/results.js"></script>
+        <script src="js/game/goalLine.js"></script>
         <script src="js/game/timer.js"></script>
         <script src="js/game/equation.js"></script>
         <script src="js/game/opponent.js"></script>
         <script src="js/game/player.js"></script>
         <script src="js/game/inputHandler.js"></script>
-        <script src="js/background//background.js"></script>
         <script src="js/game/game.js"></script>
+        
         <script src="js/main.js"></script>
 
     </body>

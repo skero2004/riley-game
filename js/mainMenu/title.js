@@ -1,4 +1,4 @@
-class Settings {
+class Title {
 
     init() {
 
@@ -17,5 +17,5 @@ class Settings {
 
         
     }
-    
+
 }
