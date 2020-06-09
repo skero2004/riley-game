@@ -12,8 +12,14 @@ class Timer {
         }
 
         this.startTime = 6000;
+        this.time = 6000;
 
         this.alpha = 1;
+
+        this.justNumberLessThanTen = false;
+        this.numberChecker = 0;
+
+        this.color = "white";
 
     }
 
@@ -46,7 +52,7 @@ class Timer {
         const framesInInterval = fps * secondsToDisappear;
         let interval = setInterval(() => {
 
-            // Increase alpha by a little
+            // Decrease alpha by a little
             this.alpha -= 1 / framesInInterval;
             if (this.alpha < 0) {
 
@@ -59,8 +65,39 @@ class Timer {
 
     }
 
+    pulseRed() {
+
+        // Fade from red to white
+        let redness = 0;
+        const fps = 60;
+        const secondsToFade = 1;
+        const framesInInterval = fps * secondsToFade;
+        let interval = setInterval(() => {
+
+            this.color = `rgba(255, ${redness}, ${redness})`;
+            redness += 255 / framesInInterval; // increase redness
+            if (redness > 255) {
+
+                this.textColor = "white";
+                clearInterval(interval);
+            
+            }
+
+        }, 1 / fps);
+
+    }
+
     update(timeStamp) {
 
+        // Check if timer just turned 1~10
+        this.numberChecker++;
+        if (this.time - Math.floor(this.time / 100) * 100 < 95 || this.time > 1000) 
+            this.numberChecker = 0;
+
+        // If timer just turned 1~10, pulse red
+        if (this.numberChecker == 1) this.pulseRed();
+
+        // Disappear when the game finishes
         if (this.game.justFinish) this.disappear();
 
         this.time = Math.round((this.startTime - timeStamp / 10));
@@ -75,7 +112,7 @@ class Timer {
     draw(ctx) {
 
         ctx.font = "30px Arial";
-        ctx.fillStyle = "white";
+        ctx.fillStyle = this.color;
         ctx.textAlign = "center";
 
         ctx.globalAlpha = this.alpha;
