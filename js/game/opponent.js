@@ -29,8 +29,10 @@ class Opponent {
         this.isGoalLineCrossed = false;
 
         this.isDisappearing = false;
-        this.initialAppearSpeed = 150;
-        this.appearSpeed = this.initialAppearSpeed;
+        this.disappearSpeed = 150;
+
+        this.isAppearing = false;
+        this.appearSpeed = 150;
 
     }
 
@@ -62,6 +64,12 @@ class Opponent {
     disappear() {
 
         this.isDisappearing = true;
+
+    }
+
+    appear() {
+
+        this.isAppearing = true;
 
     }
 
@@ -105,9 +113,10 @@ class Opponent {
 
         }
 
+        // Disappear
         if (this.isDisappearing) {
 
-            this.speed = this.initialAppearSpeed;
+            this.speed = this.disappearSpeed;
             
             if (this.position.x - this.width / 2 > this.gameWidth) {
 

@@ -5,11 +5,13 @@ class Menu {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
 
+        this.title = new Title();
+
     }
 
     init() {
 
-
+        this.title.init(this)
 
     }
 
@@ -23,6 +25,9 @@ class Menu {
 
         // Clear canvas
         ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
+
+        // Draw title
+        this.title.draw(ctx);
 
     }
 

@@ -1,6 +1,6 @@
 class InputHandler {
 
-    init(game) {
+    init(game, menu) {
 
         // Get game
         this.game = game;
@@ -16,6 +16,9 @@ class InputHandler {
 
         // Results property
         this.results = game.results;
+
+        // Get title
+        this.title = menu.title;
 
         // Properties to prevent holding key
         this.isHold = false;
@@ -56,7 +59,7 @@ class InputHandler {
             this.results.disappear();
 
             // Reset player x position
-            this.player.reset();
+            this.player.disappear();
 
             // Make opponents disappear
             this.opponents.forEach(opponent => {
@@ -64,6 +67,9 @@ class InputHandler {
                 opponent.disappear();
 
             });
+
+            // Make title appear
+            this.title.appear();
 
         }
         
@@ -74,13 +80,6 @@ class InputHandler {
         
         // Stop holding when key up
         this.isHold = false;
-
-    }
-
-    // Key hold
-    update() {
-
-
 
     }
 

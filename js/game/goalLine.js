@@ -38,7 +38,7 @@ class GoalLine {
         const distTravelPerSec = distTravelPerFrame * 1000 / deltaTime;
         const distPlayerFromEdge = this.gameWidth - (this.player.position.x + this.player.width / 2);
         const secToPlayer = Math.abs(distPlayerFromEdge / distTravelPerSec);
-        if (this.timer.time < secToPlayer * 100) {
+        if (this.timer.time < 5800+secToPlayer * 100) {
 
             this.moveLeft();
 
@@ -54,7 +54,7 @@ class GoalLine {
         ctx.translate(this.position.x, this.position.y);
 
         // Draw the image
-        ctx.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
+        ctx.drawImage(this.image, -this.width / 2, -this.height / 2);
 
         // Reset transform
         ctx.setTransform(1, 0, 0, 1, 0, 0);

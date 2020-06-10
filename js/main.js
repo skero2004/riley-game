@@ -14,14 +14,21 @@ const menuCtx = menuCanvas.getContext("2d");
 const GAME_WIDTH = gameCanvas.width;
 const GAME_HEIGHT = gameCanvas.height;
 
+// Create game content
 const background = new Background(GAME_WIDTH, GAME_HEIGHT);
 const game = new Game(GAME_WIDTH, GAME_HEIGHT);
 const menu = new Menu(GAME_WIDTH, GAME_HEIGHT);
+
+// Create input handler
+this.inputs = new InputHandler();
 
 // Initialize game content
 background.init(game);
 game.init(background);
 menu.init();
+
+// Initialize input handler
+this.inputs.init(game, menu);
 
 // Main loop
 let lastTime = 0;

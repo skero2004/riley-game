@@ -30,9 +30,6 @@ class Game {
         // Create timer
         this.timer = new Timer();
 
-        // Create input handler
-        this.inputs = new InputHandler();
-
     }
 
     init(background) {
@@ -84,9 +81,6 @@ class Game {
 
         // Initialize timer
         this.timer.init(this);
-
-        // Initialize input handler
-        this.inputs.init(this);
         
     }
 
@@ -113,9 +107,6 @@ class Game {
 
         // Update result screen
         this.results.update();
-
-        // Update inputs
-        this.inputs.update();
 
         // Check if player passed the goal line
         if (this.player.position.x > this.goalLine.position.x) {
