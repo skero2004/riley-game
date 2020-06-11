@@ -84,6 +84,23 @@ class Game {
         
     }
 
+    disappear() {
+
+        // Make results disappear
+        this.results.disappear();
+
+        // Reset player x position
+        this.player.disappear();
+
+        // Make opponents disappear
+        this.opponents.forEach(opponent => {
+
+            opponent.disappear();
+
+        });
+
+    }
+
     update(deltaTime, timeStamp) {
 
         // Update player

@@ -27,7 +27,7 @@ class Timer {
 
         // Necessary calculations
         const fps = 60;
-        const secondsToAppear = 1;
+        const secondsToAppear = 0.5;
         const framesInInterval = fps * secondsToAppear;
         let interval = setInterval(() => {
 
@@ -40,7 +40,7 @@ class Timer {
             
             }
 
-        }, 1 / fps);
+        }, 1000 / fps);
 
     }
 
@@ -48,7 +48,7 @@ class Timer {
 
         // Necessary calculations
         const fps = 60;
-        const secondsToDisappear = 1;
+        const secondsToDisappear = 0.5;
         const framesInInterval = fps * secondsToDisappear;
         let interval = setInterval(() => {
 
@@ -61,7 +61,7 @@ class Timer {
             
             }
 
-        }, 1 / fps);
+        }, 1000 / fps);
 
     }
 
@@ -70,7 +70,7 @@ class Timer {
         // Fade from red to white
         let redness = 0;
         const fps = 60;
-        const secondsToFade = 1;
+        const secondsToFade = 0.9;
         const framesInInterval = fps * secondsToFade;
         let interval = setInterval(() => {
 
@@ -83,7 +83,7 @@ class Timer {
             
             }
 
-        }, 1 / fps);
+        }, 1000 / fps);
 
     }
 

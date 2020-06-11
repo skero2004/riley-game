@@ -172,31 +172,11 @@ class Equation {
 
     }
 
-    disappear() {
-
-        const secondsToDisappear = 2;
-        const framesInInterval = fps * secondsToDisappear;
-        let interval = setInterval(() => {
-
-            // Increase alpha by a little
-            this.alpha -= 1 / framesInInterval;
-            if (this.position.y < this.gameHeight / 2 - this.distFromCenter) {
-
-                this.position.y = this.gameHeight / 2 - this.distFromCenter;
-                this.alpha = 0;
-                clearInterval(interval);
-            
-            }
-
-        }, 1 / fps);
-
-    }
-
     appear() {
 
         // Necessary calculations
         const fps = 60;
-        const secondsToAppear = 1;
+        const secondsToAppear = 0.5;
         const framesInInterval = fps * secondsToAppear;
         let interval = setInterval(() => {
 
@@ -209,7 +189,7 @@ class Equation {
             
             }
 
-        }, 1 / fps);
+        }, 1000 / fps);
 
     }
 
@@ -217,7 +197,7 @@ class Equation {
 
         // Necessary calculations
         const fps = 60;
-        const secondsToDisappear = 1;
+        const secondsToDisappear = 0.5;
         const framesInInterval = fps * secondsToDisappear;
         let interval = setInterval(() => {
 
@@ -230,7 +210,7 @@ class Equation {
             
             }
 
-        }, 1 / fps);
+        }, 1000 / fps);
 
     }
 

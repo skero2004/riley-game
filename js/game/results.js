@@ -66,6 +66,7 @@ class Results {
         else if (rarityChooser < 20) images = document.getElementsByClassName("rare");
         else if (rarityChooser < 50) images = document.getElementsByClassName("normal");
         else images = document.getElementsByClassName("common");
+        console.log(rarityChooser)
 
         // Choose image from that rarity
         const imageChooser = Math.floor(Math.random() * images.length);
@@ -104,7 +105,7 @@ class Results {
 
             // Necessary calculations
             const fps = 60;
-            const secondsToAppear = 2;
+            const secondsToAppear = 0.5;
             const framesInInterval = fps * secondsToAppear;
             let interval = setInterval(() => {
 
@@ -122,7 +123,7 @@ class Results {
                 
                 }
     
-            }, 1 / fps);
+            }, 1000 / fps);
 
         }, 500);
 
@@ -186,7 +187,7 @@ class Results {
 
         // Necessary calculations
         const fps = 60;
-        const secondsToDisappear = 2;
+        const secondsToDisappear = 0.5;
         const framesInInterval = fps * secondsToDisappear;
         let interval = setInterval(() => {
 
@@ -203,7 +204,7 @@ class Results {
             
             }
 
-        }, 1 / fps);
+        }, 1000 / fps);
 
     }
 

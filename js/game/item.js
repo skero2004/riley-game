@@ -27,7 +27,7 @@ class Item {
     appear() {
 
         const fps = 60;
-        const secondsToAppear = 1.5;
+        const secondsToAppear = 0.5;
         const framesInInterval = fps * secondsToAppear;
         let interval = setInterval(() => {
 
@@ -53,7 +53,7 @@ class Item {
 
             }
 
-        }, 1 / fps);
+        }, 1000 / fps);
 
     }
 
@@ -61,7 +61,7 @@ class Item {
 
         // Necessary calculations
         const fps = 60;
-        const secondsToDisappear = 2;
+        const secondsToDisappear = 0.5;
         const framesInInterval = fps * secondsToDisappear;
         let interval = setInterval(() => {
 
@@ -74,7 +74,7 @@ class Item {
             
             }
 
-        }, 1 / fps);
+        }, 1000 / fps);
 
     }
 

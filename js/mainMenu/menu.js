@@ -6,12 +6,36 @@ class Menu {
         this.gameHeight = gameHeight;
 
         this.title = new Title();
+        this.startGame = new MenuElement();
+        this.goToSettings = new MenuElement();
+        this.goToWorkshop = new MenuElement();
 
     }
 
     init() {
 
-        this.title.init(this)
+        this.title.init(this);
+        this.startGame.init(this, "Start Game", 400);
+        this.goToSettings.init(this, "Settings", 460);
+        this.goToWorkshop.init(this, "Workshop", 520);
+
+    }
+
+    appear() {
+
+        this.title.appear();
+        this.startGame.appear();
+        this.goToSettings.appear();
+        this.goToWorkshop.appear();
+
+    }
+
+    disappear() {
+
+        this.title.disappear();
+        this.startGame.disappear();
+        this.goToSettings.disappear();
+        this.goToWorkshop.disappear();
 
     }
 
@@ -28,6 +52,11 @@ class Menu {
 
         // Draw title
         this.title.draw(ctx);
+
+        // Draw game elements
+        this.startGame.draw(ctx);
+        this.goToSettings.draw(ctx);
+        this.goToWorkshop.draw(ctx);
 
     }
 

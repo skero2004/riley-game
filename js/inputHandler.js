@@ -5,6 +5,9 @@ class InputHandler {
         // Get game
         this.game = game;
 
+        // Get menu
+        this.menu = menu;
+
         // Player property
         this.player = game.player;
 
@@ -55,21 +58,11 @@ class InputHandler {
             // Set results showed to false
             this.results.isResultsShowed = false;
 
-            // Make results disappear
-            this.results.disappear();
-
-            // Reset player x position
-            this.player.disappear();
-
-            // Make opponents disappear
-            this.opponents.forEach(opponent => {
-
-                opponent.disappear();
-
-            });
+            // Make game elements disappear
+            this.game.disappear();
 
             // Make title appear
-            this.title.appear();
+            this.menu.appear();
 
         }
         

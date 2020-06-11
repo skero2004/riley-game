@@ -1,24 +1,18 @@
-class Title {
+class MenuElement {
 
-    init(menu) {
+    init(menu, text, y) {
 
         this.gameWidth = menu.gameWidth;
 
-        this.image = document.getElementById("title");
-
-        this.width = this.image.width;
-        this.height = this.image.height;
-
-        this.deltaY = 100;
-        this.showYPosition = 200;
         this.position = {
 
             x: this.gameWidth / 2,
-            y: this.showYPosition + this.deltaY
+            y: y
 
         }
 
         this.alpha = 0;
+        this.text = text
 
     }
 
@@ -26,18 +20,14 @@ class Title {
 
         // Necessary calculations
         const fps = 60;
-        const secondsToAppear = 1.5;
+        const secondsToAppear = 2;
         const framesInInterval = fps * secondsToAppear;
         let interval = setInterval(() => {
-
-            // Increase y position by a little
-            this.position.y -= this.deltaY / framesInInterval;
 
             // Increase alpha by a little
             this.alpha += 1 / framesInInterval;
             if (this.alpha > 1) {
 
-                this.position.y = this.showYPosition;
                 this.alpha = 1;
                 clearInterval(interval);
             
@@ -51,18 +41,14 @@ class Title {
 
         // Necessary calculations
         const fps = 60;
-        const secondsToAppear = 1.5;
-        const framesInInterval = fps * secondsToAppear;
+        const secondsToDisappear = 1;
+        const framesInInterval = fps * secondsToDisappear;
         let interval = setInterval(() => {
-
-            // Increase y position by a little
-            this.position.y -= this.deltaY / framesInInterval;
 
             // Increase alpha by a little
             this.alpha -= 1 / framesInInterval;
             if (this.alpha < 0) {
 
-                this.position.y = this.showYPosition;
                 this.alpha = 0;
                 clearInterval(interval);
             
@@ -80,20 +66,16 @@ class Title {
 
     draw(ctx) {
 
-        // Set opacity
         ctx.globalAlpha = this.alpha;
 
-        // Translate so the center is origin
-        ctx.translate(this.position.x, this.position.y);
+        ctx.font = "50px SpaceAge";
+        ctx.textAlign = "center";
+        ctx.fillStyle = "white";
 
-        // Draw the image
-        ctx.drawImage(this.image, -this.width / 2, -this.height / 2);
-
-        // Reset transform
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.fillText(this.text, this.position.x, this.position.y);
 
         ctx.globalAlpha = 1;
-        
+
     }
 
 }
