@@ -1,6 +1,9 @@
 // Controls the speed of the game
 const speedThreshold = 256;
 
+// Get canvases div
+const canvases = document.getElementById("canvases");
+
 // Canvases and its contexts
 const gameCanvas = document.getElementById("game");
 const gameCtx = gameCanvas.getContext("2d");
@@ -28,7 +31,7 @@ game.init(background);
 menu.init();
 
 // Initialize input handler
-this.inputs.init(game, menu);
+this.inputs.init(canvases, game, menu);
 
 // Main loop
 let lastTime = 0;

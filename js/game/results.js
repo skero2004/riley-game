@@ -66,7 +66,6 @@ class Results {
         else if (rarityChooser < 20) images = document.getElementsByClassName("rare");
         else if (rarityChooser < 50) images = document.getElementsByClassName("normal");
         else images = document.getElementsByClassName("common");
-        console.log(rarityChooser)
 
         // Choose image from that rarity
         const imageChooser = Math.floor(Math.random() * images.length);
@@ -234,6 +233,7 @@ class Results {
 
         // Draw title
         ctx.font = "70px SpaceAge";
+        ctx.fillStyle = "white";
         ctx.textAlign = "center";
         if (this.isElementsShowing[0]) ctx.fillText("Results", 0, -220);
 

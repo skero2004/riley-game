@@ -38,7 +38,7 @@ class GoalLine {
         const distTravelPerSec = distTravelPerFrame * 1000 / deltaTime;
         const distPlayerFromEdge = this.gameWidth - (this.player.position.x + this.player.width / 2);
         const secToPlayer = Math.abs(distPlayerFromEdge / distTravelPerSec);
-        if (this.timer.time < 5800+secToPlayer * 100) {
+        if (this.timer.time < secToPlayer * 100) {
 
             this.moveLeft();
 

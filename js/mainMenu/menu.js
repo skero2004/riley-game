@@ -6,9 +6,10 @@ class Menu {
         this.gameHeight = gameHeight;
 
         this.title = new Title();
-        this.startGame = new MenuElement();
-        this.goToSettings = new MenuElement();
-        this.goToWorkshop = new MenuElement();
+
+        this.startGame = new MenuElement(196, 606, 376, 400);
+        this.goToSettings = new MenuElement(241, 561, 436, 460);
+        this.goToWorkshop = new MenuElement(221, 581, 496, 520);
 
     }
 

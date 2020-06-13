@@ -11,7 +11,10 @@
 
 #canvases {
 
+    margin-left: -400px;
+    left: 50%;
     position: relative;
+    width: 800px;
 
 }
 
@@ -23,8 +26,6 @@
 
 #canvases > canvas {
 
-    left: 50%;
-    margin-left: -400px;
     position: absolute;
 
 }

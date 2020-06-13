@@ -1,5 +1,14 @@
 class MenuElement {
+    
+    constructor(left, right, top, bottom) {
 
+        this.left = left;
+        this.right = right;
+        this.top = top;
+        this.bottom = bottom;
+
+    }
+    
     init(menu, text, y) {
 
         this.gameWidth = menu.gameWidth;
@@ -13,6 +22,18 @@ class MenuElement {
 
         this.alpha = 0;
         this.text = text
+
+        this.color = "white";
+
+    }
+
+    isMouseOver(mouseX, mouseY) {
+
+        if (mouseX > this.left && mouseX < this.right &&
+            mouseY > this.top && mouseY < this.bottom)
+            return true;
+        else
+            return false;
 
     }
 
@@ -58,9 +79,15 @@ class MenuElement {
 
     }
 
-    update() {
+    turnWhite() {
 
+        this.color = "white";
 
+    }
+
+    turnYellow() {
+
+        this.color = "yellow";
 
     }
 
@@ -70,7 +97,7 @@ class MenuElement {
 
         ctx.font = "50px SpaceAge";
         ctx.textAlign = "center";
-        ctx.fillStyle = "white";
+        ctx.fillStyle = this.color;
 
         ctx.fillText(this.text, this.position.x, this.position.y);
 
