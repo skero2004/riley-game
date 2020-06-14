@@ -27,7 +27,7 @@ class Equation {
 
         }
 
-        this.alpha = 1;
+        this.alpha = 0;
 
         this.makeEquation();
 

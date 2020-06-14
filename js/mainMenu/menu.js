@@ -13,12 +13,17 @@ class Menu {
 
     }
 
-    init() {
+    init(game) {
 
-        this.title.init(this);
+        this.game = game;
+        this.isMenu = true;
+
+        this.title.init(this, this.game);
         this.startGame.init(this, "Start Game", 400);
         this.goToSettings.init(this, "Settings", 460);
         this.goToWorkshop.init(this, "Workshop", 520);
+
+        this.appear();
 
     }
 

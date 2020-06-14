@@ -16,14 +16,13 @@ class Player {
         this.height = this.image.height;
 
         this.maxSpeed = 10;
-        this.speed = 0;
 
         this.moveTime = 1000;
 
         this.initialXPos = 300;
         this.position = {
 
-            x: this.initialXPos,
+            x: -this.width / 2,
             y: 275
 
         }
@@ -34,7 +33,7 @@ class Player {
         this.disappearSpeed = 150;
 
         this.isAppearing = false;
-        this.appearSpeed = 150;
+        this.initialAppearSpeed = 150;
 
     }
 
@@ -115,6 +114,7 @@ class Player {
     appear() {
 
         this.isAppearing = true;
+        this.speed = this.initialAppearSpeed;
 
     }
 
@@ -153,7 +153,7 @@ class Player {
 
     }
 
-    update(deltaTime) {
+    update(deltaTime ,timeStamp) {
 
         // Calculate place
         if (this.game.isGame) this.setPlace();
@@ -172,7 +172,31 @@ class Player {
 
         }
 
-        // Move robot
+        // Appear
+        if (this.isAppearing) {
+
+            // Calculate speed
+            const moveDist = this.initialXPos + this.width / 2;
+            const rate = 1 - ((this.initialAppearSpeed * deltaTime / speedThreshold) / moveDist);
+
+            this.speed *= rate;
+
+            this.position.x += 0.1;
+
+            if (this.position.x > this.initialXPos) {
+
+                this.game.isStart = true;
+                this.isAppearing = false;
+                this.speed = 0;
+                this.position.x = this.initialXPos;
+
+                this.game.startTime = timeStamp;
+
+            }
+
+        }
+
+        // Move riley
         this.position.x += this.speed * deltaTime / speedThreshold;
 
     }

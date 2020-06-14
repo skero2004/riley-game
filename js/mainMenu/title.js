@@ -1,7 +1,9 @@
 class Title {
 
-    init(menu) {
+    init(menu, game) {
 
+        this.game = game;
+        this.menu = menu;
         this.gameWidth = menu.gameWidth;
 
         this.image = document.getElementById("title");
@@ -64,6 +66,7 @@ class Title {
 
                 this.position.y = this.showYPosition;
                 this.alpha = 0;
+                this.menu.isMenu = false;
                 clearInterval(interval);
             
             }

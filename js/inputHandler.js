@@ -1,12 +1,15 @@
 class InputHandler {
 
-    init(canvases, game, menu) {
+    init(canvases, game, background, menu) {
 
         // Get canvases
         this.canvases = canvases;
 
         // Get game
         this.game = game;
+
+        // Get background
+        this.background = background;
 
         // Get menu
         this.menu = menu;
@@ -89,15 +92,19 @@ class InputHandler {
         }
 
         // Start game when clicked
-        if (this.startGame.isMouseOver(mouse.x, mouse.y))
-            this.startGame.startGame();
+        if (this.startGame.isMouseOver(mouse.x, mouse.y) && this.startGame.alpha == 1) {
+
+            this.game.init(this.background);
+            this.menu.disappear();
+
+        }
 
         // Go to settings when clicked
-        if (this.goToSettings.isMouseOver(mouse.x, mouse.y))
+        if (this.goToSettings.isMouseOver(mouse.x, mouse.y) && this.goToSettings.alpha == 1)
             this.goToSettings.goToSettings();
 
         // Go to workshop when clicked
-        if (this.goToWorkshop.isMouseOver(mouse.x, mouse.y))
+        if (this.goToWorkshop.isMouseOver(mouse.x, mouse.y) && this.goToWorkshop.alpha == 1)
             this.goToWorkshop.goToWorkshop();
 
     }
@@ -132,7 +139,7 @@ class InputHandler {
             this.game.disappear();
 
             // Make title appear
-            this.menu.appear();
+            this.menu.init(this.game);
 
         }
         

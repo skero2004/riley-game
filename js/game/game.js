@@ -34,11 +34,15 @@ class Game {
 
     init(background) {
 
+        this.startTime = 0;
+
+        this.isGame = true;
+        this.isStart = false;
+
         // Get background
         this.background = background;
 
         // Boolean to check if game is running
-        this.isGame = true;
         this.gameCheck = 0;
         this.justFinish = false;
 
@@ -82,6 +86,20 @@ class Game {
         // Initialize timer
         this.timer.init(this);
         
+        // Make game elements appear
+        this.appear();
+
+    }
+
+    appear() {
+
+        this.player.appear();
+        this.opponents.forEach(opponent => {
+            opponent.appear();
+        });
+        this.timer.appear();
+        this.equation.appear();
+
     }
 
     disappear() {
@@ -104,7 +122,7 @@ class Game {
     update(deltaTime, timeStamp) {
 
         // Update player
-        this.player.update(deltaTime);
+        this.player.update(deltaTime, timeStamp);
 
         // Update opponents
         this.opponents.forEach(opponent => {
@@ -117,7 +135,7 @@ class Game {
         this.equation.update();
 
         // Update timer
-        this.timer.update(timeStamp);
+        this.timer.update(timeStamp - this.startTime);
 
         // Update goal line
         this.goalLine.update(deltaTime);
@@ -128,7 +146,7 @@ class Game {
         // Check if player passed the goal line
         if (this.player.position.x > this.goalLine.position.x) {
 
-            this.isGame = false;
+            this.isStart = false;
             this.gameCheck++;
 
         }

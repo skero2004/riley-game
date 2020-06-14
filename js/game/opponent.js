@@ -2,6 +2,8 @@ class Opponent {
 
     init(game, y, image) {
  
+        this.game = game;
+
         this.gameWidth = game.gameWidth;
 
         this.image = image;
@@ -12,13 +14,13 @@ class Opponent {
         this.goalLine = game.goalLine;
 
         this.maxSpeed = 10;
-        this.speed = 0;
 
         this.moveTime = 1000;
 
+        this.initialXPos = 300;
         this.position = {
 
-            x: 300,
+            x: -this.width / 2,
             y: y
 
         }
@@ -32,7 +34,7 @@ class Opponent {
         this.disappearSpeed = 150;
 
         this.isAppearing = false;
-        this.appearSpeed = 150;
+        this.initialAppearSpeed = 150;
 
     }
 
@@ -70,6 +72,7 @@ class Opponent {
     appear() {
 
         this.isAppearing = true;
+        this.speed = this.initialAppearSpeed;
 
     }
 
@@ -93,7 +96,7 @@ class Opponent {
             this.isGoalLineCrossed = true;
 
         // Move opponent forward or backward randomly
-        if (timeStamp > this.lastMoved + this.nextMoveTime && !this.isGoalLineCrossed) {
+        if (timeStamp > this.lastMoved + this.nextMoveTime && !this.isGoalLineCrossed && this.game.isStart) {
 
             // 90% move right
             let rand = Math.random() * 10;
@@ -122,6 +125,27 @@ class Opponent {
 
                 this.isDisappearing = false;
                 this.speed = 0;
+
+            }
+
+        }
+
+        // Appear
+        if (this.isAppearing) {
+
+            // Calculate speed
+            const moveDist = this.initialXPos + this.width / 2;
+            const rate = 1 - ((this.initialAppearSpeed * deltaTime / speedThreshold) / moveDist);
+
+            this.speed *= rate;
+
+            this.position.x += 0.1;
+
+            if (this.position.x > this.initialXPos) {
+
+                this.isAppearing = false;
+                this.speed = 0;
+                this.position.x = this.initialXPos;
 
             }
 

@@ -27,11 +27,10 @@ this.inputs = new InputHandler();
 
 // Initialize game content
 background.init(game);
-game.init(background);
-menu.init();
+menu.init(game);
 
 // Initialize input handler
-this.inputs.init(canvases, game, menu);
+this.inputs.init(canvases, game, background, menu);
 
 // Main loop
 let lastTime = 0;
@@ -45,12 +44,20 @@ function loop(timeStamp) {
     background.draw(backgroundCtx);
 
     // Draw game
-    game.update(deltaTime, timeStamp);
-    game.draw(gameCtx);
+    if (game.isGame) {
+
+        game.update(deltaTime, timeStamp);
+        game.draw(gameCtx);
+
+    }
 
     // Draw menu
-    menu.update();
-    menu.draw(menuCtx);
+    if (menu.isMenu) {
+
+        menu.update();
+        menu.draw(menuCtx);
+
+    }
 
     requestAnimationFrame(loop);
 

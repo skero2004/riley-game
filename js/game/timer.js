@@ -14,7 +14,7 @@ class Timer {
         this.startTime = 6000;
         this.time = 6000;
 
-        this.alpha = 1;
+        this.alpha = 0;
 
         this.justNumberLessThanTen = false;
         this.numberChecker = 0;
@@ -27,11 +27,11 @@ class Timer {
 
         // Necessary calculations
         const fps = 60;
-        const secondsToAppear = 0.5;
-        const framesInInterval = fps * secondsToAppear;
+        const secondsToDisappear = 0.5;
+        const framesInInterval = fps * secondsToDisappear;
         let interval = setInterval(() => {
 
-            // Increase alpha by a little
+            // Decrease alpha by a little
             this.alpha += 1 / framesInInterval;
             if (this.alpha > 1) {
 
@@ -88,24 +88,28 @@ class Timer {
     }
 
     update(timeStamp) {
+        console.log(this.time)
+        if (this.game.isStart) {
 
-        // Check if timer just turned 1~10
-        this.numberChecker++;
-        if (this.time - Math.floor(this.time / 100) * 100 < 95 || this.time > 1000) 
-            this.numberChecker = 0;
+            // Check if timer just turned 1~10
+            this.numberChecker++;
+            if (this.time - Math.floor(this.time / 100) * 100 < 95 || this.time > 1000) 
+                this.numberChecker = 0;
+                
+            // If timer just turned 1~10, pulse red
+            if (this.numberChecker == 1) this.pulseRed();
 
-        // If timer just turned 1~10, pulse red
-        if (this.numberChecker == 1) this.pulseRed();
+            this.time = Math.round((this.startTime - timeStamp / 10));
+            if (this.time < 0) {
+
+                this.time = 0;
+
+            }
+
+        }
 
         // Disappear when the game finishes
         if (this.game.justFinish) this.disappear();
-
-        this.time = Math.round((this.startTime - timeStamp / 10));
-        if (this.time < 0) {
-
-            this.time = 0;
-
-        }
 
     }
 
