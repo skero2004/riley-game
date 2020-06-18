@@ -1,29 +1,24 @@
-class Opponent {
+class Opponent extends ImageElement {
 
     init(game, y, image) {
  
+        super.init(game);
+        
+        this.setImage(image);
+
+        this.setPosition(-this.width / 2, y);
+
+        super.appear(0);
+
         this.game = game;
-
-        this.gameWidth = game.gameWidth;
-
-        this.image = image;
-
-        this.width = this.image.width;
-        this.height = this.image.height;
 
         this.goalLine = game.goalLine;
 
         this.maxSpeed = 10;
 
-        this.moveTime = 1000;
+        this.moveTime = 1;
 
         this.initialXPos = 300;
-        this.position = {
-
-            x: -this.width / 2,
-            y: y
-
-        }
 
         this.lastMoved = 0;
         this.nextMoveTime = 2000 + Math.random() * 8000;
@@ -40,26 +35,13 @@ class Opponent {
 
     moveLeft() {
 
-        this.speed = -this.maxSpeed;
-        setTimeout(() => { 
-            
-            this.speed = 0 
-            this.position.x = Math.round(this.position.x);
-
-        }, this.moveTime);
+        this.moveBy(this.moveTime, -40, 0);
 
     }
 
     moveRight() {
 
-        this.speed = this.maxSpeed;
-        setTimeout(() => { 
-
-            // Reset speed
-            this.speed = 0 
-            this.position.x = Math.round(this.position.x);
-
-        }, this.moveTime);
+        this.moveBy(this.moveTime, 40, 0);
 
     }
 
@@ -71,26 +53,14 @@ class Opponent {
 
     appear() {
 
+        super.appear(0);
         this.isAppearing = true;
         this.speed = this.initialAppearSpeed;
 
     }
 
-    draw(ctx) {
-
-        // Translate so center the image
-        ctx.translate(this.position.x, this.position.y);
-
-        // Draw image
-        ctx.drawImage(this.image, -this.width / 2, -this.height / 2);
-
-        // Reset transform
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-    
-    }
-
     update(deltaTime, timeStamp) {
-        
+
         // Setting isGoalLineCrossed
         if (this.position.x > this.goalLine.position.x)
             this.isGoalLineCrossed = true;
@@ -123,6 +93,7 @@ class Opponent {
             
             if (this.position.x - this.width / 2 > this.gameWidth) {
 
+                super.disappear(0);
                 this.isDisappearing = false;
                 this.speed = 0;
 
@@ -152,6 +123,8 @@ class Opponent {
         }
 
         this.position.x += this.speed * deltaTime / speedThreshold;
+
+        super.update();
 
     }
 

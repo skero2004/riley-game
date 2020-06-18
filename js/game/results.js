@@ -1,6 +1,8 @@
-class Results {
+class Results extends ImageElement {
 
     constructor() {
+
+        super();
 
         this.item = new Item();
 
@@ -15,26 +17,16 @@ class Results {
 
     init(game) {
 
-        this.game = game;
+        super.init(game);
 
-        this.gameWidth = game.gameWidth;
-        this.gameHeight = game.gameHeight;
-
-        this.player = game.player;
-
-        this.image = document.getElementById("scoreBoard");
-        this.width = this.image.width;
-        this.height = this.image.height;
-
-        this.alpha = 0;
+        this.setImage(document.getElementById("scoreBoard"));
 
         this.distFromCenter = 100;
-        this.position = {
+        this.setPosition(this.gameWidth / 2, this.gameHeight / 2 + this.distFromCenter);
 
-            x: this.gameWidth / 2,
-            y: this.gameHeight / 2 + this.distFromCenter
+        this.game = game;
 
-        }
+        this.player = game.player;
 
         this.equation = game.equation;
 
@@ -102,27 +94,14 @@ class Results {
 
         setTimeout(() => {
 
-            // Necessary calculations
-            const fps = 60;
-            const secondsToAppear = 0.5;
-            const framesInInterval = fps * secondsToAppear;
-            let interval = setInterval(() => {
+            super.appear(0.5);
+            super.moveBy(0.5, 0, -this.distFromCenter);
+            
+            setTimeout(() => {
 
-                // Move results up by a little
-                this.position.y -= this.distFromCenter / framesInInterval;
-    
-                // Increase alpha by a little
-                this.alpha += 1 / framesInInterval;
-                if (this.position.y < this.gameHeight / 2) {
-    
-                    this.position.y = this.gameHeight / 2;
-                    this.alpha = 1;
-                    this.showResults();
-                    clearInterval(interval);
-                
-                }
-    
-            }, 1000 / fps);
+                this.showResults();
+
+            }, 500);
 
         }, 500);
 
@@ -184,26 +163,8 @@ class Results {
         // If the item is there, then make it disappear
         if (this.isGettingItem) this.item.disappear();
 
-        // Necessary calculations
-        const fps = 60;
-        const secondsToDisappear = 0.5;
-        const framesInInterval = fps * secondsToDisappear;
-        let interval = setInterval(() => {
-
-            // Move results up by a little
-            this.position.y -= this.distFromCenter / framesInInterval;
-
-            // Increase alpha by a little
-            this.alpha -= 1 / framesInInterval;
-            if (this.position.y < this.gameHeight / 2 - this.distFromCenter) {
-
-                this.position.y = this.gameHeight / 2 - this.distFromCenter;
-                this.alpha = 0;
-                clearInterval(interval);
-            
-            }
-
-        }, 1000 / fps);
+        super.disappear(0.5);
+        this.moveBy(0.5, 0, -this.distFromCenter);
 
     }
 
@@ -218,18 +179,21 @@ class Results {
 
         }
 
+        this.item.update();
+        
+        super.update();
+
     }
 
     draw(ctx) {
             
+        super.draw(ctx);
+
         // Set the opacity of the image
         ctx.globalAlpha = this.alpha;
 
         // Translate so center the image
         ctx.translate(this.position.x, this.position.y);
-
-        // Draw screen
-        ctx.drawImage(this.image, -this.width / 2, -this.height / 2);
 
         // Draw title
         ctx.font = "70px SpaceAge";

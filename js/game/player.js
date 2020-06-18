@@ -1,31 +1,26 @@
-class Player {
+class Player extends ImageElement {
 
     init(game) {
 
-        this.game = game;
+        super.init(game);
 
-        this.gameWidth = game.gameWidth;
+        this.setImage(document.getElementById("riley"));
+
+        this.setPosition(-this.width / 2, 275);
+
+        super.appear(0);
+
+        this.game = game;
 
         this.background = game.background;
 
         this.opponents = game.opponents;
 
-        this.image = document.getElementById("riley");
-
-        this.width = this.image.width;
-        this.height = this.image.height;
-
         this.maxSpeed = 10;
 
-        this.moveTime = 1000;
+        this.moveTime = 1;
 
         this.initialXPos = 300;
-        this.position = {
-
-            x: -this.width / 2,
-            y: 275
-
-        }
 
         this.place = 1;
 
@@ -35,6 +30,8 @@ class Player {
         this.isAppearing = false;
         this.initialAppearSpeed = 150;
 
+        this.isMove = true;
+
     }
 
     moveLeft() {
@@ -42,15 +39,11 @@ class Player {
         // Slow background
         this.background.setSlow();
 
+        this.isMove = true;
+
         if (this.position.x > 130) {
 
-            this.speed = -this.maxSpeed;
-            setTimeout(() => { 
-
-                this.speed = 0;
-                this.position.x = Math.round(this.position.x);
-
-            }, this.moveTime);
+            this.moveBy(this.moveTime, -40, 0);
 
         } else {
 
@@ -67,7 +60,9 @@ class Player {
             // Normal background
             this.background.setNormal();
 
-        }, this.moveTime);
+            this.isMove = false;
+
+        }, this.moveTime * 1000);
 
     }
 
@@ -76,15 +71,11 @@ class Player {
         // Quicken background
         this.background.setFast();
 
+        this.isMove = true;
+
         if (this.position.x < 610) {
 
-            this.speed = this.maxSpeed;
-            setTimeout(() => { 
-            
-                this.speed = 0;
-                this.position.x = Math.round(this.position.x);
-            
-            }, this.moveTime);
+            this.moveBy(this.moveTime, 40, 0);
 
         } else {
 
@@ -101,7 +92,9 @@ class Player {
             // Normal background
             this.background.setNormal();
 
-        }, this.moveTime);
+            this.isMove = false;
+
+        }, this.moveTime * 1000);
 
     }
 
@@ -115,19 +108,6 @@ class Player {
 
         this.isAppearing = true;
         this.speed = this.initialAppearSpeed;
-
-    }
-
-    draw(ctx) {
-
-        // Translate so center the image
-        ctx.translate(this.position.x, this.position.y);
-
-        // Draw image
-        ctx.drawImage(this.image, -this.width / 2, -this.height / 2);
-
-        // Reset transform
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
 
     }
 
@@ -165,6 +145,7 @@ class Player {
             
             if (this.position.x - this.width / 2 > this.gameWidth) {
 
+                super.disappear(0);
                 this.isDisappearing = false;
                 this.speed = 0;
 
@@ -190,6 +171,8 @@ class Player {
                 this.speed = 0;
                 this.position.x = this.initialXPos;
 
+                this.isMove = false;
+
                 this.game.startTime = timeStamp;
 
             }
@@ -198,6 +181,8 @@ class Player {
 
         // Move riley
         this.position.x += this.speed * deltaTime / speedThreshold;
+
+        super.update();
 
     }
 

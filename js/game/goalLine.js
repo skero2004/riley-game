@@ -30,7 +30,7 @@ class GoalLine extends ImageElement {
         const distTravelPerSec = distTravelPerFrame * 1000 / deltaTime;
         const distPlayerFromEdge = this.gameWidth - (this.player.position.x + this.player.width / 2);
         const secToPlayer = Math.abs(distPlayerFromEdge / distTravelPerSec);
-        if (this.timer.time < 5800+secToPlayer * 100) {
+        if (this.timer.time < 5000+secToPlayer * 100) {
 
             this.moveLeft();
             this.appear(0);
@@ -40,6 +40,8 @@ class GoalLine extends ImageElement {
         if (this.right < 0) this.disappear(0);
 
         this.position.x += this.speed * deltaTime / speedThreshold;
+
+        super.update();
 
     }
 

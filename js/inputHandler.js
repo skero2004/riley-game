@@ -121,7 +121,7 @@ class InputHandler {
             this.lastKey = e.key;
 
             // Only add typing when the player is not moving
-            if (this.player.speed == 0) {
+            if (!this.player.isMove) {
 
                 this.equation.addTyping(e.key);
 

@@ -113,6 +113,22 @@ class TextElement extends GameElement {
 
     }
 
+    update() {
+
+        if (this.width && this.height) {
+
+            // Update border positions
+            this.left = this.position.x - this.width / 2;
+            this.right = this.position.x + this.width / 2;
+            this.top = this.position.y - this.height;
+            this.bottom = this.position.y;
+
+        }
+
+        super.update();
+
+    }
+
     draw(ctx) {
 
         // If it is visible, then draw

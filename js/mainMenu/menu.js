@@ -7,9 +7,9 @@ class Menu {
 
         this.title = new Title();
 
-        this.startGame = new MenuElement(196, 606, 376, 400);
-        this.goToSettings = new MenuElement(241, 561, 436, 460);
-        this.goToWorkshop = new MenuElement(221, 581, 496, 520);
+        this.startGame = new MenuElement();
+        this.goToSettings = new MenuElement();
+        this.goToWorkshop = new MenuElement();
 
     }
 
@@ -19,9 +19,9 @@ class Menu {
         this.isMenu = true;
 
         this.title.init(this, this.game);
-        this.startGame.init(this, "Start Game", 400);
-        this.goToSettings.init(this, "Settings", 460);
-        this.goToWorkshop.init(this, "Workshop", 520);
+        this.startGame.init(this, "Start Game", 400, 410, 24);
+        this.goToSettings.init(this, "Settings", 460, 320, 24);
+        this.goToWorkshop.init(this, "Workshop", 520, 360, 24);
 
         this.appear();
 
@@ -47,7 +47,10 @@ class Menu {
 
     update() {
 
-
+        this.title.update();
+        this.startGame.update();
+        this.goToSettings.update();
+        this.goToWorkshop.update();
 
     }
 

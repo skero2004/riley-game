@@ -1,10 +1,14 @@
 class GameElement {
 
-    init(canvas) {
+    init(canvas = 0) {
 
         // Get width and height of the game
-        this.gameWidth = canvas.gameWidth;
-        this.gameHeight = canvas.gameHeight;
+        if (canvas) {
+
+            this.gameWidth = canvas.gameWidth;
+            this.gameHeight = canvas.gameHeight;
+
+        }
 
         // Element invisible on init()
         this.alpha = 0;
@@ -136,8 +140,8 @@ class GameElement {
             if (seconds) this.angle += rotateAngle / framesInInterval;
             else this.angle = angle;
             
-            if ((rotateAngle < 0 && this.angle < angle) || 
-                (rotateAngle > 0 && this.angle > angle) || 
+            if ((rotateAngle < 0 && this.angle <= angle) || 
+                (rotateAngle > 0 && this.angle >= angle) || 
                 (rotateAngle == 0)) {
 
                 this.angle = angle;
@@ -159,22 +163,7 @@ class GameElement {
 
     }
 
-    // Updated constantly
     update() {
-
-        if (this.width && this.height) {
-
-            // Update border positions
-            this.left = this.position.x - this.width / 2;
-            this.right = this.position.x + this.width / 2;
-            this.top = this.position.x - this.height / 2;
-            this.bottom = this.position.x + this.height / 2;
-
-        }
-
-        // Round position for performance
-        this.position.x = Math.round(this.position.x);
-        this.position.y = Math.round(this.position.y);
 
         // Get if object is moving
         if ((this.position.x == this.lastPositionX[0] && this.position.y == this.lastPositionY[0]) || 
