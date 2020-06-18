@@ -35,13 +35,15 @@ class Opponent extends ImageElement {
 
     moveLeft() {
 
-        this.moveBy(this.moveTime, -40, 0);
+        if (!this.isMoving)
+            this.moveBy(this.moveTime, -40, 0);
 
     }
 
     moveRight() {
 
-        this.moveBy(this.moveTime, 40, 0);
+        if (!this.isMoving)
+            this.moveBy(this.moveTime, 40, 0);
 
     }
 
