@@ -1,18 +1,17 @@
-class Equation {
+class Equation extends TextElement {
 
     init(game) {
+
+        super.init(game);
+
+        this.setPosition(this.gameWidth / 2, 570);
 
         this.game = game;
 
         this.player = game.player;
 
-        this.gameWidth = game.gameWidth;
-        this.gameHeight = game.gameHeight;
-
         this.digit = 0;
         this.typing = "";
-
-        this.textColor = "white";
 
         this.numEquationsSolved = 0;
 
@@ -20,16 +19,10 @@ class Equation {
         this.correctKeyStrokes = 0;
         this.accuracy = 1; // 100%
 
-        this.position = {
-
-            x: this.gameWidth / 2,
-            y: 570
-
-        }
-
-        this.alpha = 0;
-
         this.makeEquation();
+
+        this.setFont("30px Arial");
+        this.setColor("white");
 
     }
 
@@ -122,7 +115,7 @@ class Equation {
                 if (this.typing == this.answer) {
 
                     // Change text color to green
-                    this.textColor = "lime";
+                    this.setColor("lime");
 
                     // Move player position
                     this.player.moveRight();
@@ -136,7 +129,7 @@ class Equation {
                         // Reset equation
                         this.digit = 0;
                         this.typing = "";
-                        this.textColor = "white";
+                        this.setColor("white");
                         this.makeEquation();
 
                     }, 300);
@@ -146,25 +139,7 @@ class Equation {
             } else { // If it not the correct number, move player to the left and red pulse
 
                 this.player.moveLeft();
-
-                if (this.textColor == "white") {
-
-                    // Fade from red to white
-                    let redness = 0;
-                    let interval = setInterval(() => {
-
-                        this.textColor = `rgba(255, ${redness}, ${redness})`;
-                        redness += 10; // increase redness
-                        if (redness > 255) {
-
-                            this.textColor = "white";
-                            clearInterval(interval);
-                        
-                        }
-
-                    }, 15);
-
-                }
+                this.pulse(0.5, "red");
         
             }
 
@@ -174,54 +149,13 @@ class Equation {
 
     appear() {
 
-        // Necessary calculations
-        const fps = 60;
-        const secondsToAppear = 0.5;
-        const framesInInterval = fps * secondsToAppear;
-        let interval = setInterval(() => {
-
-            // Increase alpha by a little
-            this.alpha += 1 / framesInInterval;
-            if (this.alpha > 1) {
-
-                this.alpha = 1;
-                clearInterval(interval);
-            
-            }
-
-        }, 1000 / fps);
+        super.appear(0.5);
 
     }
 
     disappear() {
 
-        // Necessary calculations
-        const fps = 60;
-        const secondsToDisappear = 0.5;
-        const framesInInterval = fps * secondsToDisappear;
-        let interval = setInterval(() => {
-
-            // Increase alpha by a little
-            this.alpha -= 1 / framesInInterval;
-            if (this.alpha < 0) {
-
-                this.alpha = 0;
-                clearInterval(interval);
-            
-            }
-
-        }, 1000 / fps);
-
-    }
-
-    draw(ctx) {
-
-        ctx.globalAlpha = this.alpha;
-        ctx.font = "30px Arial";
-        ctx.fillStyle = this.textColor;
-        ctx.textAlign = "center";
-        ctx.fillText(this.equation + this.typing, this.position.x, this.position.y);
-        ctx.globalAlpha = 1;
+        super.disappear(0.5);
 
     }
 
@@ -231,6 +165,10 @@ class Equation {
 
         this.accuracy = this.correctKeyStrokes / this.numTotalKeyStrokes;
         this.accuracy = Math.round((this.accuracy + Number.EPSILON) * 100) / 100;
+
+        this.setText(this.equation + this.typing);
+        
+        super.update();
 
     }
 

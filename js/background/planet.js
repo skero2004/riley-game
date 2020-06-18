@@ -1,66 +1,52 @@
-class Planet {
+class Planet extends ImageElement {
 
     init(background, loadType) {
 
-        this.background = background;
-
-        this.gameWidth = background.gameWidth;
-        this.gameHeight = background.gameHeight;
-        
-        this.speedTypes = background.speedTypes;
-
-        // Set speed
-        this.maxSpeed = -50;
-        this.normalSpeed = -30;
-        this.minSpeed = -20;
+        super.init(background);
     
-        this.setRandomImage();
-
-        if (loadType == background.loadTypes.FIRST)
-            this.setFirstPosition();
-        else 
-            this.setPosition();
-
-    }
-
-    setRandomImage() {
+        this.appear(0);
 
         // Randomly choose image
         let images = document.getElementsByClassName("planet");
         let rand = Math.floor(Math.random() * images.length);
-        this.image = images[rand];
 
-        // Scale down the image by some percent
-        this.scale = 0.5 + Math.random() * 0.5;
+        // Set image and scale
+        this.setImage(images[rand]);
+        this.scaleTo(0, 0.5 + Math.random() * 0.5);
 
-        // Set scaled down image width and height
-        this.width = this.image.width * this.scale;
-        this.height = this.image.height * this.scale;
+        // Rotate by random number
+        this.rotateBy(0, -20 + Math.random() * 40);
 
-        // Rotate 0 ~ 45 degrees
-        this.rotateAngle = Math.random() * Math.PI / 4;
+        // Set position
+        if (loadType == background.loadTypes.FIRST) {
 
-    }
+            this.setPosition(
 
-    setFirstPosition() {
+                Math.random() * (this.gameWidth - this.width / 2), 
+                this.height / 2 + Math.random() * (this.gameHeight - this.height)
+            
+            );
 
-        this.position = {
+        } else {
+            
+            this.setPosition(
 
-            x: Math.random() * (this.gameWidth - this.width / 2),
-            y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
-
-        }
-
-    }
-
-    setPosition() {
-
-        this.position = {
-
-            x: this.gameWidth + this.width / 2,
-            y: this.height / 2 + Math.random() * (this.gameHeight - this.height)
+                this.gameWidth + this.width / 2, 
+                this.height / 2 + Math.random() * (this.gameHeight - this.height)
+            
+            );
 
         }
+
+        // Set necessary properties
+
+        this.background = background;
+        
+        this.speedTypes = background.speedTypes;
+
+        this.maxSpeed = -50;
+        this.normalSpeed = -30;
+        this.minSpeed = -20;
 
     }
 
@@ -75,21 +61,7 @@ class Planet {
 
         this.position.x += this.speed * deltaTime / speedThreshold;
 
-    }
-
-    draw(ctx) {
-
-        // Translate so the center is origin
-        ctx.translate(this.position.x, this.position.y);
-
-        // Rotate image
-        ctx.rotate(this.rotateAngle);
-
-        // Draw the image
-        ctx.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
-
-        // Reset transform
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        super.update();
 
     }
 
