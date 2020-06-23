@@ -52,12 +52,8 @@ function loop(timeStamp) {
     }
 
     // Draw menu
-    if (menu.isMenu) {
-
-        menu.update();
-        menu.draw(menuCtx);
-
-    }
+    menu.update();
+    menu.draw(menuCtx);
 
     requestAnimationFrame(loop);
 

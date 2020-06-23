@@ -18,6 +18,9 @@ class InputHandler {
         this.startGame = menu.startGame;
         this.goToSettings = menu.goToSettings;
         this.goToWorkshop = menu.goToWorkshop;
+        this.settings = menu.settings;
+        this.selectors = menu.settings.selectors;
+        this.levelSelectors = menu.settings.levelSelectors;
 
         // Player property
         this.player = game.player;
@@ -57,7 +60,7 @@ class InputHandler {
             y: e.pageY - this.topSpace
 
         }
-
+        // console.log(mouse.x, mouse.y);
         // Turn yellow if mouse over
         if (this.startGame.isMouseOver(mouse.x, mouse.y))
             this.startGame.turnYellow();
@@ -92,20 +95,79 @@ class InputHandler {
         }
 
         // Start game when clicked
-        if (this.startGame.isMouseOver(mouse.x, mouse.y) && this.startGame.alpha == 1) {
+        if (this.startGame.isMouseOver(mouse.x, mouse.y) && this.startGame.alpha == 1 &&
+            this.settings.alpha == 0) {
 
             this.game.init(this.background);
             this.menu.disappear();
 
         }
 
-        // Go to settings when clicked
-        if (this.goToSettings.isMouseOver(mouse.x, mouse.y) && this.goToSettings.alpha == 1)
-            this.goToSettings.goToSettings();
+        // Do menu stuff only when the game screen is gone
+        if (this.game.isGone()) {
 
-        // Go to workshop when clicked
-        if (this.goToWorkshop.isMouseOver(mouse.x, mouse.y) && this.goToWorkshop.alpha == 1)
-            this.goToWorkshop.goToWorkshop();
+            // Go to settings when clicked
+            if (this.goToSettings.isMouseOver(mouse.x, mouse.y) && this.goToSettings.alpha == 1 &&
+            this.settings.alpha == 0)
+            this.settings.init(this.menu, this.game);
+
+            // Go out of settings when in setting
+            if (!this.settings.isMouseOver(mouse.x, mouse.y) && this.settings.alpha == 1)
+                this.settings.disappear();
+
+            // Go to workshop when clicked
+            if (this.goToWorkshop.isMouseOver(mouse.x, mouse.y) && this.goToWorkshop.alpha == 1 &&
+                this.settings.alpha == 0)
+                this.goToWorkshop.goMAAAN();
+
+            // Change operators
+            if (this.settings.alpha == 1) {
+
+                this.selectors.forEach(selector => {
+                
+                    if (selector.isMouseOver(mouse.x - this.settings.position.x, mouse.y - this.settings.position.y)) {
+    
+                        if (selector.isSelected()) {
+    
+                            if (this.game.usedOperations.length > 1) {
+    
+                                selector.unSelect();
+                                this.game.usedOperations = this.game.usedOperations.replace(selector.text, "");
+    
+                            }
+    
+                        } else {
+    
+                            selector.select();
+                            this.game.usedOperations += selector.text;
+    
+                        }
+    
+                    }  
+    
+                }); 
+                
+                // Change diffuculty
+                for (let i = 0; i < this.levelSelectors.length; i++) {
+    
+                    if (this.levelSelectors[i].isMouseOver(mouse.x, mouse.y)) {
+    
+                        this.levelSelectors[i].select();
+                        this.game.difficulty = this.levelSelectors[i].text.toLowerCase();
+    
+                        for (let j = 0; j < this.levelSelectors.length; j++) {
+    
+                            if (i != j) this.levelSelectors[j].unSelect();
+    
+                        }
+    
+                    }
+    
+                }
+                
+            }
+
+        }
 
     }
 
@@ -114,7 +176,7 @@ class InputHandler {
 
         // Check if its a number and key is not holded and game has started
         if (isFinite(e.key) && e.code != "Space" && (!this.isHold || e.key != this.lastKey)
-            && this.game.isGame) {
+            && this.game.isStart) {
 
             // Prevent holding down key
             this.isHold = true;

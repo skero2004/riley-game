@@ -1,5 +1,24 @@
 class GameElement {
 
+    constructor() {
+
+        // Default visibility 0
+        this.alpha = 0;
+
+        // Default angle is 0 degrees
+        this.angle = 0;
+
+        // Defaut scale is 1
+        this.scale = 1;
+    
+        // Default not moving
+        this.isMoving = false;
+
+        // Default not custom border
+        this.isCustomBorder = false;
+
+    }
+
     init(canvas = 0) {
 
         // Get width and height of the game
@@ -9,18 +28,6 @@ class GameElement {
             this.gameHeight = canvas.gameHeight;
 
         }
-
-        // Element invisible on init()
-        this.alpha = 0;
-
-        // Default angle is 0 degrees
-        this.angle = 0;
-
-        // Defaut scale is 1
-        this.scale = 1;
-    
-        // Not moving when init()
-        this.isMoving = false;
 
     }
 
@@ -36,6 +43,17 @@ class GameElement {
         this.lastPositionX = [];
         this.lastPositionY = [];
         
+    }
+
+    setBorder(top, bottom, left, right) {
+
+        this.isCustomBorder = true;
+
+        this.top = top;
+        this.bottom = bottom;
+        this.left = left;
+        this.right = right;
+
     }
 
     appear(seconds) {

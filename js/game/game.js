@@ -30,6 +30,15 @@ class Game {
         // Create timer
         this.timer = new Timer();
 
+        // Create countdown
+        this.countdown = new Countdown();
+        
+        // Difficulty settings
+        this.difficulty = "medium";
+
+        // Used operations
+        this.usedOperations = "+-";
+
     }
 
     init(background) {
@@ -51,6 +60,9 @@ class Game {
 
         // Initialize results screen
         this.results.init(this);
+
+        // Initialize countdown
+        this.countdown.init(this);
 
         // Set images to an array of images (rather than HTML collection)
         const tempImages = document.getElementsByClassName("opponent");
@@ -91,6 +103,12 @@ class Game {
 
     }
 
+    setDifficulty(difficulty) {
+
+        this.difficulty = difficulty;
+
+    }
+
     appear() {
 
         this.player.appear();
@@ -119,6 +137,20 @@ class Game {
 
     }
 
+    isGone() {
+
+        let i = 0
+        this.opponents.forEach(opponent => {
+            
+            if (opponent.alpha == 0) i++;
+        
+        });
+        if (this.player.alpha == 0) i++;
+        if (i == 5) return true;
+        else return false;
+
+    }
+
     update(deltaTime, timeStamp) {
 
         // Update player
@@ -142,6 +174,9 @@ class Game {
 
         // Update result screen
         this.results.update();
+
+        // Update countdown
+        this.countdown.update();
 
         // Check if player passed the goal line
         if (this.player.position.x > this.goalLine.position.x) {
@@ -185,6 +220,9 @@ class Game {
 
         // Draw results
         this.results.draw(ctx);
+
+        // Draw countdown
+        this.countdown.draw(ctx);
 
     }
 

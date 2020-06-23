@@ -1,12 +1,12 @@
 class MenuElement extends TextElement {
     
-    init(menu, text, y, width, height) {
+    init(menu, text, y, top, bottom, left, right) {
 
         super.init(menu);
 
         this.setPosition(this.gameWidth / 2, y);
 
-        this.setBorder(width, height);
+        this.setBorder(top, bottom, left, right);
 
         this.setText(text);
         this.setColor("white");

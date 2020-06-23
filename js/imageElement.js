@@ -48,17 +48,26 @@ class ImageElement extends GameElement {
 
     update() {
 
-        // Scale image
-        this.width = this.image.width * this.scale;
-        this.height = this.image.height * this.scale;
+        // If it is visible, then update
+        if (this.alpha > 0) {
 
-        // Update border positions
-        this.left = this.position.x - this.width / 2;
-        this.right = this.position.x + this.width / 2;
-        this.top = this.position.y - this.height / 2;
-        this.bottom = this.position.y + this.height / 2;
+            // Scale image
+            this.width = this.image.width * this.scale;
+            this.height = this.image.height * this.scale;
 
-        super.update();
+            // Update border positions
+            if (!this.isCustomBorder) {
+
+                this.left = this.position.x - this.width / 2;
+                this.right = this.position.x + this.width / 2;
+                this.top = this.position.y - this.height / 2;
+                this.bottom = this.position.y + this.height / 2;
+
+            }
+            
+            super.update();
+
+        }
 
     }
 

@@ -12,6 +12,8 @@ class Player extends ImageElement {
 
         this.game = game;
 
+        this.countdown = game.countdown;
+
         this.background = game.background;
 
         this.opponents = game.opponents;
@@ -166,14 +168,13 @@ class Player extends ImageElement {
 
             if (this.position.x > this.initialXPos) {
 
-                this.game.isStart = true;
                 this.isAppearing = false;
                 this.speed = 0;
                 this.position.x = this.initialXPos;
 
                 this.isMove = false;
 
-                this.game.startTime = timeStamp;
+                this.countdown.countdown(timeStamp);
 
             }
 

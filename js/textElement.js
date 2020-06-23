@@ -24,13 +24,6 @@ class TextElement extends GameElement {
 
     }
 
-    setBorder(width, height) {
-
-        this.width = width;
-        this.height = height;
-
-    }
-
     pulse(seconds, color) {
 
         // Get pulsed color
@@ -115,17 +108,12 @@ class TextElement extends GameElement {
 
     update() {
 
-        if (this.width && this.height) {
+        // If it is visible, then update
+        if (this.alpha > 0) {
 
-            // Update border positions
-            this.left = this.position.x - this.width / 2;
-            this.right = this.position.x + this.width / 2;
-            this.top = this.position.y - this.height;
-            this.bottom = this.position.y;
+            super.update();
 
-        }
-
-        super.update();
+        } 
 
     }
 

@@ -5,7 +5,6 @@ class Title extends ImageElement {
         super.init(menu);
 
         this.game = game;
-        this.menu = menu;
 
         this.setImage(document.getElementById("title"));
 
