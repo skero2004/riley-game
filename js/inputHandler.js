@@ -94,17 +94,17 @@ class InputHandler {
 
         }
 
-        // Start game when clicked
-        if (this.startGame.isMouseOver(mouse.x, mouse.y) && this.startGame.alpha == 1 &&
-            this.settings.alpha == 0) {
-
-            this.game.init(this.background);
-            this.menu.disappear();
-
-        }
-
         // Do menu stuff only when the game screen is gone
         if (this.game.isGone()) {
+
+            // Start game when clicked
+            if (this.startGame.isMouseOver(mouse.x, mouse.y) && this.startGame.alpha == 1 &&
+            this.settings.alpha == 0) {
+
+                this.game.init(this.background);
+                this.menu.disappear();
+
+            }      
 
             // Go to settings when clicked
             if (this.goToSettings.isMouseOver(mouse.x, mouse.y) && this.goToSettings.alpha == 1 &&
