@@ -1,6 +1,6 @@
 class InputHandler {
 
-    init(canvases, game, background, menu) {
+    init(canvases, game, background, menu, workshop) {
 
         // Get canvases
         this.canvases = canvases;
@@ -13,6 +13,9 @@ class InputHandler {
 
         // Get menu
         this.menu = menu;
+
+        // Get workshop
+        this.workshop = workshop;
 
         // Get menu elements
         this.startGame = menu.startGame;
@@ -76,6 +79,7 @@ class InputHandler {
             this.goToWorkshop.turnYellow();
         else
             this.goToWorkshop.turnWhite();
+        console.log(mouse.x, mouse.y, this.workshop.screen.isMouseOver(mouse.x, mouse.y));
 
     }
 
@@ -104,7 +108,7 @@ class InputHandler {
                 this.game.init(this.background);
                 this.menu.disappear();
 
-            }      
+            }
 
             // Go to settings when clicked
             if (this.goToSettings.isMouseOver(mouse.x, mouse.y) && this.goToSettings.alpha == 1 &&
@@ -118,7 +122,10 @@ class InputHandler {
             // Go to workshop when clicked
             if (this.goToWorkshop.isMouseOver(mouse.x, mouse.y) && this.goToWorkshop.alpha == 1 &&
                 this.settings.alpha == 0)
-                this.goToWorkshop.goMAAAN();
+                this.workshop.screen.appear();
+
+            if (!this.workshop.screen.isMouseOver(mouse.x, mouse.y) && this.workshop.screen.alpha == 1)
+                this.workshop.screen.disappear();
 
             // Change operators
             if (this.settings.alpha == 1) {

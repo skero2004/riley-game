@@ -21,6 +21,7 @@ const GAME_HEIGHT = gameCanvas.height;
 const background = new Background(GAME_WIDTH, GAME_HEIGHT);
 const game = new Game(GAME_WIDTH, GAME_HEIGHT);
 const menu = new Menu(GAME_WIDTH, GAME_HEIGHT);
+const workshop = new Workshop(GAME_WIDTH, GAME_HEIGHT);
 
 // Create input handler
 this.inputs = new InputHandler();
@@ -28,9 +29,10 @@ this.inputs = new InputHandler();
 // Initialize game content
 background.init(game);
 menu.init(game);
+workshop.init();
 
 // Initialize input handler
-this.inputs.init(canvases, game, background, menu);
+this.inputs.init(canvases, game, background, menu, workshop);
 
 // Main loop
 let lastTime = 0;
@@ -54,6 +56,10 @@ function loop(timeStamp) {
     // Draw menu
     menu.update();
     menu.draw(menuCtx);
+
+    // Draw workshop
+    workshop.update();
+    workshop.draw(workshopCtx);
 
     requestAnimationFrame(loop);
 
