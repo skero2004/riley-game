@@ -8,8 +8,8 @@ class Results extends ImageElement {
 
         this.storageNames = {
 
-            MAX_EQUATION: "maxEquation",
-            ACCURACIES: "accuracies"
+            MAX_EQUATION: "MaxEquation",
+            ACCURACIES: "Accuracies"
 
         }
 
@@ -54,10 +54,40 @@ class Results extends ImageElement {
         // Choose rarity
         let images;
         const rarityChooser = Math.random() * 100;
-        if (rarityChooser < 5) images = document.getElementsByClassName("ultraRare");
-        else if (rarityChooser < 20) images = document.getElementsByClassName("rare");
-        else if (rarityChooser < 50) images = document.getElementsByClassName("normal");
-        else images = document.getElementsByClassName("common");
+
+        // Rarity depends on difficulty
+        let ultraRarePercentage, rarePercentage, normalPercentage, commonPercentage;
+        if (this.game.difficulty == "easy") {
+
+            ultraRarePercentage = 1;
+            rarePercentage = 10;
+            normalPercentage = 30;
+            commonPercentage = 59;
+
+        } else if (this.game.difficulty == "medium") {
+
+            ultraRarePercentage = 5;
+            rarePercentage = 15;
+            normalPercentage = 30;
+            commonPercentage = 50;
+
+        } else {
+
+            ultraRarePercentage = 10;
+            rarePercentage = 20;
+            normalPercentage = 30;
+            commonPercentage = 40;
+
+        }
+
+        if (rarityChooser < ultraRarePercentage) 
+            images = document.getElementsByClassName("ultraRare");
+        else if (rarityChooser < rarePercentage + ultraRarePercentage) 
+            images = document.getElementsByClassName("rare");
+        else if (rarityChooser < normalPercentage + rarePercentage + ultraRarePercentage) 
+            images = document.getElementsByClassName("normal");
+        else 
+            images = document.getElementsByClassName("common");
 
         // Choose image from that rarity
         const imageChooser = Math.floor(Math.random() * images.length);
@@ -110,13 +140,16 @@ class Results extends ImageElement {
     // Store results to localStorge
     storeResults() {
 
+        let maxEquationStorage = this.game.difficulty + this.storageNames.MAX_EQUATION;
+        let accuraciesStorage = this.game.difficulty + this.storageNames.ACCURACIES;
+
         // Store and get max number of equations solved
-        if (localStorage.getItem(this.storageNames.MAX_EQUATION) == null || 
-            this.equation.numEquationsSolved > localStorage.getItem(this.storageNames.MAX_EQUATION)) 
-            localStorage.setItem(this.storageNames.MAX_EQUATION, this.equation.numEquationsSolved);
+        if (localStorage.getItem(maxEquationStorage) == null || 
+            this.equation.numEquationsSolved > localStorage.getItem(maxEquationStorage)) 
+            localStorage.setItem(maxEquationStorage, this.equation.numEquationsSolved);
 
         // Store and get past 30 accuracy for average accuracy
-        let pastAccuracies = JSON.parse(`[ ${localStorage.getItem(this.storageNames.ACCURACIES)} ]`);
+        let pastAccuracies = JSON.parse(`[ ${localStorage.getItem(accuraciesStorage)} ]`);
         if (!isNaN(this.equation.accuracy)) {
             
             if (pastAccuracies[0] == null) pastAccuracies[0] = this.equation.accuracy;
@@ -127,7 +160,7 @@ class Results extends ImageElement {
             else pastAccuracies.push(this.equation.accuracy);
         
         }
-        localStorage.setItem(this.storageNames.ACCURACIES, pastAccuracies);
+        localStorage.setItem(accuraciesStorage, pastAccuracies);
 
         // Calculate average accuracy
         let sum = pastAccuracies.reduce((a, b) => a + b, 0);
@@ -208,7 +241,7 @@ class Results extends ImageElement {
         if (this.isElementsShowing[2]) 
             ctx.fillText(`Equations Solved: ${this.equation.numEquationsSolved}`, 0 , -20);
         if (this.isElementsShowing[3]) 
-            ctx.fillText(`Max Equations: ${localStorage.getItem(this.storageNames.MAX_EQUATION)}`, 0, 20)
+            ctx.fillText(`Max Equations: ${localStorage.getItem(this.game.difficulty + this.storageNames.MAX_EQUATION)}`, 0, 20)
         if (this.isElementsShowing[4] && !isNaN(this.equation.accuracy)) 
             ctx.fillText(`Accuracy: ${Math.round(this.equation.accuracy * 100)}%`, 0, 60);
         else if (this.isElementsShowing[4]) 
