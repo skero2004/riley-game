@@ -201,9 +201,6 @@ class Game {
 
         // Draw goal line
         this.goalLine.draw(ctx);
-
-        // Draw player
-        this.player.draw(ctx);
     
         // Draw opponent
         this.opponents.forEach(opponent => {
@@ -211,6 +208,9 @@ class Game {
             opponent.draw(ctx);
 
         });
+
+        // Draw player
+        this.player.draw(ctx);
 
         // Draw equation
         this.equation.draw(ctx);

@@ -8,8 +8,6 @@ class Player extends ImageElement {
 
         this.setPosition(-this.width / 2, 275);
 
-        super.appear(0);
-
         this.game = game;
 
         this.countdown = game.countdown;
@@ -108,8 +106,13 @@ class Player extends ImageElement {
 
     appear() {
 
-        this.isAppearing = true;
-        this.speed = this.initialAppearSpeed;
+        setTimeout(() => {
+
+            super.appear(0);
+            this.isAppearing = true;
+            this.speed = this.initialAppearSpeed;
+
+        }, 1000);
 
     }
 
@@ -137,53 +140,63 @@ class Player extends ImageElement {
 
     update(deltaTime ,timeStamp) {
 
-        // Calculate place
-        if (this.game.isGame) this.setPlace();
+        if (this.alpha) {
 
-        // Disappear
-        if (this.isDisappearing) {
+            // Calculate place
+            if (this.game.isGame) this.setPlace();
 
-            this.speed = this.disappearSpeed;
-            
-            if (this.position.x - this.width / 2 > this.gameWidth) {
+            // Disappear
+            if (this.isDisappearing) {
 
-                super.disappear(0);
-                this.isDisappearing = false;
-                this.speed = 0;
+                this.speed = this.disappearSpeed;
+                
+                if (this.position.x - this.width / 2 > this.gameWidth) {
 
-            }
+                    super.disappear(0);
+                    this.isDisappearing = false;
+                    this.speed = 0;
 
-        }
-
-        // Appear
-        if (this.isAppearing) {
-
-            // Calculate speed
-            const moveDist = this.initialXPos + this.width / 2;
-            const rate = 1 - ((this.initialAppearSpeed * deltaTime / speedThreshold) / moveDist);
-
-            this.speed *= rate;
-
-            this.position.x += 0.1;
-
-            if (this.position.x > this.initialXPos) {
-
-                this.isAppearing = false;
-                this.speed = 0;
-                this.position.x = this.initialXPos;
-
-                this.isMove = false;
-
-                this.countdown.countdown(timeStamp);
+                }
 
             }
 
+            // Appear
+            if (this.isAppearing) {
+
+                // Calculate speed
+                const moveDist = this.initialXPos + this.width / 2;
+                const rate = 1 - ((this.initialAppearSpeed * deltaTime / speedThreshold) / moveDist);
+
+                this.speed *= rate;
+
+                this.position.x += 0.1;
+
+                if (this.position.x > this.initialXPos) {
+
+                    this.isAppearing = false;
+                    this.speed = 0;
+                    this.position.x = this.initialXPos;
+
+                    this.isMove = false;
+
+                    this.countdown.countdown(timeStamp);
+
+                }
+
+            }
+
+            // Move riley
+            this.position.x += this.speed * deltaTime / speedThreshold;
+
+            super.update();
+
         }
 
-        // Move riley
-        this.position.x += this.speed * deltaTime / speedThreshold;
+    }
 
-        super.update();
+    draw(ctx){
+
+        super.draw(ctx);
 
     }
 

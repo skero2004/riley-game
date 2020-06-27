@@ -80,7 +80,6 @@ class InputHandler {
             this.goToWorkshop.turnYellow();
         else
             this.goToWorkshop.turnWhite();
-        console.log(mouse.x, mouse.y, this.workshop.screen.isMouseOver(mouse.x, mouse.y));
 
     }
 
