@@ -48,65 +48,117 @@ class Equation extends TextElement {
         } while (!this.game.usedOperations.includes(operation))
 
         // Numbers chooser
-        let numberOne, numberTwo, maxNumber;
+        let numberOne, numberTwo, maxNumber, minNumber;
         if (operation == "+") {
 
             // Set number according to difficulty
-            if (this.game.difficulty == "easy") maxNumber = 10;
-            if (this.game.difficulty == "medium") maxNumber = 30;
-            if (this.game.difficulty == "hard") maxNumber = 50;
+            if (this.game.difficulty == "easy") {
+                
+                minNumber = 1;
+                maxNumber = 10;
+            
+            } else if (this.game.difficulty == "medium") {
 
-            numberOne = Math.ceil(Math.random() * maxNumber);
-            numberTwo = Math.ceil(Math.random() * maxNumber);
+                minNumber = 10;
+                maxNumber = 30;
+
+            } else {
+            
+                minNumber = 30;
+                maxNumber = 50;
+            
+            }
+
+            numberOne = minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1));
+            numberTwo = minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1));
         
         } else if (operation == "-") {
 
             // Set number according to difficulty
-            if (this.game.difficulty == "easy") maxNumber = 10;
-            if (this.game.difficulty == "medium") maxNumber = 50;
-            if (this.game.difficulty == "hard") maxNumber = 100;
+            if (this.game.difficulty == "easy") {
+                
+                minNumber = 1;
+                maxNumber = 10;
+            
+            } else if (this.game.difficulty == "medium") {
+                
+                minNumber = 10;
+                maxNumber = 50;
 
-            numberOne = Math.ceil(Math.random() * maxNumber);
-            numberTwo = Math.ceil(Math.random() * maxNumber);
-            while (numberTwo > numberOne) {
-                numberTwo = Math.ceil(Math.random() * maxNumber);
+            } else {
+                
+                minNumber = 50;
+                maxNumber = 100;
+
             }
 
-        } 
-        else if (operation == "x") {
+            numberOne = minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1));
+            numberTwo = minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1));
+            while (numberTwo > numberOne) {
+                numberTwo = minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1));
+            }
+
+        } else if (operation == "x") {
 
             // Set number according to difficulty
-            if (this.game.difficulty == "easy") maxNumber = 4;
-            if (this.game.difficulty == "medium") maxNumber = 7;
-            if (this.game.difficulty == "hard") maxNumber = 10;
+            if (this.game.difficulty == "easy") {
+            
+                minNumber = 1;
+                maxNumber = 4;
+            
+            }
+            else if (this.game.difficulty == "medium") {
+            
+                minNumber = 3;
+                maxNumber = 7;
+            
+            }
+            else {
+                
+                minNumber = 6;
+                maxNumber = 10;
+            
+            }
 
-            numberOne = Math.ceil(Math.random() * maxNumber);
-            numberTwo = Math.ceil(Math.random() * maxNumber);
+            numberOne = minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1));
+            numberTwo = minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1));
 
         } else {
 
             // Set number according to difficulty
-            if (this.game.difficulty == "easy") maxNumber = 10;
-            if (this.game.difficulty == "medium") maxNumber = 50;
-            if (this.game.difficulty == "hard") maxNumber = 100;
+            if (this.game.difficulty == "easy") {
 
-            // 2 ~ 100 but and must be divisible for division
-            numberOne = Math.ceil(Math.random() * (maxNumber - 1)) + 1;
+                minNumber = 1;
+                maxNumber = 15;
+
+            } else if (this.game.difficulty == "medium") {
+                
+                minNumber = 2;
+                maxNumber = 50;
+            
+            } else {
+                
+                minNumber = 3;
+                maxNumber = 100;
+            
+            }
+
+            numberOne = minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1));
             
             // numberOne cannot be prime
             const isPrime = num => {
                 for(let i = 2; i < num; i++)
-                     if(num % i === 0) return false;
+                    if(num % i === 0) return false;
                 return num > 1;
             }
             while (isPrime(numberOne)) {
-                numberOne = Math.ceil(Math.random() * (maxNumber - 1)) + 1;
+                numberOne = minNumber + Math.floor(Math.random() * (maxNumber - minNumber + 1));
             }
 
             // numberOne must be divisible by numberTwo
-            numberTwo = Math.ceil(Math.random() * (maxNumber / 2 - 1)) + 1;
+            numberTwo = minNumber + Math.floor(Math.random() * numberOne / 2);
             while (numberOne % numberTwo != 0) {
-                numberTwo = Math.ceil(Math.random() * (maxNumber / 2 - 1)) + 1;
+                numberTwo = minNumber + Math.floor(Math.random() * numberOne / 2);
             }
 
         }

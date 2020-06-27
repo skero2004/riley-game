@@ -33,10 +33,13 @@ class GoalLine extends ImageElement {
         if (this.timer.time < secToPlayer * 100) {
 
             this.moveLeft();
-            this.appear(0);
 
         }
         
+        // Get ready to appear on screen
+        if (this.timer.time < 1) this.appear(0);
+
+        // Disappear after not on screen for performance
         if (this.right < 0) this.disappear(0);
 
         this.position.x += this.speed * deltaTime / speedThreshold;
