@@ -13,6 +13,7 @@ class InputHandler {
 
         // Get menu
         this.menu = menu;
+        this.title = menu.title;
 
         // Get workshop
         this.workshop = workshop;
@@ -120,12 +121,22 @@ class InputHandler {
                 this.settings.disappear();
 
             // Go to workshop when clicked
-            if (this.goToWorkshop.isMouseOver(mouse.x, mouse.y) && this.goToWorkshop.alpha == 1 &&
-                this.settings.alpha == 0)
-                this.workshop.screen.appear();
+            if (this.goToWorkshop.isMouseOver(mouse.x, mouse.y) && 
+                this.title.alpha == 1 &&
+                this.settings.alpha == 0) {
 
-            if (!this.workshop.screen.isMouseOver(mouse.x, mouse.y) && this.workshop.screen.alpha == 1)
+                this.workshop.screen.appear();
+                this.menu.disappear();
+
+            }
+
+            if (!this.workshop.screen.isMouseOver(mouse.x, mouse.y) && 
+                this.workshop.screen.alpha == 1 && this.title.alpha == 0) {
+
                 this.workshop.screen.disappear();
+                this.menu.appear();
+
+            }
 
             // Change operators
             if (this.settings.alpha == 1) {

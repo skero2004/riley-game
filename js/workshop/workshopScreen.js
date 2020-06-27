@@ -17,6 +17,7 @@ class WorkshopScreen extends ImageElement {
 
     appear() {
 
+        this.setPosition(this.gameWidth / 2, this.gameHeight / 2 + this.distFromCenter);
         super.appear(this.workshop.secondsToAppear);
         this.moveBy(this.workshop.secondsToAppear, 0, -this.distFromCenter);
 
@@ -31,7 +32,7 @@ class WorkshopScreen extends ImageElement {
 
             this.setPosition(this.gameWidth / 2, this.gameHeight / 2 + this.distFromCenter);
 
-        }, this.workshop.secondsToDisappear * 1000)
+        }, this.workshop.secondsToDisappear * 1000);
 
     }
 

@@ -16,6 +16,7 @@ class Title extends ImageElement {
 
     appear() {
 
+        this.setPosition(this.gameWidth / 2, this.showYPosition + this.deltaY);
         super.appear(1.5);
         this.moveBy(1.5, 0, -this.deltaY);
 
@@ -25,6 +26,12 @@ class Title extends ImageElement {
 
         super.disappear(1.5);
         this.moveBy(1.5, 0, -this.deltaY);
+
+        setTimeout(() => {
+
+            this.setPosition(this.gameWidth / 2, this.showYPosition + this.deltaY);
+
+        }, 1500);
 
     }
     
