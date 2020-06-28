@@ -8,6 +8,8 @@ class GoalLine extends ImageElement {
 
         this.setPosition(this.gameWidth + this.width / 2, this.gameHeight / 2);
 
+        this.appear(0);
+
         this.player = game.player;
 
         this.timer = game.timer;
@@ -35,12 +37,6 @@ class GoalLine extends ImageElement {
             this.moveLeft();
 
         }
-        
-        // Get ready to appear on screen
-        if (this.timer.time < 1) this.appear(0);
-
-        // Disappear after not on screen for performance
-        if (this.right < 0) this.disappear(0);
 
         this.position.x += this.speed * deltaTime / speedThreshold;
 

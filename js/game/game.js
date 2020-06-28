@@ -137,6 +137,29 @@ class Game {
 
     }
 
+    quit() {
+
+        // Reset player x position
+        this.player.disappear();
+
+        // Make opponents disappear
+        this.opponents.forEach(opponent => {
+
+            opponent.disappear();
+
+        });
+
+        this.timer.disappear();
+        this.equation.disappear();
+
+        this.isStart = false;
+
+        this.equation.numEquationsSolved = 0;
+        this.equation.correctKeyStrokes = 0;
+        this.equation.accuracy = 0;
+
+    }
+
     isGone() {
 
         let i = 0

@@ -6,6 +6,8 @@ class Results extends ImageElement {
 
         this.item = new Item();
 
+        this.tag = new Tag();
+
         this.storageNames = {
 
             MAX_EQUATION: "MaxEquation",
@@ -46,6 +48,8 @@ class Results extends ImageElement {
 
         // Reset results showed
         this.isResultsShowed = false;
+
+        this.tag.init(this, game.difficulty);
 
     }
 
@@ -126,6 +130,8 @@ class Results extends ImageElement {
 
             super.appear(0.5);
             super.moveBy(0.5, 0, -this.distFromCenter);
+
+            this.tag.appear();
             
             setTimeout(() => {
 
@@ -196,6 +202,8 @@ class Results extends ImageElement {
         // If the item is there, then make it disappear
         if (this.isGettingItem) this.item.disappear();
 
+        this.tag.disappear(0.5);
+
         super.disappear(0.5);
         this.moveBy(0.5, 0, -this.distFromCenter);
 
@@ -213,6 +221,8 @@ class Results extends ImageElement {
         }
 
         this.item.update();
+
+        this.tag.update();
         
         super.update();
 
@@ -281,6 +291,9 @@ class Results extends ImageElement {
 
         // Reset alpha
         ctx.globalAlpha = 1;
+
+        // Draw tag
+        this.tag.draw(ctx);
 
     }
 

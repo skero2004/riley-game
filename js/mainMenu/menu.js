@@ -16,7 +16,7 @@ class Menu {
     }
 
     init(game) {
-
+    
         this.game = game;
 
         this.title.init(this, this.game);

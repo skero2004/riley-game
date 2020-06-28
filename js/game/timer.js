@@ -28,6 +28,12 @@ class Timer extends TextElement {
     disappear() {
 
         super.disappear(0.5);
+        setTimeout(() => {
+
+            this.init(this.game);
+
+        }, 500);
+    
     }
 
     update(timeStamp) {

@@ -2,8 +2,6 @@ class Item extends ImageElement {
 
     init(image) {
 
-        super.init();
-
         this.setPosition(-200, 160);
 
         this.scaleTo(0, 0);

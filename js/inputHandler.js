@@ -208,6 +208,12 @@ class InputHandler {
 
         }
 
+        if (this.game.isStart && e.code == "Escape") {
+
+            this.game.quit();
+
+        }
+
         // Check if all results in the results screen showed
         if (this.results.isResultsShowed) {
 
