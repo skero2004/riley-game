@@ -32,6 +32,8 @@ class Player extends ImageElement {
 
         this.isMove = true;
 
+        this.isQuit = false;
+
     }
 
     moveLeft() {
@@ -135,6 +137,8 @@ class Player extends ImageElement {
         let i = 1;
         while (opponentXPositions[i - 1] > this.position.x) i++;
         this.place = i;
+
+        if (this.isQuit) this.place = 5;
 
     }
 

@@ -141,6 +141,7 @@ class Game {
 
         // Reset player x position
         this.player.disappear();
+        this.player.isQuit = true;
 
         // Make opponents disappear
         this.opponents.forEach(opponent => {
