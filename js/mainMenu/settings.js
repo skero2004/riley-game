@@ -10,10 +10,10 @@ class Settings extends ImageElement {
             this.selectors.push(new Selector());
 
         }
-        this.selectors[0].select();
-        this.selectors[1].select();
-        this.selectors[2].unSelect();
-        this.selectors[3].unSelect();
+        this.selectors[0].setImage(document.getElementById("selected"));
+        this.selectors[1].setImage(document.getElementById("selected"));
+        this.selectors[2].setImage(document.getElementById("selector"));
+        this.selectors[3].setImage(document.getElementById("selector"));
 
         this.levelSelectors = [];
         for (let i = 0; i < 3; i++) {
@@ -21,14 +21,17 @@ class Settings extends ImageElement {
             this.levelSelectors.push(new LevelSelector());
 
         }
-        this.levelSelectors[0].unSelect();
+        this.levelSelectors[0].setColor("white");
         this.levelSelectors[0].setBorder(260, 280, 124, 280);
-        this.levelSelectors[1].select();
+        this.levelSelectors[1].setColor("yellow");
         this.levelSelectors[1].setBorder(260, 280, 295, 508);
-        this.levelSelectors[2].unSelect();
+        this.levelSelectors[2].setColor("white");
         this.levelSelectors[2].setBorder(260, 280, 524, 628)
 
         this.setPosition(this.gameWidth / 2, this.gameHeight / 2 + this.distFromCenter);
+
+        this.fireSound = new Sound("Move.wav");
+        this.fireSound.setDefaultVolume(0.07);
 
     }
 
@@ -60,6 +63,7 @@ class Settings extends ImageElement {
 
     appear() {
 
+        this.fireSound.play();
         super.appear(0.5);
         this.moveBy(0.5, 0, -this.distFromCenter);
 
@@ -67,6 +71,7 @@ class Settings extends ImageElement {
 
     disappear() {
 
+        this.fireSound.play();
         super.disappear(0.5);
         this.moveBy(0.5, 0, -this.distFromCenter);
 
@@ -87,6 +92,8 @@ class Settings extends ImageElement {
                 levelSelector.update();
 
             })
+
+            this.fireSound.update();
     
             super.update();    
 
@@ -112,7 +119,7 @@ class Settings extends ImageElement {
             ctx.font = "60px SpaceAge";
             ctx.fillText("Difficulty: ", -70, -180);
 
-            ctx.font = "30px SpaceAge"
+            ctx.font = "30px SpaceAge";
             ctx.fillText("Click outside to go back", 0, 160);
 
             // Draw selectors

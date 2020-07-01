@@ -13,6 +13,9 @@ class Menu {
 
         this.settings = new Settings();
 
+        this.bgm = new Sound("Menu.wav", true);
+        this.bgm.setDefaultVolume(0.15);
+
     }
 
     init(game) {
@@ -53,6 +56,7 @@ class Menu {
         this.goToSettings.update();
         this.goToWorkshop.update();
         this.settings.update();
+        this.bgm.update();
 
     }
 

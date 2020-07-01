@@ -8,16 +8,21 @@ class Selector extends ImageElement {
 
         this.setPosition(x, -120);
 
+        this.sound = new Sound("Select.wav");
+        this.sound.setDefaultVolume(0.1);
+
     }
 
     select() {
 
+        this.sound.play();
         this.setImage(document.getElementById("selected"));
 
     }
 
     unSelect() {
 
+        this.sound.play();
         this.setImage(document.getElementById("selector"));
 
     }
@@ -30,6 +35,8 @@ class Selector extends ImageElement {
     }
 
     update() {
+
+        this.sound.update();
 
         this.alpha = this.settings.alpha;
 

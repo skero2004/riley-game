@@ -15,6 +15,12 @@ class Results extends ImageElement {
 
         }
 
+        this.fireSound = new Sound("Move.wav");
+        this.fireSound.setDefaultVolume(0.07);
+
+        this.showSound = new Sound("ShowResult.wav");
+        this.showSound.setDefaultVolume(0.1);
+
     }
 
     init(game) {
@@ -107,6 +113,7 @@ class Results extends ImageElement {
         let i = 0
         let interval = setInterval(() => {
 
+            this.showSound.play();
             this.isElementsShowing[i] = true;
             i++;
 
@@ -125,6 +132,8 @@ class Results extends ImageElement {
 
     // Appear on screen plus the elements
     appear() {
+
+        this.fireSound.play();
 
         setTimeout(() => {
 
@@ -199,6 +208,8 @@ class Results extends ImageElement {
 
     disappear() {
 
+        this.fireSound.play();
+
         // If the item is there, then make it disappear
         if (this.isGettingItem) this.item.disappear();
 
@@ -224,6 +235,10 @@ class Results extends ImageElement {
 
         this.tag.update();
         
+        this.fireSound.update();
+
+        this.showSound.update();
+
         super.update();
 
     }

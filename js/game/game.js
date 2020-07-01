@@ -39,6 +39,10 @@ class Game {
         // Used operations
         this.usedOperations = "+-";
 
+        this.bgm = new Sound("NeonRainbow.wav", true);
+        this.bgm.setDefaultVolume(0.15);
+        this.bgm.setVolume(0);
+
     }
 
     init(background) {

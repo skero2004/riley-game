@@ -1,6 +1,8 @@
 class InputHandler {
 
-    init(canvases, game, background, menu, workshop) {
+    init(canvases, game, background, menu, workshop, startGame) {
+
+        this.firstScreen = startGame;
 
         // Get canvases
         this.canvases = canvases;
@@ -98,6 +100,8 @@ class InputHandler {
 
         }
 
+        if (!this.firstScreen.isStart) this.firstScreen.startGame();
+
         // Do menu stuff only when the game screen is gone
         if (this.game.isGone()) {
 
@@ -105,6 +109,8 @@ class InputHandler {
             if (this.startGame.isMouseOver(mouse.x, mouse.y) && this.startGame.alpha == 1 &&
             this.settings.alpha == 0) {
 
+                this.menu.bgm.fadeOut(0.5);
+                this.game.bgm.fadeIn(0.5);
                 this.game.init(this.background);
                 this.menu.disappear();
 
@@ -124,7 +130,7 @@ class InputHandler {
                 this.title.alpha == 1 &&
                 this.settings.alpha == 0) {
 
-                this.workshop.screen.appear();
+                this.workshop.appear();
                 this.menu.disappear();
 
             }
@@ -132,7 +138,7 @@ class InputHandler {
             if (!this.workshop.screen.isMouseOver(mouse.x, mouse.y) && 
                 this.workshop.screen.alpha == 1 && this.title.alpha == 0) {
 
-                this.workshop.screen.disappear();
+                this.workshop.disappear();
                 this.menu.appear();
 
             }
@@ -219,6 +225,9 @@ class InputHandler {
 
             // Set results showed to false
             this.results.isResultsShowed = false;
+
+            this.game.bgm.fadeOut(0.5);
+            this.menu.bgm.fadeIn(0.5);
 
             // Make game elements disappear
             this.game.disappear();

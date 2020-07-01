@@ -10,10 +10,14 @@ class LevelSelector extends TextElement {
 
         this.setFont("45px SpaceAge");
 
+        this.selectSound = new Sound("Select.wav");
+        this.selectSound.setDefaultVolume(0.1);
+
     }
 
     select() {
 
+        this.selectSound.play();
         this.setColor("yellow");
 
     }
@@ -34,7 +38,7 @@ class LevelSelector extends TextElement {
     update() {
 
         this.alpha = this.settings.alpha;
-
+        this.selectSound.update();
         super.update();
 
     }

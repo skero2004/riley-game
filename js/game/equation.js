@@ -60,11 +60,11 @@ class Equation extends TextElement {
             } else if (this.game.difficulty == "medium") {
 
                 minNumber = 10;
-                maxNumber = 30;
+                maxNumber = 20;
 
             } else {
             
-                minNumber = 30;
+                minNumber = 20;
                 maxNumber = 50;
             
             }
@@ -83,11 +83,11 @@ class Equation extends TextElement {
             } else if (this.game.difficulty == "medium") {
                 
                 minNumber = 10;
-                maxNumber = 50;
+                maxNumber = 30;
 
             } else {
                 
-                minNumber = 50;
+                minNumber = 30;
                 maxNumber = 100;
 
             }
@@ -134,7 +134,7 @@ class Equation extends TextElement {
             } else if (this.game.difficulty == "medium") {
                 
                 minNumber = 2;
-                maxNumber = 50;
+                maxNumber = 40;
             
             } else {
                 
