@@ -33,6 +33,8 @@ class Settings extends ImageElement {
         this.fireSound = new Sound("Move.wav");
         this.fireSound.setDefaultVolume(0.07);
 
+        this.soundSetter = new SoundMuter();
+
     }
 
     init(menu, game) {
@@ -56,6 +58,8 @@ class Settings extends ImageElement {
         this.levelSelectors[0].init(this, -200, "Easy");
         this.levelSelectors[1].init(this, 0, "Medium");
         this.levelSelectors[2].init(this, 200, "Hard");
+
+        this.soundSetter.init(this, menu);
 
         this.game = game;
 
@@ -94,6 +98,8 @@ class Settings extends ImageElement {
             })
 
             this.fireSound.update();
+
+            this.soundSetter.update();
     
             super.update();    
 
@@ -135,6 +141,9 @@ class Settings extends ImageElement {
                 levelSelector.draw(ctx);
 
             });
+
+            // Draw sound setters
+            this.soundSetter.draw(ctx);
 
             // Reset transform
             ctx.setTransform(1, 0, 0, 1, 0, 0);

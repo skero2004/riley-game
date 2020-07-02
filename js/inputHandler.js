@@ -27,6 +27,7 @@ class InputHandler {
         this.settings = menu.settings;
         this.selectors = menu.settings.selectors;
         this.levelSelectors = menu.settings.levelSelectors;
+        this.soundSetter = menu.settings.soundSetter;
 
         // Player property
         this.player = game.player;
@@ -100,7 +101,9 @@ class InputHandler {
 
         }
 
-        if (!this.firstScreen.isStart) this.firstScreen.startGame();
+        if (!this.firstScreen.isStart && mouse.x > 0 && mouse.x < 800 &&
+                                         mouse.y > 0 && mouse.y < 600) 
+            this.firstScreen.startGame();
 
         // Do menu stuff only when the game screen is gone
         if (this.game.isGone()) {
@@ -187,6 +190,10 @@ class InputHandler {
                     }
     
                 }
+
+                if (this.soundSetter.isMouseOver(mouse.x - this.settings.position.x, 
+                                                 mouse.y - this.settings.position.y))
+                    this.soundSetter.toggleSound();
                 
             }
 
