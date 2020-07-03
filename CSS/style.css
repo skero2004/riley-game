@@ -29,3 +29,38 @@
     position: absolute;
 
 }
+
+#description {
+
+    text-align: center;
+    font-size: 25px;
+
+}
+
+#items {
+
+    position: relative;
+
+}
+
+#items > * {
+
+    position: absolute;
+
+}
+
+#items > ul {
+
+    top: 20px;
+
+}
+
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }

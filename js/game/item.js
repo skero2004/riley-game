@@ -30,11 +30,12 @@ class Item extends ImageElement {
 
     storeItem() {
 
+        let items = localStorage.getItem("items").split(",");
+
+        // Store item to local storage
         if (localStorage.getItem("items") == null)
             localStorage.setItem("items", this.name);
         else {
-
-            let items = localStorage.getItem("items").split(",");
 
             let numOfThisItem = 0;
             for (let i = 0; i < items.length; i++) {

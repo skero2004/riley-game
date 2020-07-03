@@ -27,7 +27,7 @@ const workshop = new Workshop(GAME_WIDTH, GAME_HEIGHT);
 const startGame = new StartGame(GAME_WIDTH, GAME_HEIGHT);
 
 // Create input handler
-this.inputs = new InputHandler();
+const inputs = new InputHandler();
 
 // Initialize game content
 background.init(game);
@@ -36,7 +36,10 @@ workshop.init();
 startGame.init(menu);
 
 // Initialize input handler
-this.inputs.init(canvases, game, background, menu, workshop, startGame);
+inputs.init(canvases, game, background, menu, workshop, startGame);
+
+// Create item lister
+const itemLister = new ItemLister();
 
 // Main loop
 let lastTime = 0;
@@ -66,6 +69,9 @@ function loop(timeStamp) {
     // Draw workshop
     workshop.update();
     workshop.draw(workshopCtx);
+
+    // Update item list
+    itemLister.update();
 
     requestAnimationFrame(loop);
 

@@ -57,6 +57,10 @@ class Workshop {
 
         ctx.fillStyle = "yellow";
         ctx.textAlign = "center";
+        
+        ctx.font = "70px SpaceAge";
+        ctx.fillText("COMING SOON...", 0, 50);
+
         ctx.font = "30px SpaceAge";
         ctx.fillText("Click outside to go back", 0, 225);
 
