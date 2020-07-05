@@ -6,77 +6,106 @@ class ItemLister {
         const items = localStorage.getItem("items").split(",");
 
         // Unordered list
-        const ul = document.getElementById("itemList");
+        const itemList = document.getElementById("itemList");
         
         // If there is less item, refresh
-        if (this.lastItemsNumber > items.length) {
+        if (this.lastItemsNumber != items.length) {
 
-            while (ul.firstChild) {
+            while (itemList.firstChild) {
 
-                ul.removeChild(ul.lastChild);
+                itemList.removeChild(itemList.lastChild);
+
+            }
+
+            // Set last number of items
+            this.lastItemsNumber = items.length;
+
+            // Key: name of item, value: number of that item
+            const numPerItem = new Map();
+            for (let i = 0; i < items.length; i++) {
+
+                // Calculate how many of this item exists
+                let numItem = 0;
+                for (let j = 0; j < items.length; j++) {
+
+                    if (items[i] == items[j]) numItem++;
+
+                }
+                numPerItem.set(items[i], numItem);
 
             }
 
-        }
+            let itemNumber = 1;
+            numPerItem.forEach((value, key, map) => {
 
-        // Set last number of items
-        this.lastItemsNumber = items.length;
+                // Check for repeats
+                let numRepeats = 0;
+                for (let i = 0; i < itemList.childElementCount; i++) {
 
-        // Key: name of item, value: number of that item
-        const numPerItem = new Map();
-        for (let i = 0; i < items.length; i++) {
+                    if (itemList.children[i].getElementsByTagName("p")[0].innerHTML == key)
+                        numRepeats++;
 
-            // Calculate how many of this item exists
-            let numItem = 0;
-            for (let j = 0; j < items.length; j++) {
+                }
 
-                if (items[i] == items[j]) numItem++;
+                // Create new element only if no repeats
+                if (numRepeats == 0) {
 
-            }
-            numPerItem.set(items[i], numItem);
+                    // Set image source and text
+                    const imgsrc = "assets/images/items/" + key.replace(/\s/g,'', "") + ".png";
+                    const text = value + "x";
 
-        }
+                    // Set up div
+                    const div = document.createElement("div");
+                    div.style.position = "relative";
 
-        // Set list
-        for (let i = 0; i < items.length; i++) {
+                    // Set up image
+                    const img = document.createElement("img");
+                    img.src = imgsrc;
+                    img.style.backgroundColor = "black";
+                    img.style.border = "6px solid blue";
+                    img.style.borderRadius = "10px";
+                    img.style.position = "absolute";
+                    img.style.width = "100px";
+                    img.style.height = "100px";
+                    img.style.objectFit = "scale-down";
 
-            const liName = `${numPerItem.get(items[i])}x ${items[i]}`
+                    // Set up paragraph
+                    const p = document.createElement("p");
+                    p.innerHTML = text;
+                    p.style.textAlign = "center";
+                    p.style.fontSize = "40px";
+                    p.style.color = "red";
+                    p.style.position = "absolute";
 
-            // Check for repeats
-            let numRepeats = 0;
-            for (let j = 0; j < ul.children.length; j++) {
+                    // Set top position
+                    img.style.top = `${-50 + 120 * Math.ceil(itemNumber / 2)}px`;
+                    p.style.top = `${-60 + 120 * Math.ceil(itemNumber / 2)}px`;
 
-                if (ul.children[j].innerHTML == liName) numRepeats++;
+                    // Set left/right position
+                    if (itemNumber % 2 == 1) {
 
-            }
-            
-            // Create element only if there is no repeats
-            if (numRepeats == 0) {
+                        // Odd item number
+                        img.style.left = "0";
+                        p.style.left = "35px"
 
-                // If same item, then add 1
-                let isSameItem = false;
-                for (let j = 0; j < ul.children.length; j++) {
+                    } else {
 
-                    if (ul.children[j].innerHTML.replace(`${numPerItem.get(items[i]) - 1}x `, "") ==
-                        items[i]) {
+                        // Even item number
+                        img.style.left = "140px";
+                        p.style.left = "175px"
 
-                        ul.children[j].innerHTML = `${numPerItem.get(items[i])}x ${items[i]}`;
-                        isSameItem = true;
-                    
                     }
 
-                }
-
-                // Add new list only if you have never received the item
-                if (!isSameItem) {
-
-                    const li = document.createElement("li");
-                    li.innerHTML = liName;
-                    ul.appendChild(li);
+                    // Add the elements
+                    itemList.appendChild(div);
+                    div.appendChild(img);
+                    div.appendChild(p);
 
                 }
 
-            }
+                itemNumber++;
+
+            });
 
         }
 

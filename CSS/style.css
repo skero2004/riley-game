@@ -11,9 +11,10 @@
 
 #canvases {
 
+    margin-top: -190px;
     margin-left: -400px;
     left: 50%;
-    position: relative;
+    position: absolute;
     width: 800px;
 
 }
@@ -37,6 +38,21 @@
 
 }
 
+#itemDescription {
+
+    width: 100px;
+    height: 200px;
+    position: relative;
+
+}
+
+#itemDescription > * {
+
+
+    position: absolute;
+
+}
+
 #items {
 
     position: relative;
@@ -46,12 +62,6 @@
 #items > * {
 
     position: absolute;
-
-}
-
-#items > ul {
-
-    top: 20px;
 
 }
 
