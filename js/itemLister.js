@@ -1,15 +1,34 @@
 class ItemLister {
 
+    constructor(canvases) {
+
+        this.canvases = canvases;
+
+    }
+
     update() {
 
         // Get items
         const items = localStorage.getItem("items").split(",");
 
-        // Unordered list
+        // Get item list element
         const itemList = document.getElementById("itemList");
         
-        // If there is less item, refresh
-        if (this.lastItemsNumber != items.length) {
+        // Calculate number of items on the side
+        const canvasLeft = this.canvases.offsetLeft - this.canvases.clientLeft;
+
+        let numItemsSide = 1;
+        let imgFarRight = 100 * numItemsSide;
+        while (imgFarRight < canvasLeft) {
+
+            numItemsSide++;
+            imgFarRight = 100 * numItemsSide;
+
+        }
+        if (numItemsSide > 1) numItemsSide--;
+
+        // Only refresh if there is less or more items than before
+        if (this.lastItemsNumber != items.length || this.lastNumItemsSide != numItemsSide) {
 
             while (itemList.firstChild) {
 
@@ -19,6 +38,9 @@ class ItemLister {
 
             // Set last number of items
             this.lastItemsNumber = items.length;
+
+            // Set last number of items horizontally
+            this.lastNumItemsSide = numItemsSide;
 
             // Key: name of item, value: number of that item
             const numPerItem = new Map();
@@ -78,27 +100,13 @@ class ItemLister {
                     p.style.position = "absolute";
 
                     // Set top position
-                    img.style.top = `${-50 + 120 * Math.ceil(itemNumber / 3)}px`;
-                    p.style.top = `${-65 + 120 * Math.ceil(itemNumber / 3)}px`;
+                    img.style.top = `${-55 + 110 * Math.ceil(itemNumber / numItemsSide)}px`;
+                    p.style.top = `${-70 + 110 * Math.ceil(itemNumber / numItemsSide)}px`;
 
                     // Set left/right position
-                    if (itemNumber % 3 == 1) {
-
-                        img.style.left = "0";
-                        p.style.left = "30px"
-
-                    } else if (itemNumber % 3 == 2) {
-
-                        img.style.left = "100px";
-                        p.style.left = "130px"
-
-                    } else {
-
-                        img.style.left = "200px";
-                        p.style.left = "230px"
-                        
-                    }
-
+                    img.style.left = `${100 * ((itemNumber - 1) % numItemsSide)}px`;
+                    p.style.left = `${30 + 100 * ((itemNumber - 1) % numItemsSide)}px`
+                    
                     // Add the elements
                     itemList.appendChild(div);
                     div.appendChild(img);

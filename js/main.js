@@ -39,7 +39,7 @@ startGame.init(menu);
 inputs.init(canvases, game, background, menu, workshop, startGame);
 
 // Create item lister
-const itemLister = new ItemLister();
+const itemLister = new ItemLister(canvases);
 
 // Main loop
 let lastTime = 0;
