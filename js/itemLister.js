@@ -65,8 +65,8 @@ class ItemLister {
                     img.style.border = "6px solid blue";
                     img.style.borderRadius = "10px";
                     img.style.position = "absolute";
-                    img.style.width = "100px";
-                    img.style.height = "100px";
+                    img.style.width = "80px";
+                    img.style.height = "80px";
                     img.style.objectFit = "scale-down";
 
                     // Set up paragraph
@@ -74,26 +74,29 @@ class ItemLister {
                     p.innerHTML = text;
                     p.style.textAlign = "center";
                     p.style.fontSize = "40px";
-                    p.style.color = "red";
+                    p.style.color = "white";
                     p.style.position = "absolute";
 
                     // Set top position
-                    img.style.top = `${-50 + 120 * Math.ceil(itemNumber / 2)}px`;
-                    p.style.top = `${-60 + 120 * Math.ceil(itemNumber / 2)}px`;
+                    img.style.top = `${-50 + 120 * Math.ceil(itemNumber / 3)}px`;
+                    p.style.top = `${-65 + 120 * Math.ceil(itemNumber / 3)}px`;
 
                     // Set left/right position
-                    if (itemNumber % 2 == 1) {
+                    if (itemNumber % 3 == 1) {
 
-                        // Odd item number
                         img.style.left = "0";
-                        p.style.left = "35px"
+                        p.style.left = "30px"
+
+                    } else if (itemNumber % 3 == 2) {
+
+                        img.style.left = "100px";
+                        p.style.left = "130px"
 
                     } else {
 
-                        // Even item number
-                        img.style.left = "140px";
-                        p.style.left = "175px"
-
+                        img.style.left = "200px";
+                        p.style.left = "230px"
+                        
                     }
 
                     // Add the elements

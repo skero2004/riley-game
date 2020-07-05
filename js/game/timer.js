@@ -11,8 +11,8 @@ class Timer extends TextElement {
 
         this.game = game;
 
-        this.startTime = 6000;
-        this.time = 6000;
+        this.startTime = 4000;
+        this.time = 4000;
 
         this.justNumberLessThanTen = false;
         this.numberChecker = 0;
