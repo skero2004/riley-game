@@ -95,17 +95,17 @@ class ItemLister {
                     const p = document.createElement("p");
                     p.innerHTML = text;
                     p.style.textAlign = "center";
-                    p.style.fontSize = "40px";
+                    p.style.font = "30px SpaceAge";
                     p.style.color = "white";
                     p.style.position = "absolute";
 
                     // Set top position
                     img.style.top = `${-55 + 110 * Math.ceil(itemNumber / numItemsSide)}px`;
-                    p.style.top = `${-70 + 110 * Math.ceil(itemNumber / numItemsSide)}px`;
+                    p.style.top = `${-55 + 110 * Math.ceil(itemNumber / numItemsSide)}px`;
 
                     // Set left/right position
                     img.style.left = `${100 * ((itemNumber - 1) % numItemsSide)}px`;
-                    p.style.left = `${30 + 100 * ((itemNumber - 1) % numItemsSide)}px`
+                    p.style.left = `${25 + 100 * ((itemNumber - 1) % numItemsSide)}px`
                     
                     // Add the elements
                     itemList.appendChild(div);
