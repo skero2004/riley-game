@@ -40,7 +40,7 @@ class Game {
         this.usedOperations = "+-";
 
         this.bgm = new Sound("NeonRainbow.wav", true);
-        this.bgm.setDefaultVolume(0.15);
+        this.bgm.setDefaultVolume(0.1);
         this.bgm.setVolume(0);
 
     }

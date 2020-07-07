@@ -11,7 +11,7 @@
 
 #canvases {
 
-    margin-top: -190px;
+    margin-top: -290px;
     margin-left: -400px;
     left: 50%;
     position: absolute;
@@ -40,16 +40,20 @@
 
 #itemDescription {
 
-    width: 100px;
-    height: 200px;
+    height: 300px;
     position: relative;
 
 }
 
 #itemDescription > * {
 
-
     position: absolute;
+
+}
+
+#itemParagraph {
+
+    top: 30px;
 
 }
 
@@ -60,7 +64,7 @@
 }
 
 #items > * {
-
+ 
     position: absolute;
 
 }
@@ -73,4 +77,16 @@
           -ms-user-select: none; /* Internet Explorer/Edge */
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
+
+  }
+
+  img {
+
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
   }

@@ -1,6 +1,8 @@
 class InputHandler {
 
-    init(canvases, game, background, menu, workshop, startGame) {
+    init(canvases, game, background, menu, workshop, startGame, itemLister) {
+
+        this.itemLister = itemLister;
 
         this.firstScreen = startGame;
 
@@ -67,7 +69,7 @@ class InputHandler {
             y: e.pageY - this.topSpace
 
         }
-        // console.log(mouse.x, mouse.y);
+        
         // Turn yellow if mouse over
         if (this.startGame.isMouseOver(mouse.x, mouse.y))
             this.startGame.turnYellow();
@@ -195,6 +197,25 @@ class InputHandler {
                                                  mouse.y - this.settings.position.y))
                     this.soundSetter.toggleSound();
                 
+            }
+
+        }
+
+        const items = document.getElementById("itemList").getElementsByTagName("img");
+        for (let i = 0; i < items.length; i++) {
+
+            const rect = items[i].getBoundingClientRect();
+            if (e.clientX > rect.left && e.clientX < rect.right &&
+                e.clientY > rect.top && e.clientY < rect.bottom) {
+            
+                const itemName = items[i].src.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "").replace(/([A-Z])/g, ' $1').trim();
+                const itemDescription = document.getElementById("itemDescription").getElementsByTagName("p");
+                itemDescription[0].innerHTML = itemName + ":";
+
+                itemDescription[1].innerHTML = ItemDescriptions.getDescription(itemName.replace(/\s/g, ""));
+
+                this.itemLister.chosenItem = itemName;
+
             }
 
         }

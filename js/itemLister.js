@@ -4,9 +4,16 @@ class ItemLister {
 
         this.canvases = canvases;
 
+        this.chosenItem = "";
+
     }
 
     update() {
+
+        // Set item description
+        const itemDescription = document.getElementById("itemDescription");
+        const canvases = document.getElementById("canvases");
+        itemDescription.style.width = `${canvases.offsetLeft - canvases.clientLeft - 20}px`;
 
         // Get items
         const items = localStorage.getItem("items").split(",");
@@ -84,7 +91,6 @@ class ItemLister {
                     const img = document.createElement("img");
                     img.src = imgsrc;
                     img.style.backgroundColor = "black";
-                    img.style.border = "6px solid blue";
                     img.style.borderRadius = "10px";
                     img.style.position = "absolute";
                     img.style.width = "80px";
@@ -118,6 +124,16 @@ class ItemLister {
 
             });
 
+        }
+
+        // Select image
+        for (let i = 0; i < itemList.children.length; i++) {
+            
+            const img = itemList.children[i].getElementsByTagName("img")[0]
+            if (this.chosenItem == img.src.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "").replace(/([A-Z])/g, ' $1').trim()) 
+                img.style.border = "6px solid orangered";
+            else img.style.border = "6px solid blue";
+            
         }
 
     }

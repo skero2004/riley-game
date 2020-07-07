@@ -35,11 +35,11 @@ menu.init(game);
 workshop.init();
 startGame.init(menu);
 
-// Initialize input handler
-inputs.init(canvases, game, background, menu, workshop, startGame);
-
 // Create item lister
 const itemLister = new ItemLister(canvases);
+
+// Initialize input handler
+inputs.init(canvases, game, background, menu, workshop, startGame, itemLister);
 
 // Main loop
 let lastTime = 0;
