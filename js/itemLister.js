@@ -91,13 +91,17 @@ class ItemLister {
 
                         // Set up image
                         const img = document.createElement("img");
+                        const imgDiv = document.createElement("div");
                         img.src = imgsrc;
-                        img.style.backgroundColor = "black";
-                        img.style.borderRadius = "10px";
-                        img.style.position = "absolute";
+                        imgDiv.style.backgroundColor = "black";
+                        imgDiv.style.borderRadius = "10px";
+                        imgDiv.style.position = "absolute";
+                        imgDiv.style.width = "80px";
+                        imgDiv.style.height = "80px";
+                        img.style.objectFit = "scale-down";
                         img.style.width = "80px";
                         img.style.height = "80px";
-                        img.style.objectFit = "scale-down";
+                        img.style.position = "relative";
 
                         // Set up paragraph
                         const p = document.createElement("p");
@@ -108,16 +112,17 @@ class ItemLister {
                         p.style.position = "absolute";
 
                         // Set top position
-                        img.style.top = `${-55 + 110 * Math.ceil(itemNumber / numItemsSide)}px`;
+                        imgDiv.style.top = `${-55 + 110 * Math.ceil(itemNumber / numItemsSide)}px`;
                         p.style.top = `${-55 + 110 * Math.ceil(itemNumber / numItemsSide)}px`;
 
                         // Set left/right position
-                        img.style.left = `${100 * ((itemNumber - 1) % numItemsSide)}px`;
+                        imgDiv.style.left = `${100 * ((itemNumber - 1) % numItemsSide)}px`;
                         p.style.left = `${25 + 100 * ((itemNumber - 1) % numItemsSide)}px`
                         
                         // Add the elements
                         itemList.appendChild(div);
-                        div.appendChild(img);
+                        div.appendChild(imgDiv);
+                        imgDiv.appendChild(img);
                         div.appendChild(p);
 
                     }
@@ -131,10 +136,11 @@ class ItemLister {
             // Select image
             for (let i = 0; i < itemList.children.length; i++) {
                 
-                const img = itemList.children[i].getElementsByTagName("img")[0]
+                const imgDiv = itemList.children[i].getElementsByTagName("div")[0];
+                const img = imgDiv.getElementsByTagName("img")[0];
                 if (this.chosenItem == img.src.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "").replace(/([A-Z])/g, ' $1').trim()) 
-                    img.style.border = "6px solid orangered";
-                else img.style.border = "6px solid blue";
+                    imgDiv.style.border = "6px solid orangered";
+                else imgDiv.style.border = "6px solid blue";
                 
             }
 
