@@ -117,7 +117,7 @@ class ItemLister {
 
                         // Set left/right position
                         imgDiv.style.left = `${100 * ((itemNumber - 1) % numItemsSide)}px`;
-                        p.style.left = `${25 + 100 * ((itemNumber - 1) % numItemsSide)}px`
+                        p.style.left = `${25 + 100 * ((itemNumber - 1) % numItemsSide)}px`;
                         
                         // Add the elements
                         itemList.appendChild(div);

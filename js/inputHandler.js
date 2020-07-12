@@ -59,14 +59,14 @@ class InputHandler {
     onMouseMove(e) {
 
         // Get canvas position for mouse calculation
-        this.leftSpace = this.canvases.offsetLeft - this.canvases.clientLeft;
-        this.topSpace = this.canvases.offsetTop - this.canvases.clientTop;
+        this.leftSpace = this.canvases.getBoundingClientRect().left;
+        this.topSpace = this.canvases.getBoundingClientRect().top;
 
         // Get clicked position (0,0) is top left of canvas
         let mouse = {
 
-            x: e.pageX - this.leftSpace,
-            y: e.pageY - this.topSpace
+            x: e.clientX - this.leftSpace,
+            y: e.clientY - this.topSpace
 
         }
         
@@ -92,14 +92,14 @@ class InputHandler {
     onClick(e) {
 
         // Get canvas position for mouse calculation
-        this.leftSpace = this.canvases.offsetLeft - this.canvases.clientLeft;
-        this.topSpace = this.canvases.offsetTop - this.canvases.clientTop;
+        this.leftSpace = this.canvases.getBoundingClientRect().left;
+        this.topSpace = this.canvases.getBoundingClientRect().top;
 
         // Get clicked position (0,0) is top left of canvas
         let mouse = {
 
-            x: e.pageX - this.leftSpace,
-            y: e.pageY - this.topSpace
+            x: e.clientX - this.leftSpace,
+            y: e.clientY - this.topSpace
 
         }
 
