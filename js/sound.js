@@ -1,7 +1,5 @@
 class Sound {
 
-    static isSound = true;
-
     constructor(src, isLoop = false) {
 
         this.sound = document.createElement("audio");
@@ -123,3 +121,5 @@ class Sound {
     }
 
 }
+
+Sound.isSound = true;
