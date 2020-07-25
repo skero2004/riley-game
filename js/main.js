@@ -16,6 +16,17 @@ const menuCtx = menuCanvas.getContext("2d");
 const startGameCanvas = document.getElementById("startGame");
 const startGameCtx = startGameCanvas.getContext("2d");
 
+if (DeviceChecker.isMobile()) {
+
+    for (let i = 0; i < canvases.children.length; i++) {
+
+        canvases.children[i].width = screen.width - 30;
+        canvases.children[i].height = canvases.children[i].width / 4 * 3;
+    
+    }
+
+}
+
 const GAME_WIDTH = gameCanvas.width;
 const GAME_HEIGHT = gameCanvas.height;
 
