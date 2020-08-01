@@ -4,7 +4,7 @@ class WorkshopScreen extends ImageElement {
 
         super.init(workshop);
 
-        this.distFromCenter = 100;
+        this.distFromCenter = workshop.distFromCenter;
         this.setPosition(this.gameWidth / 2, this.gameHeight / 2 + this.distFromCenter);
 
         this.setImage(document.getElementById("workshopScreen"));

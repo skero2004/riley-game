@@ -143,8 +143,12 @@ class InputHandler {
             if (!this.workshop.screen.isMouseOver(mouse.x, mouse.y) && 
                 this.workshop.screen.alpha == 1 && this.title.alpha == 0) {
 
-                this.workshop.disappear();
-                this.menu.appear();
+                setTimeout(() => {
+
+                    this.workshop.disappear();
+                    this.menu.appear();
+
+                }, 100);
 
             }
 

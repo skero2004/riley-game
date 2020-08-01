@@ -89,6 +89,13 @@ class Background {
     
     }
 
+    isAppeared() {
+
+        if (this.stars[0].alpha > 0) 
+            return true;
+
+    }
+
     update(deltaTime, timeStamp) {
 
         // Create new planet at random interval
@@ -153,7 +160,6 @@ class Background {
 
     draw(ctx) {
 
-        // Clear canvas
         ctx.clearRect(0, 0, this.gameWidth, this.gameHeight);
 
         // Draw stars

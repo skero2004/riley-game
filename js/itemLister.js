@@ -1,3 +1,21 @@
+if (DeviceChecker.isMobile()) {
+
+    let itemDescription = document.getElementById("itemDescription");
+    Array.from(itemDescription.children).forEach(child => {
+
+        child.style.top = (screen.width - 30) / 4 * 3;
+
+    });
+
+    let items = document.getElementById("items");
+    Array.from(items.children).forEach(child => {
+
+        child.style.top = (screen.width - 30) / 4 * 3;
+
+    });
+
+}
+
 class ItemLister {
 
     constructor(canvases) {

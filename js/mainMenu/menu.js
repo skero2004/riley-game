@@ -31,6 +31,13 @@ class Menu {
 
     }
 
+    isAppeared() {
+
+        if (this.startGame.alpha > 0)
+            return true;
+
+    }
+
     appear() {
 
         this.title.appear();
