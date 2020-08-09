@@ -56,7 +56,7 @@ class GameElement {
 
     }
 
-    appear(seconds) {
+    appear(seconds, completion = () => {}) {
 
         // Necessary calculations
         const fps = 60;
@@ -70,6 +70,7 @@ class GameElement {
             if (this.alpha >= 1) {
 
                 this.alpha = 1;
+                completion();
                 clearInterval(interval);
             
             }
@@ -78,7 +79,7 @@ class GameElement {
 
     }
 
-    disappear(seconds) {
+    disappear(seconds, completion = () => {}) {
 
         // Necessary calculations
         const fps = 60;
@@ -92,6 +93,7 @@ class GameElement {
             if (this.alpha <= 0) {
 
                 this.alpha = 0;
+                completion();
                 clearInterval(interval);
             
             }
@@ -100,13 +102,13 @@ class GameElement {
 
     }
 
-    moveBy(seconds, x, y) {
+    moveBy(seconds, x, y, completion = () => {}) {
 
-        this.moveTo(seconds, this.position.x + x, this.position.y + y);
+        this.moveTo(seconds, this.position.x + x, this.position.y + y, completion);
 
     }
 
-    moveTo(seconds, x, y) {
+    moveTo(seconds, x, y, completion = () => {}) {
 
         // How much to move
         const moveX = x - this.position.x;
@@ -130,6 +132,7 @@ class GameElement {
 
                 this.position.x = x;
                 this.position.y = y;
+                completion();
                 clearInterval(interval);
             
             }
@@ -138,13 +141,13 @@ class GameElement {
 
     }
 
-    rotateBy(seconds, angle) {
+    rotateBy(seconds, angle, completion = () => {}) {
 
-        this.rotateTo(seconds, this.angle + angle);
+        this.rotateTo(seconds, this.angle + angle, completion);
 
     }
 
-    rotateTo(seconds, angle) {
+    rotateTo(seconds, angle, completion = () => {}) {
         
         // How much to rotate
         const rotateAngle = angle - this.angle;
@@ -163,6 +166,7 @@ class GameElement {
                 (rotateAngle == 0)) {
 
                 this.angle = angle;
+                completion();
                 clearInterval(interval);
             
             }

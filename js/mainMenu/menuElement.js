@@ -17,7 +17,7 @@ class MenuElement extends TextElement {
     appear() {
 
         super.appear(2);
-
+        
     }
 
     disappear() {

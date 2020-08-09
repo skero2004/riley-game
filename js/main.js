@@ -52,6 +52,12 @@ const itemLister = new ItemLister(canvases);
 // Initialize input handler
 inputs.init(canvases, game, background, menu, workshop, startGame, itemLister);
 
+// Add default spaceship to localstorage
+if (!localStorage.getItem("ownedShips"))
+    localStorage.setItem("ownedShips", "RileyShip");
+if (!localStorage.getItem("usingShip"))
+    localStorage.setItem("usingShip", "RileyShip");
+
 // Main loop
 let lastTime = 0;
 function loop(timeStamp) {

@@ -25,13 +25,11 @@ class Title extends ImageElement {
     disappear() {
 
         super.disappear(1.5);
-        this.moveBy(1.5, 0, -this.deltaY);
-
-        setTimeout(() => {
-
-            this.setPosition(this.gameWidth / 2, this.showYPosition + this.deltaY);
-
-        }, 1500);
+        this.moveBy(1.5, 0, -this.deltaY, () => {
+         
+            this.setPosition(this.gameWidth / 2, this.showYPosition + this.deltaY)
+        
+        });
 
     }
     

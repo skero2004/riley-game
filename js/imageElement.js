@@ -65,9 +65,8 @@ class ImageElement extends GameElement {
 
             }
             
-            super.update();
-
         }
+        super.update();
 
     }
 

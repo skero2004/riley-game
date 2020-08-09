@@ -26,14 +26,12 @@ class WorkshopScreen extends ImageElement {
     disappear() {
 
         super.disappear(this.workshop.secondsToDisappear);
-        this.moveBy(this.workshop.secondsToDisappear, 0, -this.distFromCenter);
-
-        setTimeout(() => {
+        this.moveBy(this.workshop.secondsToDisappear, 0, -this.distFromCenter, () => {
 
             this.setPosition(this.gameWidth / 2, this.gameHeight / 2 + this.distFromCenter);
 
-        }, this.workshop.secondsToDisappear * 1000);
-
+        });
+        
     }
 
 }

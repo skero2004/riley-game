@@ -46,14 +46,6 @@ class Item extends ImageElement {
 
             if (numOfThisItem < 30) items.push(this.name);
 
-            let newItems;
-            for (let i = 0; i < items.length; i++) {
-
-                newItems += items[i] + ",";
-
-            }
-            newItems = newItems.replace("undefined", "").slice(0, -1); 
-
             localStorage.setItem("items", items);
 
         }

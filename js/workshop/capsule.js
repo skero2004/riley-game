@@ -42,6 +42,32 @@ class Capsule extends ImageElement {
 
     }
 
+    select() {
+
+        this.setImage(document.getElementById("capsuleSelected"));
+
+    }
+
+    unselect() {
+
+        this.setImage(document.getElementById("capsule"));
+
+    }
+
+    isSelected() {
+
+        if (this.image == document.getElementById("capsuleSelected"))
+            return true;
+        else return false;
+
+    }
+
+    getImageName() {
+
+        return this.itemImage.src.replace(/^.*[\\\/]/, "").replace(/\.[^/.]+$/, "").trim();
+
+    }
+
     draw(ctx) {
 
         super.draw(ctx);
