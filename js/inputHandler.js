@@ -251,9 +251,12 @@ class InputHandler {
                         // Set selected item
                         localStorage.setItem("lastSelected", capsuleChosen);
 
-                        if (this.workshop.getSelectedItem() == this.workshop.getUsingShip())
+                        if (this.workshop.getSelectedItem() == this.workshop.getUsingShip()){
+
+                            this.workshop.inUse.setPosition(400, 500);
                             this.workshop.inUse.alpha = 1;
-                        else 
+
+                        } else 
                             this.workshop.inUse.alpha = 0;
 
                         for (let i = 0; i < this.capsules.length; i++) {
