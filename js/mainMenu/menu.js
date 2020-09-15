@@ -24,8 +24,8 @@ class Menu {
 
         this.title.init(this, this.game);
         this.startGame.init(this, "Start Game", 400, 376, 400, 195, 605);
-        this.goToSettings.init(this, "Settings", 460, 436, 460, 240, 560);
-        this.goToWorkshop.init(this, "Workshop", 520, 496, 520, 220, 580);
+        this.goToSettings.init(this, "Settings", 450, 426, 450, 240, 560);
+        this.goToWorkshop.init(this, "Workshop", 500, 476, 500, 220, 580);
 
         this.appear();
 

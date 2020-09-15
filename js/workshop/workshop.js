@@ -19,13 +19,9 @@ class Workshop {
             new Capsule(document.getElementById("rileyShip")),
             new Capsule(document.getElementById("spaceS")),
             new Capsule(document.getElementById("orbitalShip")),
-            new Capsule(document.getElementById("spaceS")),
-            new Capsule(document.getElementById("spaceS")),
-            new Capsule(document.getElementById("spaceS")),
-            new Capsule(document.getElementById("spaceS")),
-            new Capsule(document.getElementById("spaceS")),
-            new Capsule(document.getElementById("spaceS")),
-            new Capsule(document.getElementById("spaceS"))
+            new Capsule(document.getElementById("blueShip")),
+            new Capsule(document.getElementById("turtleShip")),
+            new Capsule(document.getElementById("healthShip"))
 
         ];
         
@@ -178,15 +174,64 @@ class Workshop {
 
     }
 
+    buy() {
+
+        let ownedItems = localStorage.getItem("items").split(",");
+        for (let i = 0; i < ownedItems.length; i++) {
+
+            ownedItems[i] = ownedItems[i].replace(/ /g,'');
+
+        }
+        let recipe = this.readRecipe();
+       
+        for (let i = 0; i < recipe.length; i++) {
+
+            let number = recipe[i].substring(0, recipe[i].indexOf("x"));
+            recipe[i] = recipe[i].substring(recipe[i].indexOf("x") + 1);
+
+            inner: for (let j = 0; j < ownedItems.length; j++) {
+
+                if (recipe[i] == ownedItems[j]) { 
+                
+                    ownedItems.splice(j, 1);
+                    number--;
+
+                }
+                if (number == 0) {
+
+                    break inner;
+
+                }
+
+            }
+
+        }
+
+        for (let i = 0; i < ownedItems.length; i++) {
+
+            ownedItems[i] = ownedItems[i].replace(/([A-Z])/g, ' $1').trim();
+
+        }
+
+        localStorage.setItem("items", ownedItems);
+
+    }
+
     hasAllItems() {
 
         if (!this.isSelectedItemOwned()) {
 
-            const ownedItems = localStorage.getItem("items").split(",");
+            let ownedItems = localStorage.getItem("items").split(",");
+            for (let i = 0; i < ownedItems.length; i++) {
+
+                ownedItems[i] = ownedItems[i].replace(/ /g,'');
+
+            }
             const recipe = this.readRecipe();
-            let numItem = 0;
             let hasItem = [];
             out: for (let i = 0; i < recipe.length; i++) {
+
+                let numItem = 0;
 
                 const currentRecipe = recipe[i];
                 const number = currentRecipe.substring(0, currentRecipe.indexOf("x"));

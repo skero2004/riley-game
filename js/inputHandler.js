@@ -220,6 +220,7 @@ class InputHandler {
                                 this.workshop.addOwnedShip();
                                 this.workshop.requiredItems = [];
                                 this.button.turnToUse();
+                                this.workshop.buy();
 
                             } else {
 
