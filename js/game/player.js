@@ -4,7 +4,8 @@ class Player extends ImageElement {
 
         super.init(game);
 
-        this.setImage(document.getElementById("riley"));
+        const shipName = localStorage.getItem("usingShip").charAt(0).toLowerCase() + localStorage.getItem("usingShip").slice(1) + "WR";
+        this.setImage(document.getElementById(shipName));
 
         this.setPosition(-this.width / 2, 275);
 
