@@ -61,7 +61,7 @@ class Workshop {
 
         }
 
-        if (localStorage.getItem("lastSelected") != "null" || !localStorage.getItem)
+        if (localStorage.getItem("lastSelected") != "null" && localStorage.getItem("lastSelected") != null)
             this.capsules[localStorage.getItem("lastSelected")].select();
         else 
             this.capsules[0].select();
